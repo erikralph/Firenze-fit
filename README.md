@@ -1,6 +1,12 @@
-# Firenze Fit v2.2
-App: index.html, sw.js, manifest.webmanifest, icons/, wrangler.jsonc, .assetsignore
-Dados por grupo: data/gXX/ (index.json, catalogo.json, AAAA-MM.json, status.json, fotos/)
-Motor (não vai para o site): tools/  ->  python tools/motor.py 12 2026-11 2027-12
-Revisão de imagens: abra o app com ?revisar=1
-Aparelho quebrado: edite data/g12/status.json -> "manutencao": ["leg_press_h"]
+# Firenze Fit v2.4.0
+
+## Estrutura
+index.html, sw.js, manifest.webmanifest, icons/, wrangler.jsonc  -> o app
+data/g12/  -> treinos do Grupo 12 (index.json, catalogo.json, AAAA-MM.json, status.json, fotos/)
+tools/     -> motor que gera os treinos (não vai para o site)
+
+## Rotina
+- Atualizar o app: subir só os arquivos alterados (mesmo nome = substitui).
+- Aparelho quebrado: editar data/g12/status.json -> "manutencao": ["leg_press_h"]
+- Revisar imagens: abrir o app com /?revisar=1
+- Fotos da academia: data/g12/fotos/ (capa.jpg, leg_press_h.jpg, peck_deck.jpg...)

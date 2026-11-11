@@ -63,7 +63,6 @@ nav.bot button.on{color:var(--gold)}
 .thumb{width:56px;height:42px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--card2)}
 .ic{width:56px;height:42px;border-radius:10px;background:rgba(212,175,55,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .chart{width:100%;height:150px}
-/* imagem de execução: 2 fotos com transição suave (sem tranco, sem faixas brancas) */
 .media{position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line)}
 .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .media img.b{animation:xfade 5s ease-in-out infinite}
@@ -71,6 +70,17 @@ nav.bot button.on{color:var(--gold)}
 .media .tag{position:absolute;left:8px;bottom:8px;background:rgba(10,10,10,.8);color:var(--gold);font-size:10px;font-weight:800;padding:4px 8px;border-radius:8px;z-index:2}
 .media.fb{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1a1a1a,#0d0d0d)}
 .media.mini{aspect-ratio:3/2;width:96px;border-radius:12px;flex-shrink:0}
+/* galeria da academia */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gal figure{margin:0;background:var(--card2);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.gal .ph{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:radial-gradient(80% 80% at 50% 40%,rgba(212,175,55,.10),transparent 70%),#111;color:var(--gold)}
+.gal .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.gal .ph svg.i{width:30px;height:30px;stroke-width:1.6}
+.gal figcaption{padding:8px 10px 10px;font-size:12px;font-weight:700;line-height:1.3}
+.gal figcaption span{display:block;font-size:10.5px;color:var(--mut);font-weight:500;margin-top:2px}
+.gal-sec{font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin:6px 0 -2px}
+.strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}.strip:empty{display:none}
+.strip img{height:120px;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--line);flex-shrink:0}
 #sess{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease}
 #sess.open{transform:none}
 .s-head{padding:calc(var(--st) + 10px) 14px 10px;background:var(--card);border-bottom:1px solid var(--line)}
@@ -89,7 +99,6 @@ nav.bot button.on{color:var(--gold)}
 .chk.on{background:var(--gold);border-color:var(--gold);color:#000}
 tr.done input{border-color:rgba(212,175,55,.35);color:var(--gold)}
 tr.now td.n{color:var(--gold)}tr.now input{border-color:var(--gold)}
-/* bi/tri-set */
 .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px}
 .flow span{font-size:11px;font-weight:800;padding:5px 9px;border-radius:9px;background:var(--bg);border:1px solid var(--line)}
 .flow span.on{border-color:var(--gold);color:var(--gold)}.flow i{color:var(--mut);font-style:normal;font-size:12px}
@@ -119,10 +128,6 @@ tr.now td.n{color:var(--gold)}tr.now input{border-color:var(--gold)}
 .prof{display:flex;align-items:center;gap:12px;width:100%;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:left}
 .avatar{width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
 .wrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
-.strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}
-.strip img{height:110px;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--line);flex-shrink:0}
-.eqchips{display:flex;flex-wrap:wrap;gap:6px}.eqchips span{font-size:11px;padding:6px 10px;border-radius:10px;background:var(--card2);border:1px solid var(--line)}
-.eqchips span b{color:var(--gold);font-weight:700}
 details summary{list-style:none;cursor:pointer}details summary::-webkit-details-marker{display:none}
 </style>
 </head>
@@ -136,16 +141,16 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
     <p class="sm mut" style="margin:8px 0 24px" id="lg-sub">Treinos feitos para os aparelhos da sua academia.</p>
     <div id="lg-step1" class="stack">
       <input type="email" id="lg-email" placeholder="E-mail usado na assinatura" autocomplete="email" inputmode="email" style="text-align:center">
-      <button class="btn btn-gold" id="lg-go">ENTRAR</button>
+      <button type="button" class="btn btn-gold" id="lg-go">ENTRAR</button>
     </div>
     <div id="lg-step2" class="stack hide">
       <p class="sm mut">Enviamos um código de 6 dígitos para <b id="lg-mailshow" class="gold"></b></p>
       <input id="lg-code" inputmode="numeric" maxlength="6" placeholder="000000" style="text-align:center;font-size:24px;letter-spacing:8px;font-weight:900">
-      <button class="btn btn-gold" id="lg-verify">CONFIRMAR</button>
-      <button class="btn btn-sm" style="margin:0 auto" id="lg-back"><span class="mut">Usar outro e-mail</span></button>
+      <button type="button" class="btn btn-gold" id="lg-verify">CONFIRMAR</button>
+      <button type="button" class="btn btn-sm" style="margin:0 auto" id="lg-back"><span class="mut">Usar outro e-mail</span></button>
     </div>
     <p id="lg-err" class="sm hide" style="color:var(--red);margin-top:12px"></p>
-    <p class="xs mut" style="margin-top:18px">Ainda não assina? <a id="lg-buylink" class="gold" href="#">Conheça os planos</a></p>
+    <p class="xs mut" style="margin-top:18px">Ainda não assina? <button type="button" class="gold xs" style="text-decoration:underline" onclick="UI.buy()">Conheça os planos</button></p>
   </div>
 </section>
 
@@ -154,37 +159,37 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
     <div style="padding-top:20px"><div class="eyebrow">Firenze Fit</div><div class="h2" style="margin-top:4px">Quem vai treinar?</div>
     <p class="sm mut" style="margin-top:4px">Cada pessoa tem seu próprio histórico, cargas e evolução.</p></div>
     <div id="pf-list" class="stack"></div>
-    <button class="btn btn-ghost" onclick="UI.newProfile()"><svg class="i"><use href="#i-plus"/></svg>Adicionar pessoa</button>
+    <button type="button" class="btn btn-ghost" onclick="UI.newProfile()"><svg class="i"><use href="#i-plus"/></svg>Adicionar pessoa</button>
   </div>
 </section>
 
 <section id="scr-onb" class="screen hide">
   <div class="wrap stack">
     <div style="padding-top:10px"><div class="eyebrow">Novo perfil</div><div class="h2" style="margin-top:4px">Vamos montar seu treino</div></div>
-    <div><label class="lbl">Seu nome</label><input id="ob-nome" maxlength="20" placeholder="Ex.: Erik"></div>
-    <div><label class="lbl">Peso atual (kg)</label><input id="ob-peso" inputmode="decimal" placeholder="Ex.: 82,5"></div>
-    <div><label class="lbl">Objetivo</label><div class="grid2" id="ob-obj">
-      <button class="opt on" data-v="hipertrofia"><b>Ganhar massa</b><span>Hipertrofia</span></button>
-      <button class="opt" data-v="emagrecimento"><b>Emagrecer</b><span>Definição e condicionamento</span></button></div></div>
-    <div><label class="lbl">Experiência</label><div class="stack" id="ob-lvl">
-      <button class="opt on" data-v="iniciante"><b>Iniciante</b><span>Menos de 6 meses ou voltando agora · 3x/semana</span></button>
-      <button class="opt" data-v="intermediario"><b>Intermediário</b><span>6 meses a 2 anos com regularidade · 4x/semana</span></button>
-      <button class="opt" data-v="avancado"><b>Avançado</b><span>Mais de 2 anos, domina a técnica · 5x/semana</span></button></div></div>
+    <div><label class="lbl" for="ob-nome">Seu nome</label><input id="ob-nome" maxlength="20" placeholder="Ex.: Erik" autocomplete="off" enterkeyhint="next"></div>
+    <div><label class="lbl" for="ob-peso">Peso atual (kg)</label><input id="ob-peso" inputmode="decimal" placeholder="Ex.: 82,5" autocomplete="off" enterkeyhint="done"></div>
+    <div><span class="lbl">Objetivo</span><div class="grid2" id="ob-obj">
+      <button type="button" class="opt on" data-v="hipertrofia"><b>Ganhar massa</b><span>Hipertrofia</span></button>
+      <button type="button" class="opt" data-v="emagrecimento"><b>Emagrecer</b><span>Definição e condicionamento</span></button></div></div>
+    <div><span class="lbl">Experiência</span><div class="stack" id="ob-lvl">
+      <button type="button" class="opt on" data-v="iniciante"><b>Iniciante</b><span>Menos de 6 meses ou voltando agora · 3x/semana</span></button>
+      <button type="button" class="opt" data-v="intermediario"><b>Intermediário</b><span>6 meses a 2 anos com regularidade · 4x/semana</span></button>
+      <button type="button" class="opt" data-v="avancado"><b>Avançado</b><span>Mais de 2 anos, domina a técnica · 5x/semana</span></button></div></div>
     <div class="card" style="padding:14px">
-      <label class="row" style="align-items:flex-start;gap:10px"><input type="checkbox" id="ob-parq" style="width:20px;height:20px;margin-top:2px;flex-shrink:0">
-      <span class="sm mut">Declaro que não tenho restrição médica para atividade física ou que fui liberado(a) por um médico. Se sentir dor, tontura ou falta de ar, paro o treino.</span></label>
-      <label class="row" style="align-items:flex-start;gap:10px;margin-top:12px"><input type="checkbox" id="ob-lgpd" style="width:20px;height:20px;margin-top:2px;flex-shrink:0">
-      <span class="sm mut">Concordo que meu peso e meus treinos fiquem salvos neste aparelho para acompanhar minha evolução.</span></label>
+      <div class="row" style="align-items:flex-start;gap:10px"><input type="checkbox" id="ob-parq" style="width:20px;height:20px;margin-top:2px;flex-shrink:0">
+      <span class="sm mut" onclick="$('ob-parq').click()">Declaro que não tenho restrição médica para atividade física ou que fui liberado(a) por um médico. Se sentir dor, tontura ou falta de ar, paro o treino.</span></div>
+      <div class="row" style="align-items:flex-start;gap:10px;margin-top:12px"><input type="checkbox" id="ob-lgpd" style="width:20px;height:20px;margin-top:2px;flex-shrink:0">
+      <span class="sm mut" onclick="$('ob-lgpd').click()">Concordo que meu peso e meus treinos fiquem salvos neste aparelho para acompanhar minha evolução.</span></div>
     </div>
     <p id="ob-err" class="sm hide" style="color:var(--red)"></p>
-    <button class="btn btn-gold" id="ob-save">CRIAR PERFIL</button>
-    <button class="btn btn-sm" style="margin:0 auto" onclick="UI.show('profiles')"><span class="mut">Cancelar</span></button>
+    <button type="button" class="btn btn-gold" id="ob-save">CRIAR PERFIL</button>
+    <button type="button" class="btn btn-sm" style="margin:0 auto" onclick="UI.show('profiles')"><span class="mut">Cancelar</span></button>
   </div>
 </section>
 
 <header class="top hide" id="hdr">
   <div class="row between">
-    <button class="row" onclick="UI.show('profiles')" style="gap:10px;text-align:left">
+    <button type="button" class="row" onclick="UI.show('profiles')" style="gap:10px;text-align:left">
       <div class="avatar" id="h-av" style="width:38px;height:38px;font-size:15px">E</div>
       <div><div class="eyebrow" id="h-grupo" style="font-size:10px">Grupo 12</div><div class="h3" id="h-nome">Erik</div></div>
     </button>
@@ -195,7 +200,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
 <main id="app" class="hide">
   <div id="pwa-banner" class="card hide" style="margin-bottom:14px;border-color:rgba(212,175,55,.4)">
     <div class="row between"><div class="row"><svg class="i gold"><use href="#i-phone"/></svg><div><b class="sm">Instale o app</b><div class="xs mut">Tela cheia e seus dados protegidos</div></div></div>
-    <div class="row" style="gap:4px"><button class="btn btn-gold btn-sm" onclick="UI.install()">Instalar</button><button class="btn btn-sm mut" onclick="UI.dismissBanner()" aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div></div>
+    <div class="row" style="gap:4px"><button type="button" class="btn btn-gold btn-sm" onclick="UI.install()">Instalar</button><button type="button" class="btn btn-sm mut" onclick="UI.dismissBanner()" aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div></div>
   </div>
 
   <section class="tab on stack" id="t-hoje">
@@ -206,14 +211,14 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
       <div class="h1" id="hj-nome" style="margin-top:10px;font-size:28px">Treino A</div>
       <p class="sm mut" id="hj-foco" style="margin-top:4px"></p>
       <div class="row xs mut" style="margin-top:12px;gap:14px;flex-wrap:wrap" id="hj-meta"></div>
-      <button class="btn btn-gold" style="margin-top:16px" onclick="S.start()"><svg class="i"><use href="#i-play"/></svg>COMEÇAR TREINO</button>
+      <button type="button" class="btn btn-gold" style="margin-top:16px" onclick="S.start()"><svg class="i"><use href="#i-play"/></svg>COMEÇAR TREINO</button>
     </div>
     <div class="card stack">
       <div class="row between"><span class="lbl" style="margin:0">Constância no mês</span><b class="gold" id="hj-pct" style="font-size:20px">0%</b></div>
       <div class="bar"><i id="hj-bar" style="width:0"></i></div>
       <div class="row between xs"><b id="hj-feitos">0 treinos</b><span class="mut" id="hj-metatxt">Meta</span></div>
     </div>
-    <button class="gym" id="hj-gym" onclick="UI.showGym()">
+    <button type="button" class="gym" id="hj-gym" onclick="UI.showGym()">
       <div class="ov"></div><div class="in"><span class="pill">Feito sob medida</span>
       <div class="h3" style="margin-top:8px" id="gym-tit">Academia do Grupo 12</div>
       <div class="xs mut" id="gym-sub" style="margin-top:2px"></div></div>
@@ -222,7 +227,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
       <div class="card stat"><span class="lbl" style="margin:0">Treinos</span><b id="st-tr">0</b></div>
       <div class="card stat"><span class="lbl" style="margin:0">Volume total</span><b id="st-vol">0 kg</b></div>
       <div class="card stat"><span class="lbl" style="margin:0">Séries</span><b id="st-se">0</b></div>
-      <button class="card stat" style="text-align:left" onclick="UI.addWeight()"><span class="lbl" style="margin:0">Peso atual</span><b id="st-peso">-- kg</b><span class="xs gold">+ registrar</span></button>
+      <button type="button" class="card stat" style="text-align:left" onclick="UI.addWeight()"><span class="lbl" style="margin:0">Peso atual</span><b id="st-peso">-- kg</b><span class="xs gold">+ registrar</span></button>
     </div>
   </section>
 
@@ -234,7 +239,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
   <section class="tab stack" id="t-evo">
     <div class="h2">Evolução</div>
     <div class="card stack">
-      <div class="row between"><span class="lbl" style="margin:0">Peso corporal</span><button class="btn btn-gold btn-sm" onclick="UI.addWeight()">+ Registrar peso</button></div>
+      <div class="row between"><span class="lbl" style="margin:0">Peso corporal</span><button type="button" class="btn btn-gold btn-sm" onclick="UI.addWeight()">+ Registrar peso</button></div>
       <div id="ch-peso"></div>
       <div id="w-list"></div>
     </div>
@@ -254,20 +259,21 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
     <div class="h2">Perfil</div>
     <div class="card stack">
       <div class="row"><div class="avatar" id="pf-av">E</div><div><b id="pf-nome">Erik</b><div class="xs gold" id="pf-sub">Grupo 12</div></div></div>
-      <div><label class="lbl">Objetivo</label><select id="pf-obj" onchange="UI.changeGoal()"><option value="hipertrofia">Hipertrofia</option><option value="emagrecimento">Emagrecimento</option></select></div>
-      <div><label class="lbl">Nível</label><select id="pf-lvl" onchange="UI.changeGoal()"><option value="iniciante">Iniciante (3x/sem)</option><option value="intermediario">Intermediário (4x/sem)</option><option value="avancado">Avançado (5x/sem)</option></select></div>
+      <div><label class="lbl" for="pf-obj">Objetivo</label><select id="pf-obj" onchange="UI.changeGoal()"><option value="hipertrofia">Hipertrofia</option><option value="emagrecimento">Emagrecimento</option></select></div>
+      <div><label class="lbl" for="pf-lvl">Nível</label><select id="pf-lvl" onchange="UI.changeGoal()"><option value="iniciante">Iniciante (3x/sem)</option><option value="intermediario">Intermediário (4x/sem)</option><option value="avancado">Avançado (5x/sem)</option></select></div>
       <p class="xs mut">O histórico é mantido quando você troca de objetivo ou nível.</p>
     </div>
-    <button class="btn btn-ghost" onclick="UI.showGym()"><svg class="i"><use href="#i-dumb"/></svg>Sua academia</button>
+    <button type="button" class="btn btn-ghost" onclick="UI.showGym()"><svg class="i"><use href="#i-dumb"/></svg>Sua academia</button>
     <div class="card stack">
       <span class="lbl" style="margin:0">Seus dados</span>
       <p class="xs mut">Os treinos ficam salvos neste celular. Faça um backup antes de trocar de aparelho.</p>
-      <div class="grid2"><button class="btn btn-dark btn-sm" style="width:100%" onclick="UI.exportData()"><svg class="i"><use href="#i-down"/></svg>Backup</button>
-      <label class="btn btn-dark btn-sm" style="width:100%"><svg class="i"><use href="#i-up"/></svg>Restaurar<input type="file" accept=".json" class="hide" onchange="UI.importData(this)"></label></div>
+      <div class="grid2"><button type="button" class="btn btn-dark btn-sm" style="width:100%" onclick="UI.exportData()"><svg class="i"><use href="#i-down"/></svg>Backup</button>
+      <button type="button" class="btn btn-dark btn-sm" style="width:100%" onclick="$('imp-file').click()"><svg class="i"><use href="#i-up"/></svg>Restaurar</button>
+      <input type="file" id="imp-file" accept=".json,application/json" class="hide" onchange="UI.importData(this)"></div>
     </div>
-    <button class="btn btn-ghost" onclick="UI.showInstall()"><svg class="i"><use href="#i-phone"/></svg>Como instalar no celular</button>
-    <button class="btn btn-dark" onclick="UI.show('profiles')"><svg class="i"><use href="#i-users"/></svg>Trocar de pessoa</button>
-    <button class="btn btn-sm" style="margin:6px auto 0;color:var(--red)" onclick="UI.deleteProfile()">Excluir este perfil</button>
+    <button type="button" class="btn btn-ghost" onclick="UI.showInstall()"><svg class="i"><use href="#i-phone"/></svg>Como instalar no celular</button>
+    <button type="button" class="btn btn-dark" onclick="UI.show('profiles')"><svg class="i"><use href="#i-users"/></svg>Trocar de pessoa</button>
+    <button type="button" class="btn btn-sm" style="margin:6px auto 0;color:var(--red)" onclick="UI.deleteProfile()">Excluir este perfil</button>
     <p class="xs mut" style="text-align:center" id="pf-ver"></p>
   </section>
 </main>
@@ -278,19 +284,19 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
 </div>
 
 <nav class="bot hide" id="nav">
-  <button class="on" data-t="hoje"><svg class="i"><use href="#i-home"/></svg>Hoje</button>
-  <button data-t="treinos"><svg class="i"><use href="#i-list"/></svg>Treinos</button>
-  <button data-t="evo"><svg class="i"><use href="#i-chart"/></svg>Evolução</button>
-  <button data-t="hist"><svg class="i"><use href="#i-clock"/></svg>Histórico</button>
-  <button data-t="perfil"><svg class="i"><use href="#i-user"/></svg>Perfil</button>
+  <button type="button" class="on" data-t="hoje"><svg class="i"><use href="#i-home"/></svg>Hoje</button>
+  <button type="button" data-t="treinos"><svg class="i"><use href="#i-list"/></svg>Treinos</button>
+  <button type="button" data-t="evo"><svg class="i"><use href="#i-chart"/></svg>Evolução</button>
+  <button type="button" data-t="hist"><svg class="i"><use href="#i-clock"/></svg>Histórico</button>
+  <button type="button" data-t="perfil"><svg class="i"><use href="#i-user"/></svg>Perfil</button>
 </nav>
 
 <div id="sess">
   <div class="s-head">
     <div class="row between">
-      <button onclick="S.minimize()" class="row mut" style="padding:6px"><svg class="i"><use href="#i-down2"/></svg></button>
+      <button type="button" onclick="S.minimize()" class="row mut" style="padding:6px"><svg class="i"><use href="#i-down2"/></svg></button>
       <div style="text-align:center"><b class="sm" id="s-title">Treino</b><div class="xs gold" id="s-clock" style="font-variant-numeric:tabular-nums">00:00</div></div>
-      <button onclick="S.askCancel()" class="mut xs" style="padding:6px;font-weight:700">Cancelar</button>
+      <button type="button" onclick="S.askCancel()" class="mut xs" style="padding:6px;font-weight:700">Cancelar</button>
     </div>
     <div class="steps"><div id="st-mob">1 · Mobilidade</div><div id="st-tre">2 · Treino</div><div id="st-car">3 · Cardio</div></div>
   </div>
@@ -301,8 +307,8 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
 <div id="rest" class="hide">
   <div class="t" id="rest-t">01:00</div>
   <div style="flex:1"><b class="sm">Descanso</b><div class="xs mut" id="rest-next">Próxima série</div></div>
-  <button class="btn btn-dark btn-sm" onclick="R.add(15)">+15s</button>
-  <button class="btn btn-gold btn-sm" onclick="R.stop()">Pular</button>
+  <button type="button" class="btn btn-dark btn-sm" onclick="R.add(15)">+15s</button>
+  <button type="button" class="btn btn-gold btn-sm" onclick="R.stop()">Pular</button>
 </div>
 
 <div id="modal" class="modal hide" onclick="if(event.target===this)UI.closeModal()"><div class="card" id="modal-c"></div></div>
@@ -326,6 +332,8 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
  <symbol id="i-down2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
  <symbol id="i-up2" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
  <symbol id="i-dumb" viewBox="0 0 24 24"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 00-7.1 0L12 7.3l-1.7-1.7a5 5 0 00-7.1 7.1L12 21.5l8.8-8.8a5 5 0 000-7.1z"/></symbol>
+ <symbol id="i-mat" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="2"/><path d="M7 8v8M17 8v8"/></symbol>
  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
@@ -335,15 +343,22 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
 <script>
 /* ================= CONFIGURAÇÃO ================= */
 const CFG = {
-  VERSAO: '2.2.0',
+  VERSAO: '2.4.0',
   GRUPOS: ['12','13','14','15','16','17','18'],
   AUTH_URL: null,          // null = modo teste (aceita qualquer e-mail)
-  CHECKOUT_URL: '#',
+  CHECKOUT_URL: '',        // link da página de vendas (abre fora do app)
   IMG: id => [0,1].map(n => `https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${id}/${n}.jpg`),
   FOTO: (g, nome) => `data/g${g}/fotos/${nome}.jpg`,
   ACESSO_DIAS: 30
 };
 const NAO_FOTO = ['anilhas','banco','colchonete','grama','halter_leve','halter'];
+/* seções da galeria da academia */
+const GAL = [
+  ['Máquinas', ['leg_press_h','maq_supino','peck_deck','extensora','flexora','mesa_flexora','adutora','abdutora','smith','panturrilha_sent','banco_scott','polia_alta','polia_baixa','polia_triceps'], 'i-dumb'],
+  ['Pesos livres e bancos', ['halter_leve','halter','mesa_supino','barra_supino','barra_w','barra_h','barra_reta','anilhas','barra_fixa','banco','banco_reg'], 'i-dumb'],
+  ['Cardio', ['esteira','bike','transport','cama_elastica'], 'i-heart'],
+  ['Área livre', ['colchonete','bola_suica','caixote','grama'], 'i-mat']
+];
 
 /* ================= UTIL ================= */
 const $ = id => document.getElementById(id);
@@ -354,6 +369,7 @@ const fmtW = n => String(Math.round(n*10)/10).replace('.', ',');
 const mmss = s => { s = Math.max(0, Math.round(s)); const m = Math.floor(s/60); return String(m).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); };
 const today = () => { const d = new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
 const ddmm = d => d.slice(8,10)+'/'+d.slice(5,7);
+const uid = p => p + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
 const repT = (reps,k) => { const p = String(reps).split('/').map(t=>t.trim()); return p.length>1 ? (p[k]||p.at(-1)) : String(reps).split(' ')[0]; };
 const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const OBJ = {hipertrofia:'Hipertrofia', emagrecimento:'Emagrecimento'};
@@ -365,13 +381,13 @@ const BLKTXT = {piramide:'Ajuste a carga a cada série conforme as repetições 
 function toast(msg, ms=2200){ const t=$('toast'); t.textContent=msg; t.classList.remove('hide'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.add('hide'), ms); }
 function buzz(){ try{ navigator.vibrate && navigator.vibrate([300,120,300]); }catch(e){}
   try{ const a=new (window.AudioContext||window.webkitAudioContext)(); [0,.25,.5].forEach(t=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.25,a.currentTime+t);o.start(a.currentTime+t);o.stop(a.currentTime+t+.15);}); }catch(e){} }
-/* imagem de execução com transição suave (CSS) */
 function media(img, label, cls=''){
   const [a,b] = CFG.IMG(img);
   return `<div class="media ${cls}"><img src="${a}" alt="" onerror="mediaFail(this)"><img class="b" src="${b}" alt="" onerror="this.remove()">${label?`<span class="tag">${label}</span>`:''}</div>`;
 }
 function mediaFail(img){ const m = img.parentElement; if(!m) return; m.classList.add('fb');
   m.innerHTML = `<svg class="i gold" style="width:36px;height:36px"><use href="#i-dumb"/></svg>`; }
+function galFail(img){ img.outerHTML = `<svg class="i"><use href="#${img.dataset.ic}"/></svg>`; }
 
 /* ================= ARMAZENAMENTO POR PESSOA ================= */
 const DB = {
@@ -425,7 +441,13 @@ const App = { pid:null, grupo:'12', idx:null, cat:null, prog:null, status:null,
   monthHist(){ const mk = App.prog?.mes; return DB.p('hist', []).filter(h => h.mes === mk); },
   nextDayIdx(){ const prog = App.program(); if(!prog) return 0; const r = DB.p('rot', {}); return (r[App.prog.mes] || 0) % prog.dias.length; },
   mainEquip(e){ return e.equip.find(q => !NAO_FOTO.includes(q)) || e.equip[0]; },
-  pesos(){ return DB.p('pesos', []).filter(p => p && p.d && num(p.kg)).sort((a,b) => (a.d+(a.t||'')).localeCompare(b.d+(b.t||''))); }
+  /* cada registro de peso tem um id único: apagar um nunca apaga outro */
+  pesos(){
+    const raw = DB.p('pesos', []); let fixed = false;
+    const list = raw.filter(p => p && p.d && num(p.kg)).map(p => { if(!p.id){ fixed = true; return {...p, id: uid('w')}; } return p; });
+    if(fixed) DB.ps('pesos', list);
+    return list.sort((a,b) => (a.d+(a.t||'')+a.id).localeCompare(b.d+(b.t||'')+b.id));
+  }
 };
 
 /* ================= UI ================= */
@@ -436,10 +458,12 @@ const UI = {
     ['hdr','app','nav'].forEach(id => $(id).classList.toggle('hide', !inApp));
     $('mini').classList.toggle('hide', !(inApp && S.cur && !$('sess').classList.contains('open')));
     if(name === 'profiles') UI.renderProfiles();
+    document.activeElement?.blur?.();
   },
   tab(t){ document.querySelectorAll('nav.bot button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
     document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 't-'+t)); $('app').scrollTop = 0;
     if(t==='evo') UI.renderEvo(); if(t==='hist') UI.renderHist(); if(t==='treinos') UI.renderTreinos(); },
+  buy(){ if(CFG.CHECKOUT_URL) window.open(CFG.CHECKOUT_URL, '_blank', 'noopener'); else toast('Planos em breve'); },
 
   applyCover(){
     const url = CFG.FOTO(App.grupo, 'capa'), img = new Image();
@@ -447,34 +471,48 @@ const UI = {
       $('scr-login').style.backgroundImage = `linear-gradient(rgba(10,10,10,.75),rgba(10,10,10,.97)),url(${url})`; };
     img.src = url;
   },
+  /* galeria: grade com foto (ou ícone) + nome + detalhe, separada por seção */
   showGym(){
     const g = App.grupo, eq = App.cat.equipamentos, det = App.cat.detalhes || {};
-    const fotos = (App.idx.fotos || ['capa']).map(f => `<img src="${CFG.FOTO(g,f)}" onerror="this.remove()">`).join('');
+    const fotos = (App.idx.fotos || ['capa']).map(f => `<img src="${CFG.FOTO(g,f)}" alt="" onerror="this.remove()">`).join('');
+    const usados = new Set();
+    const secs = GAL.map(([titulo, ids, ic]) => {
+      const lista = ids.filter(q => eq[q] && !usados.has(q)); lista.forEach(q => usados.add(q));
+      if(!lista.length) return '';
+      return `<div class="gal-sec">${titulo}</div><div class="gal">${lista.map(q => `
+        <figure><div class="ph"><img src="${CFG.FOTO(g,q)}" alt="" data-ic="${ic}" onerror="galFail(this)"></div>
+        <figcaption>${esc(eq[q])}${det[q]?`<span>${esc(det[q])}</span>`:''}</figcaption></figure>`).join('')}</div>`;
+    }).join('');
+    const resto = Object.keys(eq).filter(q => !usados.has(q));
+    const extra = resto.length ? `<div class="gal-sec">Outros</div><div class="gal">${resto.map(q => `
+        <figure><div class="ph"><img src="${CFG.FOTO(g,q)}" alt="" data-ic="i-dumb" onerror="galFail(this)"></div>
+        <figcaption>${esc(eq[q])}${det[q]?`<span>${esc(det[q])}</span>`:''}</figcaption></figure>`).join('')}</div>` : '';
     UI.modal(`<div class="stack"><div><span class="pill">Feito sob medida</span><div class="h2" style="margin-top:8px">Academia do ${esc(App.idx.nome)}</div>
       <p class="sm mut" style="margin-top:4px">Todo treino deste app usa somente estes aparelhos. Nada de adaptação.</p>${App.idx.obs?`<p class="xs gold" style="margin-top:6px">${esc(App.idx.obs)}</p>`:''}</div>
-      <div class="strip">${fotos}</div>
-      <div class="eqchips">${Object.keys(eq).map(q => `<span>${esc(eq[q])}${det[q]?` · <b>${esc(det[q])}</b>`:''}</span>`).join('')}</div>
-      <button class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
+      <div class="strip">${fotos}</div>${secs}${extra}
+      <button type="button" class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
   },
 
   renderProfiles(){
     const list = DB.get('profiles', []);
     $('pf-list').innerHTML = list.length ? list.map(p => `
-      <button class="prof" onclick="UI.pick('${p.id}')"><div class="avatar">${esc(p.nome[0]||'?').toUpperCase()}</div>
+      <button type="button" class="prof" onclick="UI.pick('${p.id}')"><div class="avatar">${esc(p.nome[0]||'?').toUpperCase()}</div>
       <div style="flex:1"><b>${esc(p.nome)}</b><div class="xs mut">${OBJ[p.obj]} · ${LVL[p.lvl]}</div></div><svg class="i gold"><use href="#i-right"/></svg></button>`).join('')
       : `<div class="card sm mut" style="text-align:center">Nenhum perfil ainda. Crie o primeiro.</div>`;
   },
   newProfile(){ ['ob-nome','ob-peso'].forEach(i=>$(i).value=''); $('ob-parq').checked=false; $('ob-lgpd').checked=false; $('ob-err').classList.add('hide'); UI.show('onb'); },
-  saveProfile(){
+  saveProfile(ev){
+    ev?.preventDefault?.();
     const nome = $('ob-nome').value.trim(), peso = num($('ob-peso').value), err = $('ob-err');
     const fail = m => { err.textContent = m; err.classList.remove('hide'); };
     if(!nome) return fail('Digite seu nome.');
     if(!peso || peso < 30 || peso > 250) return fail('Digite um peso válido (ex.: 82,5).');
     if(!$('ob-parq').checked || !$('ob-lgpd').checked) return fail('Marque as duas declarações para continuar.');
-    const p = { id: 'p' + Date.now().toString(36), nome, obj: $('ob-obj').querySelector('.on').dataset.v, lvl: $('ob-lvl').querySelector('.on').dataset.v,
+    const p = { id: uid('p'), nome, obj: $('ob-obj').querySelector('.on').dataset.v, lvl: $('ob-lvl').querySelector('.on').dataset.v,
       criado: new Date().toISOString(), consent: {parq:true, lgpd:true, em:new Date().toISOString()} };
     const list = DB.get('profiles', []); list.push(p); DB.set('profiles', list);
-    App.pid = p.id; DB.ps('pesos', [{d: today(), t: new Date().toTimeString().slice(0,5), kg: peso}]); UI.pick(p.id);
+    App.pid = p.id; DB.ps('pesos', [{id: uid('w'), d: today(), t: new Date().toTimeString().slice(0,5), kg: peso}]);
+    UI.pick(p.id);
   },
   pick(id){ App.pid = id; DB.set('active', id); S.cur = DB.p('sess'); UI.show('app'); UI.tab('hoje'); UI.render(); },
   deleteProfile(){ const p = App.profile(); if(!confirm(`Excluir o perfil de ${p.nome} e todo o histórico dele? Os outros perfis não são afetados.`)) return;
@@ -505,11 +543,11 @@ const UI = {
     $('hj-pct').textContent = pct + '%'; $('hj-bar').style.width = pct + '%';
     $('hj-feitos').textContent = feitos + (feitos===1?' treino':' treinos'); $('hj-metatxt').textContent = 'Meta: ' + meta + ' (' + prog.freq + 'x/semana)';
     $('gym-tit').textContent = 'Academia do ' + App.idx.nome;
-    $('gym-sub').textContent = `Programa montado só com os aparelhos da sua academia · ver lista`;
+    $('gym-sub').textContent = `Programa montado só com os aparelhos da sua academia · ver aparelhos`;
     const hist = DB.p('hist', []);
     $('st-tr').textContent = hist.length; $('st-vol').textContent = fmtKg(hist.reduce((a,h)=>a+h.vol,0));
     $('st-se').textContent = hist.reduce((a,h)=>a+h.series,0);
-    const pesos = App.pesos(); $('st-peso').textContent = pesos.length ? fmtW(pesos.at(-1).kg) + ' kg' : '-- kg';
+    const pesos = App.pesos(); $('st-peso').textContent = pesos.length ? fmtW(num(pesos.at(-1).kg)) + ' kg' : '-- kg';
     $('mini').classList.toggle('hide', !(S.cur && !$('sess').classList.contains('open')));
     if(S.cur) $('mini-t').textContent = S.cur.titulo;
     UI.banner();
@@ -528,12 +566,11 @@ const UI = {
           <div class="list-item"><img class="thumb" loading="lazy" src="${CFG.IMG(e.img)[0]}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ic',innerHTML:'<svg class=\\'i\\'><use href=\\'#i-dumb\\'/></svg>'}))">
           <div style="flex:1"><b class="sm">${code?`<span class="code">${code}</span>`:''}${esc(e.nome)}</b><div class="xs mut">${x.series} × ${esc(x.reps)} · ${x.desc?'descanso '+x.desc+'s':'sem pausa → próximo'}</div>
           ${BLK[b.tipo] && j===0 ? `<span class="pill" style="margin-top:4px">${BLK[b.tipo]}</span>`:''}</div></div>`; }).join('')).join('')}
-        <div class="list-item"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><div><b class="sm">3 · Cardio no final · ${d.cardio.min} min</b><div class="xs mut">${esc(d.cardio.intens)}</div></div></div>
-        <button class="btn btn-gold" style="margin-top:10px" onclick="S.start(${i})"><svg class="i"><use href="#i-play"/></svg>Fazer este treino</button>
+        <div class="list-item"><div class="ic"><svg class="i"><use href="#i-heart"/></svg></div><div><b class="sm">3 · Cardio no final · ${d.cardio.min} min</b><div class="xs mut">${esc(d.cardio.intens)}</div></div></div>
+        <button type="button" class="btn btn-gold" style="margin-top:10px" onclick="S.start(${i})"><svg class="i"><use href="#i-play"/></svg>Fazer este treino</button>
       </div></details>`).join('');
   },
 
-  /* gráfico em SVG (funciona com 1 ou mais pontos) */
   chart(el, pts, unit){
     if(!pts.length){ el.innerHTML = `<p class="xs mut" style="padding:24px 0;text-align:center">Sem registros ainda.</p>`; return; }
     const W=320,H=150,PL=30,PR=14,PT=18,PB=24, ys=pts.map(p=>p.y);
@@ -555,8 +592,8 @@ const UI = {
     UI.chart($('ch-peso'), ps.map(p => ({y:num(p.kg), l:ddmm(p.d)})), 'kg');
     const diff = ps.length > 1 ? num(ps.at(-1).kg) - num(ps[0].kg) : null;
     $('w-list').innerHTML = (diff!==null ? `<p class="sm" style="margin-bottom:6px">Desde o início: <b class="gold">${diff>0?'+':''}${fmtW(diff)} kg</b></p>` : '') +
-      ps.slice().reverse().slice(0,8).map(p => `<div class="wrow"><span>${new Date(p.d+'T12:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'})}${p.t?` <span class="mut xs">${p.t}</span>`:''}</span>
-        <span class="row" style="gap:6px"><b>${fmtW(num(p.kg))} kg</b><button class="mut" style="padding:4px" onclick="UI.delWeight('${p.d}','${p.t||''}')" aria-label="Apagar"><svg class="i" style="width:15px"><use href="#i-trash"/></svg></button></span></div>`).join('');
+      ps.slice().reverse().slice(0,10).map(p => `<div class="wrow"><span>${new Date(p.d+'T12:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'})}${p.t?` <span class="mut xs">${p.t}</span>`:''}</span>
+        <span class="row" style="gap:6px"><b>${fmtW(num(p.kg))} kg</b><button type="button" class="mut" style="padding:4px" onclick="UI.delWeight('${p.id}')" aria-label="Apagar"><svg class="i" style="width:15px"><use href="#i-trash"/></svg></button></span></div>`).join('');
     const ids = Object.keys(DB.p('cargas', {})).filter(id => App.ex(id));
     const sel = $('ev-ex'), keep = sel.value;
     sel.innerHTML = ids.length ? ids.map(id => `<option value="${id}">${esc(App.ex(id).nome)}</option>`).join('') : '<option value="">Faça um treino para ver suas cargas</option>';
@@ -568,20 +605,24 @@ const UI = {
     UI.chart($('ch-carga'), pts, 'kg');
   },
   addWeight(){
-    UI.modal(`<div class="stack"><div class="h3">Registrar peso de hoje</div><input id="w-in" type="text" inputmode="decimal" placeholder="Ex.: 81,7" autocomplete="off">
-      <button class="btn btn-gold" id="w-save">Salvar</button><button class="btn btn-dark" onclick="UI.closeModal()">Cancelar</button></div>`);
+    UI.modal(`<div class="stack"><div class="h3">Registrar peso de hoje</div><input id="w-in" type="text" inputmode="decimal" placeholder="Ex.: 81,7" autocomplete="off" enterkeyhint="done">
+      <button type="button" class="btn btn-gold" id="w-save">Salvar</button><button type="button" class="btn btn-dark" onclick="UI.closeModal()">Cancelar</button></div>`);
     $('w-save').onclick = UI.saveWeight;
-    $('w-in').onkeydown = e => { if(e.key === 'Enter') UI.saveWeight(); };
+    $('w-in').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); UI.saveWeight(); } };
     setTimeout(()=>$('w-in')?.focus(), 150);
   },
   saveWeight(){
     const kg = num($('w-in').value); if(!kg || kg<30 || kg>250) return toast('Digite um peso válido, ex.: 81,7');
-    const arr = App.pesos(); arr.push({d: today(), t: new Date().toTimeString().slice(0,5), kg});
+    const arr = App.pesos(); arr.push({id: uid('w'), d: today(), t: new Date().toTimeString().slice(0,5), kg});
     if(!DB.ps('pesos', arr)) return;
     UI.closeModal(); UI.render(); UI.renderEvo(); toast('Peso registrado: ' + fmtW(kg) + ' kg');
   },
-  delWeight(d,t){ if(!confirm('Apagar este registro de peso?')) return;
-    DB.ps('pesos', App.pesos().filter(p => !(p.d===d && (p.t||'')===t))); UI.render(); UI.renderEvo(); },
+  delWeight(id){
+    const arr = App.pesos(), w = arr.find(p => p.id === id); if(!w) return;
+    if(arr.length === 1) return toast('Mantenha pelo menos um registro de peso.');
+    if(!confirm(`Apagar o registro de ${fmtW(num(w.kg))} kg?`)) return;
+    DB.ps('pesos', arr.filter(p => p.id !== id)); UI.render(); UI.renderEvo(); toast('Registro apagado');
+  },
   renderHist(){
     const h = DB.p('hist', []).slice().reverse();
     $('hi-list').innerHTML = h.length ? h.map(s => { const d = new Date(s.d); return `
@@ -593,8 +634,10 @@ const UI = {
   exportData(){
     const p = App.profile(), out = {app:'firenzefit', v:2, perfil:p, dados:{}};
     Object.keys(localStorage).filter(k => k.startsWith('ff2:p:'+p.id+':')).forEach(k => out.dados[k.split(':').pop()] = JSON.parse(localStorage.getItem(k)));
-    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(out)], {type:'application/json'}));
-    a.download = `firenzefit-${p.nome.toLowerCase()}-${today()}.json`; a.click(); toast('Backup salvo nos seus arquivos');
+    const blob = new Blob([JSON.stringify(out)], {type:'application/json'}), name = `firenzefit-${p.nome.toLowerCase()}-${today()}.json`;
+    const file = typeof File === 'function' ? new File([blob], name, {type:'application/json'}) : null;
+    if(file && navigator.canShare?.({files:[file]})){ navigator.share({files:[file], title:'Backup Firenze Fit'}).catch(()=>{}); return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); toast('Backup salvo nos seus arquivos');
   },
   importData(inp){
     const f = inp.files[0]; if(!f) return; const rd = new FileReader();
@@ -613,10 +656,10 @@ const UI = {
       ${ios ? `<p class="sm mut">1. Abra este link no <b class="gold">Safari</b><br>2. Toque em <b class="gold">Compartilhar</b> (quadrado com seta)<br>3. Escolha <b class="gold">Adicionar à Tela de Início</b></p>
       <p class="xs" style="color:var(--red)">No iPhone, depois de instalar use sempre pelo ícone: o Safari e o app guardam dados separados.</p>`
       : `<p class="sm mut">1. No <b class="gold">Chrome</b>, toque nos três pontinhos<br>2. Escolha <b class="gold">Instalar aplicativo</b></p>`}
-      <button class="btn btn-gold" onclick="UI.closeModal()">Entendi</button></div>`);
+      <button type="button" class="btn btn-gold" onclick="UI.closeModal()">Entendi</button></div>`);
   },
-  modal(html){ $('modal-c').innerHTML = html; $('modal').classList.remove('hide'); },
-  closeModal(){ $('modal').classList.add('hide'); }
+  modal(html){ $('modal-c').innerHTML = html; $('modal').classList.remove('hide'); $('modal-c').scrollTop = 0; },
+  closeModal(){ $('modal').classList.add('hide'); document.activeElement?.blur?.(); }
 };
 
 /* ================= DESCANSO ================= */
@@ -632,7 +675,7 @@ const R = {
 /* ================= SESSÃO ================= */
 const S = {
   cur:null, clockIv:null,
-  code(bi,j){ return String.fromCharCode(65 + (bi % 26)) + (j+1); },   // A1, A2...
+  code(bi,j){ return String.fromCharCode(65 + (bi % 26)) + (j+1); },
   resolve(id){ const e = App.ex(id); if(!e) return id; const man = App.status?.manutencao || [];
     if(e.equip.some(q => man.includes(q)) && e.alt && App.ex(e.alt)) return e.alt; return id; },
   start(idx){
@@ -663,8 +706,6 @@ const S = {
     const order = ['mob','tre','car']; order.forEach((k,i) => { $('st-'+k).className = k===st ? 'on' : (i < order.indexOf(st) ? 'ok' : ''); });
     if(st === 'mob') S.renderMob(); else if(st === 'tre') S.renderBlock(); else S.renderCardio();
   },
-
-  /* 1. MOBILIDADE com imagem e passo a passo */
   renderMob(){
     const ids = S.day().mob, eq = App.cat.equipamentos;
     $('s-body').innerHTML = `<div class="stack"><div><div class="h2">Mobilidade</div><p class="sm mut" style="margin-top:4px">5 a 6 minutos para soltar as articulações antes de pegar peso. Movimentos lentos, sem dor. Marque cada um ao terminar.</p></div>
@@ -672,22 +713,20 @@ const S = {
       <div class="mob-item ${on?'on':''}"><div class="row" style="align-items:flex-start;gap:12px">
         ${media(m.img,'','mini')}
         <div style="flex:1"><b class="sm">${i+1}. ${esc(m.nome)}</b><div class="xs gold" style="margin-top:2px">${esc(m.dose)}</div><div class="xs mut">${esc(eq[m.equip]||'')}</div></div>
-        <button class="chk ${on?'on':''}" onclick="S.toggleMob(${i})" aria-label="Feito"><svg class="i"><use href="#i-check"/></svg></button></div>
+        <button type="button" class="chk ${on?'on':''}" onclick="S.toggleMob(${i})" aria-label="Feito"><svg class="i"><use href="#i-check"/></svg></button></div>
         <ol>${m.passos.map(p=>`<li>${esc(p)}</li>`).join('')}</ol></div>`; }).join('')}</div>`;
-    $('s-foot').innerHTML = `<button class="btn btn-gold" onclick="S.go('tre')">${S.cur.mob.length>=ids.length?'Ir para o treino':'Pular para o treino'} <svg class="i"><use href="#i-right"/></svg></button>`;
+    $('s-foot').innerHTML = `<button type="button" class="btn btn-gold" onclick="S.go('tre')">${S.cur.mob.length>=ids.length?'Ir para o treino':'Pular para o treino'} <svg class="i"><use href="#i-right"/></svg></button>`;
   },
   toggleMob(i){ const a = S.cur.mob; a.includes(i) ? a.splice(a.indexOf(i),1) : a.push(i); S.save(); S.renderMob(); },
-
-  /* 2. TREINO */
   blockDone(b){ return b.exs.every(x => x.sets.every(s => s.ok)); },
-  pointer(b){ // próxima série a fazer, na ordem das voltas: A1 s1, A2 s1, A1 s2, A2 s2...
+  pointer(b){
     const n = Math.max(...b.exs.map(x => x.sets.length));
     for(let k=0;k<n;k++) for(let j=0;j<b.exs.length;j++){ const s = b.exs[j].sets[k]; if(s && !s.ok) return {j,k}; }
     return null;
   },
   renderBlock(){
     const c = S.cur, b = c.blocos[c.bi], multi = b.exs.length > 1, ptr = S.pointer(b);
-    const nav = `<div class="blocknav">${c.blocos.map((x,i)=>`<button class="${i===c.bi?'on':''} ${S.blockDone(x)?'ok':''}" onclick="S.toBlock(${i})">${i+1}</button>`).join('')}</div>`;
+    const nav = `<div class="blocknav">${c.blocos.map((x,i)=>`<button type="button" class="${i===c.bi?'on':''} ${S.blockDone(x)?'ok':''}" onclick="S.toBlock(${i})">${i+1}</button>`).join('')}</div>`;
     let head = '';
     if(multi){
       const voltas = Math.max(...b.exs.map(x => x.sets.length)), volta = ptr ? ptr.k+1 : voltas, rest = b.exs.at(-1).desc;
@@ -699,8 +738,8 @@ const S = {
     $('s-body').innerHTML = `<div class="stack">${nav}${head}
       ${b.exs.map((x,j) => S.exCard(x, j, multi, ptr)).join(multi ? `<div class="link">SEM PAUSA</div>` : '')}</div>`;
     const last = c.bi === c.blocos.length-1;
-    $('s-foot').innerHTML = `<div class="row"><button class="btn btn-dark" style="width:56px" ${c.bi?'':'disabled'} onclick="S.toBlock(${c.bi-1})"><svg class="i"><use href="#i-left"/></svg></button>
-      <button class="btn btn-gold" onclick="${last ? "S.go('car')" : 'S.toBlock('+(c.bi+1)+')'}">${last ? 'Ir para o cardio' : 'Próximo exercício'} <svg class="i"><use href="#i-right"/></svg></button></div>`;
+    $('s-foot').innerHTML = `<div class="row"><button type="button" class="btn btn-dark" style="width:56px" ${c.bi?'':'disabled'} onclick="S.toBlock(${c.bi-1})"><svg class="i"><use href="#i-left"/></svg></button>
+      <button type="button" class="btn btn-gold" onclick="${last ? "S.go('car')" : 'S.toBlock('+(c.bi+1)+')'}">${last ? 'Ir para o cardio' : 'Próximo exercício'} <svg class="i"><use href="#i-right"/></svg></button></div>`;
   },
   exCard(x, j, multi, ptr){
     const e = App.ex(x.ex), q = App.mainEquip(e), eqn = App.cat.equipamentos, det = App.cat.detalhes || {};
@@ -709,7 +748,7 @@ const S = {
       ${media(e.img,'▶ Execução')}
       <div class="row between" style="align-items:flex-start"><div><div class="h3">${multi?`<span class="code">${S.code(S.cur.bi,j)}</span>`:''}${esc(e.nome)}</div>
         <div class="xs gold" style="margin-top:4px">${esc(e.musc)} · ${x.sets.length} × ${esc(x.reps)} · ${x.desc ? 'descanso '+x.desc+'s' : 'sem pausa → próximo'}</div></div>
-        ${e.alt ? `<button class="btn btn-dark btn-sm" onclick="S.swap(${j})"><svg class="i"><use href="#i-swap"/></svg>Trocar</button>`:''}</div>
+        ${e.alt ? `<button type="button" class="btn btn-dark btn-sm" onclick="S.swap(${j})"><svg class="i"><use href="#i-swap"/></svg>Trocar</button>`:''}</div>
       <div class="here"><img src="${CFG.FOTO(App.grupo,q)}" onerror="this.remove()"><div><div class="xs gold" style="font-weight:800;letter-spacing:.5px;text-transform:uppercase">Na sua academia</div>
         <div class="sm"><b>${esc(e.equip.filter(k=>k!=='anilhas').map(k=>eqn[k]).join(' + '))}</b></div>${det[q]?`<div class="xs mut">${esc(det[q])}</div>`:''}</div></div>
       ${e.nota ? `<div class="note">${esc(e.nota)}</div>` : ''}
@@ -719,7 +758,7 @@ const S = {
       ${x.sets.map((s,k) => `<tr class="${s.ok?'done':''} ${ptr&&ptr.j===j&&ptr.k===k?'now':''}"><td class="n">${k+1}</td>
         <td><input inputmode="decimal" value="${esc(s.kg)}" placeholder="${e.tipo==='tempo'?'—':'kg'}" ${e.tipo==='tempo'?'disabled':''} onchange="S.setVal(${j},${k},'kg',this.value)"></td>
         <td><input inputmode="numeric" value="${esc(s.r)}" placeholder="${esc(repT(x.reps,k))}" onchange="S.setVal(${j},${k},'r',this.value)"></td>
-        <td><button class="chk ${s.ok?'on':''}" onclick="S.done(${j},${k})"><svg class="i"><use href="#i-check"/></svg></button></td></tr>`).join('')}</table>
+        <td><button type="button" class="chk ${s.ok?'on':''}" onclick="S.done(${j},${k})"><svg class="i"><use href="#i-check"/></svg></button></td></tr>`).join('')}</table>
     </div>`;
   },
   toBlock(i){ if(i<0||i>=S.cur.blocos.length) return; S.cur.bi = i; S.save(); S.renderBlock(); $('s-body').scrollTop = 0; },
@@ -730,7 +769,7 @@ const S = {
     S.save(); S.renderBlock();
     if(!s.ok) return;
     const multi = b.exs.length > 1, ptr = S.pointer(b);
-    if(multi && ptr && ptr.k === k && ptr.j > j){   // ainda na mesma volta: vai para o próximo sem descanso
+    if(multi && ptr && ptr.k === k && ptr.j > j){
       toast('Sem pausa → ' + S.code(bi, ptr.j) + ' ' + App.ex(b.exs[ptr.j].ex).nome);
       $('ex-'+ptr.j)?.scrollIntoView({behavior:'smooth', block:'start'}); return;
     }
@@ -743,23 +782,21 @@ const S = {
     const x = S.cur.blocos[S.cur.bi].exs[j], e = App.ex(x.ex);
     const options = [x.orig, App.ex(x.orig)?.alt, e.alt].filter((v,i,a) => v && App.ex(v) && v !== x.ex && a.indexOf(v)===i);
     UI.modal(`<div class="stack"><div class="h3">Aparelho ocupado ou com problema?</div><p class="sm mut">Troque por um exercício equivalente desta academia:</p>
-      ${options.map(o => `<button class="prof" onclick="S.doSwap(${j},'${o}')"><img class="thumb" src="${CFG.IMG(App.ex(o).img)[0]}" onerror="this.style.visibility='hidden'"><div><b class="sm">${esc(App.ex(o).nome)}</b><div class="xs mut">${esc(App.ex(o).equip.map(q=>App.cat.equipamentos[q]).join(' + '))}</div></div></button>`).join('')}
-      <button class="btn btn-dark" onclick="UI.closeModal()">Manter</button></div>`);
+      ${options.map(o => `<button type="button" class="prof" onclick="S.doSwap(${j},'${o}')"><img class="thumb" src="${CFG.IMG(App.ex(o).img)[0]}" onerror="this.style.visibility='hidden'"><div><b class="sm">${esc(App.ex(o).nome)}</b><div class="xs mut">${esc(App.ex(o).equip.map(q=>App.cat.equipamentos[q]).join(' + '))}</div></div></button>`).join('')}
+      <button type="button" class="btn btn-dark" onclick="UI.closeModal()">Manter</button></div>`);
   },
   doSwap(j,id){ const x = S.cur.blocos[S.cur.bi].exs[j]; x.ex = id; x.auto = false; S.cur.trocas++;
     const prev = DB.p('cargas', {})[id] || []; x.sets.forEach((s,k) => { if(!s.ok) s.kg = prev[k]?.kg ?? ''; });
     S.save(); UI.closeModal(); S.renderBlock(); },
-
-  /* 3. CARDIO */
   renderCardio(){
     const d = S.day(), c = S.cur.cardio, eq = App.cat.equipamentos;
     const opts = ['esteira','bike','transport','cama_elastica'].filter(q => eq[q]);
     $('s-body').innerHTML = `<div class="stack"><div><div class="h2">Cardio final</div><p class="sm mut" style="margin-top:4px">Por último, para não roubar energia do treino de força. ${esc(d.cardio.obs)}.</p></div>
       <div class="card stack" style="text-align:center"><span class="pill" style="margin:0 auto">${esc(d.cardio.intens)}</span>
         <div class="cardio-clock" id="cd-clock">${mmss(d.cardio.min*60)}</div><div class="xs mut">meta: ${d.cardio.min} minutos</div>
-        <div class="chips" style="justify-content:center">${opts.map(q => `<button class="${c.eq===q?'on':''}" onclick="S.cardioEq('${q}')">${esc(eq[q])}</button>`).join('')}</div>
-        <button class="btn ${c.run?'btn-dark':'btn-ghost'}" onclick="S.cardioToggle()">${c.run ? 'Pausar' : (c.acc ? 'Continuar' : 'Iniciar cronômetro')}</button></div></div>`;
-    $('s-foot').innerHTML = `<div class="row"><button class="btn btn-dark" style="width:56px" onclick="S.go('tre')"><svg class="i"><use href="#i-left"/></svg></button><button class="btn btn-gold" onclick="S.finish()"><svg class="i"><use href="#i-check"/></svg>CONCLUIR TREINO</button></div>`;
+        <div class="chips" style="justify-content:center">${opts.map(q => `<button type="button" class="${c.eq===q?'on':''}" onclick="S.cardioEq('${q}')">${esc(eq[q])}</button>`).join('')}</div>
+        <button type="button" class="btn ${c.run?'btn-dark':'btn-ghost'}" onclick="S.cardioToggle()">${c.run ? 'Pausar' : (c.acc ? 'Continuar' : 'Iniciar cronômetro')}</button></div></div>`;
+    $('s-foot').innerHTML = `<div class="row"><button type="button" class="btn btn-dark" style="width:56px" onclick="S.go('tre')"><svg class="i"><use href="#i-left"/></svg></button><button type="button" class="btn btn-gold" onclick="S.finish()"><svg class="i"><use href="#i-check"/></svg>CONCLUIR TREINO</button></div>`;
     S.cardioTick();
   },
   cardioEq(q){ S.cur.cardio.eq = q; S.save(); S.renderCardio(); },
@@ -773,7 +810,7 @@ const S = {
     c.blocos.forEach(b => b.exs.forEach(x => { const sets = x.sets.filter(s => s.ok).map(s => ({kg: num(s.kg)||0, r: parseInt(s.r)||0}));
       if(!sets.length) return; series += sets.length; sets.forEach(s => vol += s.kg*s.r); exs.push({ex:x.ex, sets}); cargas[x.ex] = sets; }));
     if(!series && !confirm('Nenhuma série foi marcada como feita. Concluir mesmo assim?')) return;
-    const h = DB.p('hist', []); h.push({ id: 's'+Date.now().toString(36), d: new Date().toISOString(), mes: c.mes, dia: S.day().id, nome: c.titulo,
+    const h = DB.p('hist', []); h.push({ id: uid('s'), d: new Date().toISOString(), mes: c.mes, dia: S.day().id, nome: c.titulo,
       obj: App.profile().obj, lvl: App.profile().lvl, dur: Math.round((Date.now()-c.t0)/1000), vol: Math.round(vol), series, exs, cardio: Math.round(S.cardioElapsed()/60), trocas: c.trocas });
     DB.ps('hist', h); DB.ps('cargas', cargas);
     const rot = DB.p('rot', {}); rot[c.mes] = c.di + 1; DB.ps('rot', rot);
@@ -781,11 +818,11 @@ const S = {
     const nx = App.program().dias[App.nextDayIdx()];
     UI.modal(`<div class="stack" style="text-align:center"><div class="avatar" style="width:64px;height:64px;margin:0 auto"><svg class="i" style="width:30px;height:30px"><use href="#i-check"/></svg></div><div class="h2">Treino concluído!</div>
       <div class="grid2"><div class="card stat"><span class="lbl" style="margin:0">Volume</span><b>${fmtKg(vol)}</b></div><div class="card stat"><span class="lbl" style="margin:0">Séries</span><b>${series}</b></div></div>
-      <p class="sm mut">Próximo: Treino ${nx.id} · ${esc(nx.nome)}</p><button class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
+      <p class="sm mut">Próximo: Treino ${nx.id} · ${esc(nx.nome)}</p><button type="button" class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
   }
 };
 
-/* ================= REVISÃO DE IMAGENS (abra o app com ?revisar=1) ================= */
+/* ================= REVISÃO DE IMAGENS (?revisar=1) ================= */
 function revisar(){
   const ex = Object.values(App.cat.exercicios), mob = Object.values(App.cat.mobilidade||{});
   document.body.innerHTML = `<div class="screen"><div class="wrap stack"><div class="h2">Revisão de imagens · ${esc(App.idx.nome)}</div>
@@ -796,37 +833,40 @@ function revisar(){
 }
 
 /* ================= INÍCIO ================= */
+let booted = false;
 async function boot(){
   const qs = new URLSearchParams(location.search), q = qs.get('grupo'), saved = DB.get('grupo'), rev = qs.get('revisar');
   if(q && CFG.GRUPOS.includes(q) && q !== saved){ if(!saved || confirm(`Mudar seu grupo de ${saved} para ${q}?`)) DB.set('grupo', q); }
   App.grupo = DB.get('grupo') || '12'; DB.set('grupo', App.grupo);
-  $('lg-grupo').textContent = 'GRUPO ' + App.grupo; $('lg-buylink').href = CFG.CHECKOUT_URL;
-  Data.nowKey(); if(!rev) history.replaceState(null, '', location.pathname);
-  if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
-  if('serviceWorker' in navigator){
-    const hadCtrl = !!navigator.serviceWorker.controller; let reloaded = false;
-    navigator.serviceWorker.addEventListener('controllerchange', () => { if(hadCtrl && !reloaded && !S.cur){ reloaded = true; location.reload(); } });
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  $('lg-grupo').textContent = 'GRUPO ' + App.grupo;
+  Data.nowKey();
+  if(!booted){
+    booted = true;
+    if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
+    // service worker só registra; NUNCA recarrega a página sozinho (isso tirava o iPhone da tela cheia)
+    if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
   }
   UI.applyCover();
   const ok = await Data.load();
-  if(!ok){ document.body.innerHTML = '<div class="screen center"><div class="card wrap" style="text-align:center"><div class="h3">Sem conexão</div><p class="sm mut" style="margin-top:8px">Abra o app uma vez com internet para baixar seus treinos.</p><button class="btn btn-gold" style="margin-top:14px" onclick="location.reload()">Tentar de novo</button></div></div>'; return; }
+  if(!ok){ document.body.innerHTML = '<div class="screen center"><div class="card wrap" style="text-align:center"><div class="h3">Sem conexão</div><p class="sm mut" style="margin-top:8px">Abra o app uma vez com internet para baixar seus treinos.</p><button type="button" class="btn btn-gold" style="margin-top:14px" onclick="location.reload()">Tentar de novo</button></div></div>'; return; }
   if(rev) return revisar();
   $('lg-sub').textContent = `Treinos feitos para os aparelhos da academia do ${App.idx.nome}.`;
   if(!Auth.valid()) return UI.show('login');
   const act = DB.get('active'); if(act && DB.get('profiles',[]).some(p => p.id === act)) UI.pick(act); else UI.show('profiles');
 }
-$('lg-go').onclick = async () => {
+async function doLogin(){
   const email = $('lg-email').value.trim().toLowerCase(), err = $('lg-err'); err.classList.add('hide');
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent = 'Digite um e-mail válido.'; return err.classList.remove('hide'); }
   $('lg-go').textContent = 'Verificando...';
   try{ const r = await Auth.request(email);
-    if(r.dev){ Auth.save(email, App.grupo); toast('Modo teste: acesso liberado'); return boot(); }
+    if(r.dev){ Auth.save(email, App.grupo); toast('Modo teste: acesso liberado'); UI.show('profiles'); return; }
     if(!r.ok){ err.textContent = r.msg || 'Não encontramos uma assinatura ativa para este e-mail.'; err.classList.remove('hide'); return; }
     $('lg-mailshow').textContent = email; $('lg-step1').classList.add('hide'); $('lg-step2').classList.remove('hide');
   }catch(e){ err.textContent = 'Sem conexão. Tente novamente.'; err.classList.remove('hide'); }
   finally{ $('lg-go').textContent = 'ENTRAR'; }
-};
+}
+$('lg-go').onclick = doLogin;
+$('lg-email').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); doLogin(); } };
 $('lg-verify').onclick = async () => {
   const email = $('lg-email').value.trim().toLowerCase(), err = $('lg-err');
   try{ const r = await Auth.verify(email, $('lg-code').value.trim());
@@ -836,11 +876,15 @@ $('lg-verify').onclick = async () => {
 };
 $('lg-back').onclick = () => { $('lg-step2').classList.add('hide'); $('lg-step1').classList.remove('hide'); };
 $('ob-save').onclick = UI.saveProfile;
+$('ob-nome').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); $('ob-peso').focus(); } };
+$('ob-peso').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); e.target.blur(); } };
 ['ob-obj','ob-lvl'].forEach(id => $(id).addEventListener('click', e => { const b = e.target.closest('.opt'); if(!b) return;
   $(id).querySelectorAll('.opt').forEach(o => o.classList.toggle('on', o === b)); }));
 document.querySelectorAll('nav.bot button').forEach(b => b.onclick = () => UI.tab(b.dataset.t));
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); window._bip = e; });
 document.addEventListener('visibilitychange', () => { if(!document.hidden && R.end) R.tick(); });
+/* bloqueia qualquer link que tentaria sair do app */
+document.addEventListener('click', e => { const a = e.target.closest('a[href]'); if(a && !a.target){ e.preventDefault(); } }, true);
 boot();
 </script>
 </body>
