@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Firenze Fit</title>
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Firenze Fit">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+:root{--bg:#0a0a0a;--card:#141414;--card2:#1b1b1b;--line:#2a2a2a;--gold:#D4AF37;--gold2:#aa8c2c;--mut:#8a8a8a;--txt:#f4f4f4;--red:#f87171;--grn:#4ade80;--st:env(safe-area-inset-top);--sb:env(safe-area-inset-bottom)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{overscroll-behavior:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit;font-size:16px;color:var(--txt);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;outline:none}
+input:focus,select:focus{border-color:var(--gold)}
+.hide{display:none!important}
+.screen{position:fixed;inset:0;overflow-y:auto;padding:calc(var(--st) + 20px) 18px calc(var(--sb) + 24px)}
+.center{display:flex;flex-direction:column;justify-content:center;align-items:center}
+.wrap{width:100%;max-width:440px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
+.glass{background:rgba(20,20,20,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(212,175,55,.3)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:14px;font-weight:800;letter-spacing:.3px;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;box-shadow:0 8px 24px rgba(212,175,55,.18)}
+.btn-ghost{background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.3);color:var(--gold)}
+.btn-dark{background:var(--card2);border:1px solid var(--line)}
+.btn-sm{padding:8px 12px;font-size:12px;border-radius:10px;width:auto}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase}
+.mut{color:var(--mut)}.gold{color:var(--gold)}.sm{font-size:12px}.xs{font-size:10.5px}
+.h1{font-size:34px;font-weight:900;letter-spacing:-.5px}.h2{font-size:22px;font-weight:900}.h3{font-size:16px;font-weight:800}
+.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}
+.stack>*+*{margin-top:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;background:rgba(212,175,55,.1);color:var(--gold);border:1px solid rgba(212,175,55,.25)}
+.pill.red{background:rgba(248,113,113,.1);color:var(--red);border-color:rgba(248,113,113,.3)}
+.pill.grn{background:rgba(74,222,128,.08);color:var(--grn);border-color:rgba(74,222,128,.25)}
+.lbl{font-size:10.5px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:block}
+.opt{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:12px;text-align:left;width:100%}
+.opt.on{border-color:var(--gold);background:rgba(212,175,55,.08)}
+.opt b{display:block;font-size:14px}.opt span{font-size:11px;color:var(--mut)}
+svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+header.top{position:fixed;top:0;left:0;right:0;z-index:30;padding:calc(var(--st) + 12px) 18px 12px;background:rgba(10,10,10,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+main#app{position:fixed;inset:0;overflow-y:auto;padding:calc(var(--st) + 78px) 16px calc(var(--sb) + 150px)}
+nav.bot{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;background:rgba(10,10,10,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:var(--sb)}
+nav.bot button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 9px;font-size:10px;font-weight:700;color:var(--mut)}
+nav.bot button.on{color:var(--gold)}
+.tab{display:none}.tab.on{display:block}
+.hero{position:relative;overflow:hidden;border-radius:22px;padding:20px;border:1px solid var(--line);background:radial-gradient(120% 140% at 100% 0%,rgba(212,175,55,.18),transparent 55%),linear-gradient(160deg,#171717,#0c0c0c)}
+.gym{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(212,175,55,.35);min-height:150px;background:linear-gradient(160deg,#1a1a1a,#0c0c0c) center/cover no-repeat;display:flex;align-items:flex-end}
+.gym .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.05) 20%,rgba(10,10,10,.92))}
+.gym .in{position:relative;padding:16px;width:100%}
+.strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.strip::-webkit-scrollbar{display:none}
+.strip figure{flex-shrink:0;width:112px}.strip img{width:112px;height:84px;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block}
+.strip figcaption{font-size:10px;color:var(--mut);margin-top:4px;line-height:1.25}
+.bar{height:9px;border-radius:9px;background:var(--bg);border:1px solid var(--line);overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:9px;transition:width .5s}
+.stat b{display:block;font-size:20px;font-weight:900;margin-top:4px}
+.list-item{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.list-item:first-child{border-top:0}
+.thumb{width:52px;height:52px;border-radius:12px;background:#fff;object-fit:cover;flex-shrink:0}
+.ic{width:52px;height:52px;border-radius:12px;background:rgba(212,175,55,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chart{width:100%;height:140px}
+#sess{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease}
+#sess.open{transform:none}
+.s-head{padding:calc(var(--st) + 10px) 14px 10px;background:var(--card);border-bottom:1px solid var(--line)}
+.steps{display:flex;gap:6px;margin-top:10px}.steps div{flex:1;text-align:center;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:7px 0;border-radius:9px;background:var(--bg);color:var(--mut);border:1px solid var(--line)}
+.steps div.on{color:#000;background:var(--gold);border-color:var(--gold)}.steps div.ok{color:var(--gold);border-color:rgba(212,175,55,.4)}
+.s-body{flex:1;overflow-y:auto;padding:14px 14px calc(var(--sb) + 110px)}
+.s-foot{position:absolute;left:0;right:0;bottom:0;padding:12px 14px calc(var(--sb) + 12px);background:linear-gradient(transparent,var(--bg) 30%)}
+.media{position:relative;width:100%;aspect-ratio:4/3;max-height:260px;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.media img{width:100%;height:100%;object-fit:contain}
+.media .tag{position:absolute;left:8px;bottom:8px;background:rgba(10,10,10,.8);color:var(--gold);font-size:10px;font-weight:800;padding:4px 8px;border-radius:8px}
+.media.fb{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1a1a1a,#0d0d0d)}
+.here{display:flex;gap:10px;align-items:center;padding:8px;border-radius:14px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.3)}
+.here img{width:64px;height:48px;object-fit:cover;border-radius:9px}
+.sets{width:100%;border-collapse:separate;border-spacing:0 6px}
+.sets th{font-size:9.5px;color:var(--mut);text-transform:uppercase;font-weight:800;letter-spacing:.6px;text-align:center}
+.sets td{text-align:center}.sets td input{padding:9px 4px;text-align:center;border-radius:10px;font-weight:700}
+.sets .n{width:30px;font-weight:900;color:var(--mut)}
+.chk{width:42px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg);display:inline-flex;align-items:center;justify-content:center;color:var(--mut)}
+.chk.on{background:var(--gold);border-color:var(--gold);color:#000}
+tr.done input{border-color:rgba(212,175,55,.35);color:var(--gold)}
+.link{display:flex;align-items:center;gap:8px;justify-content:center;margin:8px 0;font-size:11px;font-weight:900;letter-spacing:1px;color:var(--gold)}
+.link:before,.link:after{content:"";flex:1;height:1px;background:rgba(212,175,55,.35)}
+.mob-item{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:14px;background:var(--card);width:100%;text-align:left}
+.mob-item.on{border-color:rgba(212,175,55,.5)}.mob-item.on .chk{background:var(--gold);color:#000;border-color:var(--gold)}
+.blocknav{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.blocknav::-webkit-scrollbar{display:none}
+.blocknav button{flex-shrink:0;min-width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-weight:800;font-size:12px;color:var(--mut)}
+.blocknav button.on{border-color:var(--gold);color:var(--gold)}.blocknav button.ok{background:rgba(212,175,55,.15);color:var(--gold)}
+#rest{position:fixed;left:12px;right:12px;bottom:calc(var(--sb) + 84px);z-index:60;border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:12px;background:rgba(20,20,20,.96);border:1px solid rgba(212,175,55,.45);box-shadow:0 10px 40px rgba(0,0,0,.6)}
+#rest .t{font-size:30px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--gold);min-width:84px}
+#rest.end{animation:flash 1s infinite}@keyframes flash{50%{background:#3a2f0c;border-color:var(--gold)}}
+.cardio-clock{font-size:64px;font-weight:900;text-align:center;font-variant-numeric:tabular-nums;color:var(--gold);letter-spacing:-2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips button{padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px;font-weight:700}
+.chips button.on{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,.08)}
+#mini{position:fixed;left:12px;right:12px;bottom:calc(var(--sb) + 70px);z-index:40;border-radius:16px;padding:10px 12px;display:flex;align-items:center;gap:12px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(212,175,55,.7);animation:pulse 1.6s infinite}@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(212,175,55,0)}}
+.modal{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:12px}
+.modal .card{width:100%;max-width:440px;max-height:88vh;overflow-y:auto;margin-bottom:var(--sb)}
+#toast{position:fixed;top:calc(var(--st) + 14px);left:50%;transform:translateX(-50%);z-index:99;background:var(--gold);color:#000;font-weight:800;font-size:13px;padding:10px 16px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:90%;text-align:center}
+.login-bg{background:radial-gradient(90% 60% at 50% 0%,rgba(212,175,55,.22),transparent 60%),var(--bg) center/cover no-repeat}
+.logo{width:64px;height:64px;border-radius:18px;margin:0 auto 14px;display:block}
+.prof{display:flex;align-items:center;gap:12px;width:100%;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:left}
+.avatar{width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
+details summary{list-style:none;cursor:pointer}details summary::-webkit-details-marker{display:none}
+</style>
+</head>
+<body>
+<section id="scr-login" class="screen center login-bg hide">
+  <div class="wrap card glass" style="padding:28px 22px;text-align:center">
+    <img src="icons/icon-192.png" class="logo" alt="">
+    <div class="eyebrow">Firenze Fit</div>
+    <div class="h1" id="lg-grupo" style="margin-top:4px">GRUPO 12</div>
+    <p class="sm mut" style="margin:8px 0 24px" id="lg-sub">Treinos feitos para os aparelhos da sua academia.</p>
+    <div id="lg-step1" class="stack">
+      <input type="email" id="lg-email" placeholder="E-mail usado na assinatura" autocomplete="email" inputmode="email" style="text-align:center">
+      <button class="btn btn-gold" id="lg-go">ENTRAR</button>
+    </div>
+    <div id="lg-step2" class="stack hide">
+      <p class="sm mut">Enviamos um código de 6 dígitos para <b id="lg-mailshow" class="gold"></b></p>
+      <input id="lg-code" inputmode="numeric" maxlength="6" placeholder="000000" style="text-align:center;font-size:24px;letter-spacing:8px;font-weight:900">
+      <button class="btn btn-gold" id="lg-verify">CONFIRMAR</button>
+      <button class="btn btn-sm" style="margin:0 auto" id="lg-back"><span class="mut">Usar outro e-mail</span></button>
+    </div>
+    <p id="lg-err" class="sm hide" style="color:var(--red);margin-top:12px"></p>
+    <p class="xs mut" style="margin-top:18px">Ainda não assina? <a id="lg-buylink" class="gold" href="#">Conheça os planos</a></p>
+  </div>
+</section>
+
+<section id="scr-profiles" class="screen hide">
+  <div class="wrap stack">
+    <div style="padding-top:20px"><div class="eyebrow">Firenze Fit</div><div class="h2" style="margin-top:4px">Quem vai treinar?</div>
+    <p class="sm mut" style="margin-top:4px">Cada pessoa tem seu próprio histórico, cargas e evolução.</p></div>
+    <div id="pf-list" class="stack"></div>
+    <button class="btn btn-ghost" onclick="UI.newProfile()"><svg class="i"><use href="#i-plus"/></svg>Adicionar pessoa</button>
+  </div>
+</section>
+
+<section id="scr-onb" class="screen hide">
+  <div class="wrap stack">
+    <div style="padding-top:10px"><div class="eyebrow">Novo perfil</div><div class="h2" style="margin-top:4px">Vamos montar seu treino</div></div>
+    <div><label class="lbl">Seu nome</label><input id="ob-nome" maxlength="20" placeholder="Ex.: Erik"></div>
+    <div><label class="lbl">Peso atual (kg)</label><input id="ob-peso" inputmode="decimal" placeholder="Ex.: 82,5"></div>
+    <div><label class="lbl">Objetivo</label><div class="grid2" id="ob-obj">
+      <button class="opt on" data-v="hipertrofia"><b>Ganhar massa</b><span>Hipertrofia</span></button>
+      <button class="opt" data-v="emagrecimento"><b>Emagrecer</b><span>Definição e condicionamento</span></button></div></div>
+    <div><label class="lbl">Experiência</label><div class="stack" id="ob-lvl">
+      <button class="opt on" data-v="iniciante"><b>Iniciante</b><span>Menos de 6 meses ou voltando agora · 3x/semana</span></button>
+      <button class="opt" data-v="intermediario"><b>Intermediário</b><span>6 meses a 2 anos com regularidade · 4x/semana</span></button>
+      <button class="opt" data-v="avancado"><b>Avançado</b><span>Mais de 2 anos, domina a técnica · 5x/semana</span></button></div></div>
+    <div class="card" style="padding:14px">
+      <label class="row" style="align-items:flex-start;gap:10px"><input type="checkbox" id="ob-parq" style="width:20px;height:20px;margin-top:2px;flex-shrink:0">
+      <span class="sm mut">Declaro que não tenho restrição médica para atividade física ou que fui liberado(a) por um médico. Se sentir dor, tontura ou falta de ar, paro o treino.</span></label>
+      <label class="row" style="align-items:flex-start;gap:10px;margin-top:12px"><input type="checkbox" id="ob-lgpd" style="width:20px;height:20px;margin-top:2px;flex-shrink:0">
+      <span class="sm mut">Concordo que meu peso e meus treinos fiquem salvos neste aparelho para acompanhar minha evolução.</span></label>
+    </div>
+    <p id="ob-err" class="sm hide" style="color:var(--red)"></p>
+    <button class="btn btn-gold" id="ob-save">CRIAR PERFIL</button>
+    <button class="btn btn-sm" style="margin:0 auto" onclick="UI.show('profiles')"><span class="mut">Cancelar</span></button>
+  </div>
+</section>
+
+<header class="top hide" id="hdr">
+  <div class="row between">
+    <button class="row" onclick="UI.show('profiles')" style="gap:10px;text-align:left">
+      <div class="avatar" id="h-av" style="width:38px;height:38px;font-size:15px">E</div>
+      <div><div class="eyebrow" id="h-grupo" style="font-size:10px">Grupo 12</div><div class="h3" id="h-nome">Erik</div></div>
+    </button>
+    <div style="text-align:right"><div class="pill" id="h-obj">Hipertrofia</div><div class="xs mut" id="h-lvl" style="margin-top:4px">Intermediário</div></div>
+  </div>
+</header>
+
+<main id="app" class="hide">
+  <div id="pwa-banner" class="card hide" style="margin-bottom:14px;border-color:rgba(212,175,55,.4)">
+    <div class="row between"><div class="row"><svg class="i gold"><use href="#i-phone"/></svg><div><b class="sm">Instale o app</b><div class="xs mut">Tela cheia e seus dados protegidos</div></div></div>
+    <div class="row" style="gap:4px"><button class="btn btn-gold btn-sm" onclick="UI.install()">Instalar</button><button class="btn btn-sm mut" onclick="UI.dismissBanner()" aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div></div>
+  </div>
+
+  <section class="tab on stack" id="t-hoje">
+    <div class="row between"><span class="xs mut" style="font-weight:700;text-transform:uppercase;letter-spacing:1px" id="hj-mes">Mês</span><span class="pill" id="hj-din">Dinâmica</span></div>
+    <div id="hj-aviso" class="card hide" style="border-color:rgba(248,113,113,.4)"></div>
+    <div class="hero">
+      <span class="pill">Seu treino de hoje</span>
+      <div class="h1" id="hj-nome" style="margin-top:10px;font-size:28px">Treino A</div>
+      <p class="sm mut" id="hj-foco" style="margin-top:4px"></p>
+      <div class="row xs mut" style="margin-top:12px;gap:14px;flex-wrap:wrap" id="hj-meta"></div>
+      <button class="btn btn-gold" style="margin-top:16px" onclick="S.start()"><svg class="i"><use href="#i-play"/></svg>COMEÇAR TREINO</button>
+    </div>
+    <div class="card stack">
+      <div class="row between"><span class="lbl" style="margin:0">Constância no mês</span><b class="gold" id="hj-pct" style="font-size:20px">0%</b></div>
+      <div class="bar"><i id="hj-bar" style="width:0"></i></div>
+      <div class="row between xs"><b id="hj-feitos">0 treinos</b><span class="mut" id="hj-metatxt">Meta</span></div>
+    </div>
+    <button class="gym" id="hj-gym" onclick="UI.showGym()" style="width:100%;text-align:left">
+      <div class="ov"></div><div class="in"><span class="pill">Feito sob medida</span>
+      <div class="h3" style="margin-top:8px" id="gym-tit">Academia do Grupo 12</div>
+      <div class="xs mut" id="gym-sub" style="margin-top:2px"></div></div>
+    </button>
+    <div class="grid2">
+      <div class="card stat"><span class="lbl" style="margin:0">Treinos</span><b id="st-tr">0</b></div>
+      <div class="card stat"><span class="lbl" style="margin:0">Volume total</span><b id="st-vol">0 kg</b></div>
+      <div class="card stat"><span class="lbl" style="margin:0">Séries</span><b id="st-se">0</b></div>
+      <div class="card stat"><span class="lbl" style="margin:0">Peso atual</span><b id="st-peso">-- kg</b></div>
+    </div>
+  </section>
+
+  <section class="tab stack" id="t-treinos">
+    <div><div class="h2">Programa do mês</div><p class="sm mut" id="tr-desc" style="margin-top:4px"></p></div>
+    <div id="tr-list" class="stack"></div>
+  </section>
+
+  <section class="tab stack" id="t-evo">
+    <div class="h2">Evolução</div>
+    <div class="card stack">
+      <div class="row between"><span class="lbl" style="margin:0">Peso corporal</span><button class="btn btn-ghost btn-sm" onclick="UI.addWeight()">+ Registrar</button></div>
+      <div id="ch-peso"></div>
+    </div>
+    <div class="card stack">
+      <span class="lbl" style="margin:0">Carga por exercício</span>
+      <select id="ev-ex" onchange="UI.renderLoadChart()"></select>
+      <div id="ch-carga"></div>
+    </div>
+  </section>
+
+  <section class="tab stack" id="t-hist">
+    <div class="h2">Histórico</div>
+    <div id="hi-list" class="stack"></div>
+  </section>
+
+  <section class="tab stack" id="t-perfil">
+    <div class="h2">Perfil</div>
+    <div class="card stack">
+      <div class="row"><div class="avatar" id="pf-av">E</div><div><b id="pf-nome">Erik</b><div class="xs gold" id="pf-sub">Grupo 12</div></div></div>
+      <div><label class="lbl">Objetivo</label><select id="pf-obj" onchange="UI.changeGoal()"><option value="hipertrofia">Hipertrofia</option><option value="emagrecimento">Emagrecimento</option></select></div>
+      <div><label class="lbl">Nível</label><select id="pf-lvl" onchange="UI.changeGoal()"><option value="iniciante">Iniciante (3x/sem)</option><option value="intermediario">Intermediário (4x/sem)</option><option value="avancado">Avançado (5x/sem)</option></select></div>
+      <p class="xs mut">O histórico é mantido quando você troca de objetivo ou nível.</p>
+    </div>
+    <button class="btn btn-ghost" onclick="UI.showGym()"><svg class="i"><use href="#i-dumb"/></svg>Sua academia</button>
+    <div class="card stack">
+      <span class="lbl" style="margin:0">Seus dados</span>
+      <p class="xs mut">Os treinos ficam salvos neste celular. Faça um backup antes de trocar de aparelho.</p>
+      <div class="grid2"><button class="btn btn-dark btn-sm" style="width:100%" onclick="UI.exportData()"><svg class="i"><use href="#i-down"/></svg>Backup</button>
+      <label class="btn btn-dark btn-sm" style="width:100%"><svg class="i"><use href="#i-up"/></svg>Restaurar<input type="file" accept=".json" class="hide" onchange="UI.importData(this)"></label></div>
+    </div>
+    <button class="btn btn-ghost" onclick="UI.showInstall()"><svg class="i"><use href="#i-phone"/></svg>Como instalar no celular</button>
+    <button class="btn btn-dark" onclick="UI.show('profiles')"><svg class="i"><use href="#i-users"/></svg>Trocar de pessoa</button>
+    <button class="btn btn-sm" style="margin:6px auto 0;color:var(--red)" onclick="UI.deleteProfile()">Excluir este perfil</button>
+    <p class="xs mut" style="text-align:center" id="pf-ver"></p>
+  </section>
+</main>
+
+<div id="mini" class="glass hide" onclick="S.open()">
+  <div class="dot"></div><div style="flex:1"><b class="sm" id="mini-t">Treino em andamento</b><div class="xs mut" id="mini-s">Toque para voltar</div></div>
+  <svg class="i gold"><use href="#i-up2"/></svg>
+</div>
+
+<nav class="bot hide" id="nav">
+  <button class="on" data-t="hoje"><svg class="i"><use href="#i-home"/></svg>Hoje</button>
+  <button data-t="treinos"><svg class="i"><use href="#i-list"/></svg>Treinos</button>
+  <button data-t="evo"><svg class="i"><use href="#i-chart"/></svg>Evolução</button>
+  <button data-t="hist"><svg class="i"><use href="#i-clock"/></svg>Histórico</button>
+  <button data-t="perfil"><svg class="i"><use href="#i-user"/></svg>Perfil</button>
+</nav>
+
+<div id="sess">
+  <div class="s-head">
+    <div class="row between">
+      <button onclick="S.minimize()" class="row mut" style="padding:6px"><svg class="i"><use href="#i-down2"/></svg></button>
+      <div style="text-align:center"><b class="sm" id="s-title">Treino</b><div class="xs gold" id="s-clock" style="font-variant-numeric:tabular-nums">00:00</div></div>
+      <button onclick="S.askCancel()" class="mut xs" style="padding:6px;font-weight:700">Cancelar</button>
+    </div>
+    <div class="steps"><div id="st-mob">1 · Mobilidade</div><div id="st-tre">2 · Treino</div><div id="st-car">3 · Cardio</div></div>
+  </div>
+  <div class="s-body" id="s-body"></div>
+  <div class="s-foot" id="s-foot"></div>
+</div>
+
+<div id="rest" class="hide">
+  <div class="t" id="rest-t">01:00</div>
+  <div style="flex:1"><b class="sm">Descanso</b><div class="xs mut" id="rest-next">Próxima série</div></div>
+  <button class="btn btn-dark btn-sm" onclick="R.add(15)">+15s</button>
+  <button class="btn btn-gold btn-sm" onclick="R.stop()">Pular</button>
+</div>
+
+<div id="modal" class="modal hide" onclick="if(event.target===this)UI.closeModal()"><div class="card" id="modal-c"></div></div>
+<div id="toast" class="hide"></div>
+
+<svg width="0" height="0" style="position:absolute">
+ <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
+ <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-7"/></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+ <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></symbol>
+ <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c.8-3.5 3.4-5 7-5s6.2 1.5 7 5"/><path d="M16 4.5a3.5 3.5 0 010 7M18 15c2 .6 3.4 2.2 4 5"/></symbol>
+ <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="currentColor"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></symbol>
+ <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></symbol>
+ <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+ <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></symbol>
+ <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 21V9M7 14l5-5 5 5M4 3h16"/></symbol>
+ <symbol id="i-down2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+ <symbol id="i-up2" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
+ <symbol id="i-dumb" viewBox="0 0 24 24"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></symbol>
+ <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+ <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+</svg>
+<script>
+/* ================= CONFIGURAÇÃO ================= */
+const CFG = {
+  VERSAO: '2.1.0',
+  GRUPOS: ['12','13','14','15','16','17','18'],
+  AUTH_URL: null,              // null = modo teste (aceita qualquer e-mail). Depois: URL do serviço de acesso
+  CHECKOUT_URL: '#',
+  IMG: id => [0,1].map(n => `https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${id}/${n}.jpg`),
+  FOTO: (g, nome) => `data/g${g}/fotos/${nome}.jpg`,   // fotos reais da academia de cada grupo
+  ACESSO_DIAS: 30
+};
+const NAO_FOTO = ['anilhas','banco','colchonete','grama'];   // não vale mostrar como "aparelho da sua academia"
+
+/* ================= UTIL ================= */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num = v => { const n = parseFloat(String(v).replace(',', '.')); return isFinite(n) ? n : null; };
+const fmtKg = n => n >= 1000 ? (n/1000).toFixed(1).replace('.', ',') + ' t' : Math.round(n) + ' kg';
+const mmss = s => { s = Math.max(0, Math.round(s)); const m = Math.floor(s/60); return String(m).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); };
+const today = () => { const d = new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+const repT = (reps,k) => { const p = String(reps).split('/').map(t=>t.trim()); return p.length>1 ? (p[k]||p.at(-1)) : String(reps).split(' ')[0]; };
+const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const OBJ = {hipertrofia:'Hipertrofia', emagrecimento:'Emagrecimento'};
+const LVL = {iniciante:'Iniciante', intermediario:'Intermediário', avancado:'Avançado'};
+const BLK = {normal:null, piramide:'Pirâmide', biset:'Bi-set', triset:'Tri-set', drop:'Drop-set', restpause:'Rest-pause'};
+const BLKTXT = {piramide:'Ajuste a carga a cada série conforme as repetições indicadas.', biset:'Faça uma série de cada exercício em sequência, <b class="gold">sem pausa</b>. Descanse só no fim da volta.',
+  triset:'Três exercícios em sequência, <b class="gold">sem pausa</b>. Descanse só no fim da volta.', drop:'Na última série, ao chegar na falha, reduza a carga em ~30% e continue até a falha de novo.',
+  restpause:'Faça as repetições, pause 15 segundos e continue. Repita a pausa mais uma vez.'};
+function toast(msg, ms=2200){ const t=$('toast'); t.textContent=msg; t.classList.remove('hide'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.add('hide'), ms); }
+function buzz(){ try{ navigator.vibrate && navigator.vibrate([300,120,300]); }catch(e){}
+  try{ const a=new (window.AudioContext||window.webkitAudioContext)(); [0,.25,.5].forEach(t=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.25,a.currentTime+t);o.start(a.currentTime+t);o.stop(a.currentTime+t+.15);}); }catch(e){} }
+
+/* ================= ARMAZENAMENTO POR PESSOA ================= */
+const DB = {
+  get(k, d=null){ try{ const v = localStorage.getItem('ff2:'+k); return v===null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem('ff2:'+k, JSON.stringify(v)); }catch(e){ toast('Memória do aparelho cheia. Faça um backup.'); } },
+  del(k){ localStorage.removeItem('ff2:'+k); },
+  p(k, d=null){ return DB.get('p:'+App.pid+':'+k, d); },
+  ps(k, v){ DB.set('p:'+App.pid+':'+k, v); }
+};
+
+/* ================= DADOS (JSON estático por grupo) ================= */
+const Data = {
+  async json(url){ const r = await fetch(url, {cache:'no-cache'}); if(!r.ok) throw new Error(r.status); return r.json(); },
+  nowKey(){ const q = new URLSearchParams(location.search).get('mes') || sessionStorage.getItem('ff-mes'); if(q && /^\d{4}-\d{2}$/.test(q)){ sessionStorage.setItem('ff-mes', q); return q; }
+    const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'); },
+  pick(meses, now){ const ok = meses.filter(m => m <= now); return ok.length ? ok.at(-1) : meses[0]; },  // mês atual; se faltar, o último publicado
+  async load(){
+    const g = App.grupo, base = `data/g${g}/`;
+    const idx = await Data.json(base+'index.json').then(v => (DB.set('cache:idx:'+g, v), v)).catch(() => DB.get('cache:idx:'+g));
+    const cat = await Data.json(base+'catalogo.json').then(v => (DB.set('cache:cat:'+g, v), v)).catch(() => DB.get('cache:cat:'+g));
+    if(!idx || !cat) return false;
+    const mk = Data.pick(idx.meses, Data.nowKey());
+    const prog = await Data.json(base+mk+'.json').then(v => (DB.set('cache:prog:'+g, v), v)).catch(() => DB.get('cache:prog:'+g));
+    const status = await Data.json(base+'status.json').catch(() => ({manutencao:[]}));
+    App.idx = idx; App.cat = cat; App.prog = prog; App.status = status || {manutencao:[]};
+    return !!prog;
+  }
+};
+
+/* ================= ACESSO ================= */
+const Auth = {
+  valid(){ const a = DB.get('auth'); return a && a.exp > Date.now(); },
+  async request(email){
+    if(!CFG.AUTH_URL) return {ok:true, dev:true};
+    const r = await fetch(CFG.AUTH_URL + '/code', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email, grupo:App.grupo})});
+    return r.json();
+  },
+  async verify(email, code){
+    const r = await fetch(CFG.AUTH_URL + '/verify', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email, code})});
+    return r.json();
+  },
+  save(email, grupo, exp){ DB.set('auth', {email, grupo, exp: exp || Date.now() + CFG.ACESSO_DIAS*864e5}); }
+};
+
+/* ================= APP ================= */
+const App = { pid:null, grupo:'12', idx:null, cat:null, prog:null, status:null,
+  profile(){ return (DB.get('profiles', [])).find(p => p.id === App.pid); },
+  program(){ const p = App.profile(); return App.prog?.programas?.[p.obj]?.[p.lvl]; },
+  ex(id){ return App.cat?.exercicios?.[id]; },
+  monthHist(){ const mk = App.prog?.mes; return DB.p('hist', []).filter(h => h.mes === mk); },
+  nextDayIdx(){ const prog = App.program(); if(!prog) return 0; const r = DB.p('rot', {}); return (r[App.prog.mes] || 0) % prog.dias.length; },
+  mainEquip(e){ return e.equip.find(q => !NAO_FOTO.includes(q)); }
+};
+
+/* ================= UI ================= */
+const UI = {
+  show(name){
+    ['login','profiles','onb'].forEach(s => $('scr-'+s).classList.toggle('hide', s !== name));
+    const inApp = name === 'app';
+    ['hdr','app','nav'].forEach(id => $(id).classList.toggle('hide', !inApp));
+    $('mini').classList.toggle('hide', !(inApp && S.cur && !$('sess').classList.contains('open')));
+    if(name === 'profiles') UI.renderProfiles();
+  },
+  tab(t){ document.querySelectorAll('nav.bot button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
+    document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 't-'+t)); $('app').scrollTop = 0;
+    if(t==='evo') UI.renderEvo(); if(t==='hist') UI.renderHist(); if(t==='treinos') UI.renderTreinos(); },
+
+  /* fotos da academia: aplica a capa onde existir */
+  applyCover(){
+    const url = CFG.FOTO(App.grupo, 'capa'), img = new Image();
+    img.onload = () => { $('hj-gym').style.backgroundImage = `url(${url})`;
+      $('scr-login').style.backgroundImage = `linear-gradient(rgba(10,10,10,.75),rgba(10,10,10,.97)),url(${url})`; };
+    img.src = url;
+  },
+  showGym(){
+    const g = App.grupo, eq = App.cat.equipamentos, det = App.cat.detalhes || {};
+    const ids = Object.keys(eq).filter(q => !['grama'].includes(q));
+    UI.modal(`<div class="stack"><div><span class="pill">Feito sob medida</span><div class="h2" style="margin-top:8px">Academia do ${esc(App.idx.nome)}</div>
+      <p class="sm mut" style="margin-top:4px">Todo treino deste app usa somente os aparelhos abaixo. Nada de adaptação.</p>${App.idx.obs?`<p class="xs gold" style="margin-top:6px">${esc(App.idx.obs)}</p>`:''}</div>
+      <div class="grid2" id="gym-grid">${ids.map(q => `<figure data-q="${q}" style="margin:0"><img src="${CFG.FOTO(g,q)}" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:var(--card2)" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ic',style:'width:100%;height:auto;aspect-ratio:4/3',innerHTML:'<svg class=\\'i\\' style=\\'width:28px;height:28px\\'><use href=\\'#i-dumb\\'/></svg>'}))">
+        <figcaption class="xs" style="margin-top:4px"><b>${esc(eq[q])}</b>${det[q]?`<br><span class="mut">${esc(det[q])}</span>`:''}</figcaption></figure>`).join('')}</div>
+      <button class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
+  },
+
+  renderProfiles(){
+    const list = DB.get('profiles', []);
+    $('pf-list').innerHTML = list.length ? list.map(p => `
+      <button class="prof" onclick="UI.pick('${p.id}')"><div class="avatar">${esc(p.nome[0]||'?').toUpperCase()}</div>
+      <div style="flex:1"><b>${esc(p.nome)}</b><div class="xs mut">${OBJ[p.obj]} · ${LVL[p.lvl]}</div></div><svg class="i gold"><use href="#i-right"/></svg></button>`).join('')
+      : `<div class="card sm mut" style="text-align:center">Nenhum perfil ainda. Crie o primeiro.</div>`;
+  },
+  newProfile(){ ['ob-nome','ob-peso'].forEach(i=>$(i).value=''); $('ob-parq').checked=false; $('ob-lgpd').checked=false; $('ob-err').classList.add('hide'); UI.show('onb'); },
+  saveProfile(){
+    const nome = $('ob-nome').value.trim(), peso = num($('ob-peso').value), err = $('ob-err');
+    const fail = m => { err.textContent = m; err.classList.remove('hide'); };
+    if(!nome) return fail('Digite seu nome.');
+    if(!peso || peso < 30 || peso > 250) return fail('Digite um peso válido (ex.: 82,5).');
+    if(!$('ob-parq').checked || !$('ob-lgpd').checked) return fail('Marque as duas declarações para continuar.');
+    const p = { id: 'p' + Date.now().toString(36), nome, obj: $('ob-obj').querySelector('.on').dataset.v, lvl: $('ob-lvl').querySelector('.on').dataset.v,
+      criado: new Date().toISOString(), consent: {parq:true, lgpd:true, em:new Date().toISOString()} };
+    const list = DB.get('profiles', []); list.push(p); DB.set('profiles', list);
+    App.pid = p.id; DB.ps('pesos', [{d: today(), kg: peso}]); UI.pick(p.id);
+  },
+  pick(id){ App.pid = id; DB.set('active', id); S.cur = DB.p('sess'); UI.show('app'); UI.tab('hoje'); UI.render(); },
+  deleteProfile(){ const p = App.profile(); if(!confirm(`Excluir o perfil de ${p.nome} e todo o histórico dele? Os outros perfis não são afetados.`)) return;
+    Object.keys(localStorage).filter(k => k.startsWith('ff2:p:'+p.id+':')).forEach(k => localStorage.removeItem(k));
+    DB.set('profiles', DB.get('profiles',[]).filter(x => x.id !== p.id)); DB.del('active'); App.pid = null; UI.show('profiles'); },
+  changeGoal(){ const list = DB.get('profiles', []), p = list.find(x => x.id === App.pid);
+    p.obj = $('pf-obj').value; p.lvl = $('pf-lvl').value; DB.set('profiles', list); UI.render(); toast('Programa atualizado'); },
+
+  render(){
+    const p = App.profile(); if(!p) return UI.show('profiles');
+    const prog = App.program(), mk = App.prog.mes, m = +mk.split('-')[1];
+    $('h-av').textContent = $('pf-av').textContent = p.nome[0].toUpperCase();
+    $('h-nome').textContent = $('pf-nome').textContent = p.nome;
+    $('h-grupo').textContent = App.idx.nome; $('pf-sub').textContent = App.idx.nome + ' · ' + OBJ[p.obj];
+    $('h-obj').textContent = OBJ[p.obj]; $('h-lvl').textContent = LVL[p.lvl];
+    $('pf-obj').value = p.obj; $('pf-lvl').value = p.lvl; $('pf-ver').textContent = 'Firenze Fit v' + CFG.VERSAO + ' · programa ' + mk;
+    $('hj-mes').textContent = 'Programa de ' + MESES[m-1];
+    $('hj-din').textContent = prog.dinamica.split(' – ')[0].split(' + ')[0];
+    const man = (App.status.manutencao||[]).map(id => App.cat.equipamentos[id]).filter(Boolean);
+    $('hj-aviso').classList.toggle('hide', !man.length && !App.status.aviso);
+    $('hj-aviso').innerHTML = `<b class="sm" style="color:var(--red)">Aviso da academia</b><p class="xs mut" style="margin-top:4px">${man.length ? 'Em manutenção: ' + esc(man.join(', ')) + '. O app já trocou os exercícios afetados.' : ''} ${esc(App.status.aviso||'')}</p>`;
+    const d = prog.dias[App.nextDayIdx()];
+    $('hj-nome').textContent = 'Treino ' + d.id + ' · ' + d.nome; $('hj-foco').textContent = d.foco;
+    const nEx = d.blocos.reduce((a,b)=>a+b.exs.length,0);
+    const ic = (i,t) => `<span class="row" style="gap:4px"><svg class="i gold" style="width:14px"><use href="#${i}"/></svg>${t}</span>`;
+    $('hj-meta').innerHTML = ic('i-clock','~'+UI.estimate(d)+' min') + ic('i-dumb', nEx+' exercícios') + ic('i-chart', 'cardio '+d.cardio.min+' min');
+    const feitos = App.monthHist().length, meta = prog.freq * 4, pct = Math.min(100, Math.round(feitos/meta*100));
+    $('hj-pct').textContent = pct + '%'; $('hj-bar').style.width = pct + '%';
+    $('hj-feitos').textContent = feitos + (feitos===1?' treino':' treinos'); $('hj-metatxt').textContent = 'Meta: ' + meta + ' (' + prog.freq + 'x/semana)';
+    $('gym-tit').textContent = 'Academia do ' + App.idx.nome;
+    $('gym-sub').textContent = `Programa montado com os ${Object.keys(App.cat.equipamentos).length} itens da sua academia · ver aparelhos`;
+    const hist = DB.p('hist', []);
+    $('st-tr').textContent = hist.length; $('st-vol').textContent = fmtKg(hist.reduce((a,h)=>a+h.vol,0));
+    $('st-se').textContent = hist.reduce((a,h)=>a+h.series,0);
+    const pesos = DB.p('pesos', []); $('st-peso').textContent = pesos.length ? String(pesos.at(-1).kg).replace('.',',') + ' kg' : '-- kg';
+    $('mini').classList.toggle('hide', !(S.cur && !$('sess').classList.contains('open')));
+    if(S.cur) $('mini-t').textContent = S.cur.titulo;
+    UI.banner();
+  },
+  estimate(d){ let s = 6*60 + d.cardio.min*60; d.blocos.forEach(b => { s += b.exs[0].series*(b.exs.length*45 + b.exs.at(-1).desc); }); return Math.round(s/60/5)*5; },
+
+  renderTreinos(){
+    const prog = App.program(); $('tr-desc').innerHTML = `<b class="gold">${esc(prog.dinamica)}</b><br>${esc(prog.descricao)}`;
+    const next = App.nextDayIdx();
+    $('tr-list').innerHTML = prog.dias.map((d,i) => `
+      <details class="card" ${i===next?'open':''}><summary class="row between"><div><span class="pill ${i===next?'':'grn'}">${i===next?'Próximo':'Treino '+d.id}</span>
+      <div class="h3" style="margin-top:6px">${esc(d.id+' · '+d.nome)}</div><div class="xs mut">${esc(d.foco)} · ~${UI.estimate(d)} min</div></div><svg class="i mut"><use href="#i-down2"/></svg></summary>
+      <div style="margin-top:12px">
+        <div class="list-item"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><div><b class="sm">1 · Mobilidade</b><div class="xs mut">${d.mob.length} movimentos · ~6 min</div></div></div>
+        ${d.blocos.map(b => b.exs.map((x,j) => { const e = App.ex(S.resolve(x.ex)); return `
+          <div class="list-item"><img class="thumb" loading="lazy" src="${CFG.IMG(e.img)[0]}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ic',innerHTML:'<svg class=\\'i\\'><use href=\\'#i-dumb\\'/></svg>'}))">
+          <div style="flex:1"><b class="sm">${esc(e.nome)}</b><div class="xs mut">${x.series} × ${esc(x.reps)} · ${x.desc?'descanso '+x.desc+'s':'sem pausa'}</div>
+          ${BLK[b.tipo] && j===0 ? `<span class="pill" style="margin-top:4px">${BLK[b.tipo]}</span>`:''}</div></div>`; }).join('')).join('')}
+        <div class="list-item"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><div><b class="sm">3 · Cardio no final · ${d.cardio.min} min</b><div class="xs mut">${esc(d.cardio.intens)}</div></div></div>
+        <button class="btn btn-gold" style="margin-top:10px" onclick="S.start(${i})"><svg class="i"><use href="#i-play"/></svg>Fazer este treino</button>
+      </div></details>`).join('');
+  },
+
+  chart(el, pts, unit){
+    if(pts.length < 2){ el.innerHTML = `<p class="xs mut" style="padding:24px 0;text-align:center">${pts.length? 'Registre mais uma vez para ver a curva.' : 'Sem registros ainda.'}</p>`; return; }
+    const W=320,H=140,P=24, ys=pts.map(p=>p.y), mn=Math.min(...ys), mx=Math.max(...ys), rg=(mx-mn)||1;
+    const X=i=>P+i*(W-2*P)/(pts.length-1), Y=v=>H-P-(v-mn)/rg*(H-2*P);
+    const path=pts.map((p,i)=>(i?'L':'M')+X(i).toFixed(1)+' '+Y(p.y).toFixed(1)).join(' ');
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="chart"><defs><linearGradient id="g${el.id}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#D4AF37" stop-opacity=".35"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></linearGradient></defs>
+      <path d="${path} L${X(pts.length-1)} ${H-P} L${P} ${H-P}Z" fill="url(#g${el.id})"/><path d="${path}" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+      ${pts.map((p,i)=>`<circle cx="${X(i)}" cy="${Y(p.y)}" r="3.5" fill="#0a0a0a" stroke="#D4AF37" stroke-width="2"/>`).join('')}
+      <text x="${P}" y="14" fill="#8a8a8a" font-size="10">${String(mx).replace('.',',')} ${unit}</text><text x="${P}" y="${H-6}" fill="#8a8a8a" font-size="10">${pts[0].l}</text>
+      <text x="${W-P}" y="${H-6}" fill="#8a8a8a" font-size="10" text-anchor="end">${pts.at(-1).l}</text></svg>`;
+  },
+  renderEvo(){
+    UI.chart($('ch-peso'), DB.p('pesos', []).map(p => ({y:p.kg, l:p.d.slice(8,10)+'/'+p.d.slice(5,7)})), 'kg');
+    const ids = Object.keys(DB.p('cargas', {})).filter(id => App.ex(id));
+    const sel = $('ev-ex'), keep = sel.value;
+    sel.innerHTML = ids.length ? ids.map(id => `<option value="${id}">${esc(App.ex(id).nome)}</option>`).join('') : '<option>Faça um treino para ver suas cargas</option>';
+    if(ids.includes(keep)) sel.value = keep; UI.renderLoadChart();
+  },
+  renderLoadChart(){
+    const id = $('ev-ex').value, pts = [];
+    DB.p('hist', []).forEach(h => { const e = h.exs.find(x => x.ex === id); if(e){ const mx = Math.max(...e.sets.map(s=>s.kg||0)); if(mx) pts.push({y:mx, l:h.d.slice(8,10)+'/'+h.d.slice(5,7)}); } });
+    UI.chart($('ch-carga'), pts, 'kg');
+  },
+  addWeight(){
+    UI.modal(`<div class="stack"><div class="h3">Registrar peso</div><input id="w-in" inputmode="decimal" placeholder="Ex.: 81,7">
+      <button class="btn btn-gold" onclick="UI.saveWeight()">Salvar</button></div>`); setTimeout(()=>$('w-in').focus(),100);
+  },
+  saveWeight(){ const kg = num($('w-in').value); if(!kg || kg<30 || kg>250) return toast('Peso inválido');
+    const arr = DB.p('pesos', []).filter(p => p.d !== today()); arr.push({d: today(), kg}); arr.sort((a,b)=>a.d.localeCompare(b.d));
+    DB.ps('pesos', arr); UI.closeModal(); UI.render(); UI.renderEvo(); toast('Peso registrado'); },
+  renderHist(){
+    const h = DB.p('hist', []).slice().reverse();
+    $('hi-list').innerHTML = h.length ? h.map(s => { const d = new Date(s.d); return `
+      <div class="card"><div class="row between"><div><b>${esc(s.nome)}</b><div class="xs mut">${d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'})} · ${Math.round(s.dur/60)} min</div></div>
+      <span class="pill">${fmtKg(s.vol)}</span></div>
+      <div class="xs mut" style="margin-top:8px">${s.series} séries · ${s.exs.length} exercícios${s.cardio ? ' · cardio '+s.cardio+' min' : ''}${s.trocas ? ' · '+s.trocas+' troca(s)':''}</div></div>`; }).join('')
+      : `<div class="card sm mut" style="text-align:center">Seus treinos concluídos aparecem aqui.</div>`;
+  },
+  exportData(){
+    const p = App.profile(), out = {app:'firenzefit', v:2, perfil:p, dados:{}};
+    Object.keys(localStorage).filter(k => k.startsWith('ff2:p:'+p.id+':')).forEach(k => out.dados[k.split(':').pop()] = JSON.parse(localStorage.getItem(k)));
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(out)], {type:'application/json'}));
+    a.download = `firenzefit-${p.nome.toLowerCase()}-${today()}.json`; a.click(); toast('Backup salvo nos seus arquivos');
+  },
+  importData(inp){
+    const f = inp.files[0]; if(!f) return; const rd = new FileReader();
+    rd.onload = () => { try{ const o = JSON.parse(rd.result); if(o.app !== 'firenzefit') throw 0;
+      const list = DB.get('profiles', []).filter(x => x.id !== o.perfil.id); list.push(o.perfil); DB.set('profiles', list);
+      Object.entries(o.dados).forEach(([k,v]) => DB.set('p:'+o.perfil.id+':'+k, v)); UI.pick(o.perfil.id); toast('Backup restaurado: ' + o.perfil.nome);
+    }catch(e){ toast('Arquivo de backup inválido'); } }; rd.readAsText(f); inp.value='';
+  },
+  standalone(){ return matchMedia('(display-mode: standalone)').matches || navigator.standalone; },
+  banner(){ $('pwa-banner').classList.toggle('hide', UI.standalone() || DB.get('bannerOff',0) > Date.now()); },
+  dismissBanner(){ DB.set('bannerOff', Date.now() + 7*864e5); UI.banner(); },
+  install(){ if(window._bip){ window._bip.prompt(); window._bip = null; } else UI.showInstall(); },
+  showInstall(){
+    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    UI.modal(`<div class="stack"><div class="h3">Instalar o Firenze Fit</div>
+      ${ios ? `<p class="sm mut">1. Abra este link no <b class="gold">Safari</b><br>2. Toque em <b class="gold">Compartilhar</b> (quadrado com seta)<br>3. Escolha <b class="gold">Adicionar à Tela de Início</b></p>
+      <p class="xs" style="color:var(--red)">No iPhone, depois de instalar use sempre pelo ícone: o Safari e o app guardam dados separados.</p>`
+      : `<p class="sm mut">1. No <b class="gold">Chrome</b>, toque nos três pontinhos<br>2. Escolha <b class="gold">Instalar aplicativo</b></p>`}
+      <button class="btn btn-gold" onclick="UI.closeModal()">Entendi</button></div>`);
+  },
+  modal(html){ $('modal-c').innerHTML = html; $('modal').classList.remove('hide'); },
+  closeModal(){ $('modal').classList.add('hide'); }
+};
+
+/* ================= DESCANSO (por horário: resiste ao bloqueio de tela) ================= */
+const R = {
+  end:0, iv:null,
+  start(sec, next){ if(!sec) return; R.end = Date.now() + sec*1000; $('rest-next').textContent = next || 'Próxima série'; $('rest').classList.remove('hide','end'); clearInterval(R.iv); R.iv = setInterval(R.tick, 250); R.tick(); },
+  tick(){ const left = (R.end - Date.now())/1000; $('rest-t').textContent = mmss(left);
+    if(left <= 0 && !$('rest').classList.contains('end')){ $('rest').classList.add('end'); buzz(); setTimeout(R.stop, 4000); } },
+  add(s){ R.end += s*1000; $('rest').classList.remove('end'); },
+  stop(){ clearInterval(R.iv); $('rest').classList.add('hide'); $('rest').classList.remove('end'); }
+};
+
+/* ================= SESSÃO ================= */
+const S = {
+  cur:null, clockIv:null, imgIv:null,
+  resolve(id){ const e = App.ex(id); if(!e) return id; const man = App.status?.manutencao || [];
+    if(e.equip.some(q => man.includes(q)) && e.alt && App.ex(e.alt)) return e.alt; return id; },
+  start(idx){
+    if(S.cur && !confirm('Já existe um treino em andamento. Descartar e começar outro?')) return S.open();
+    const prog = App.program(); const di = idx ?? App.nextDayIdx(); const d = prog.dias[di];
+    const last = DB.p('cargas', {});
+    S.cur = { di, mes: App.prog.mes, titulo: 'Treino ' + d.id + ' · ' + d.nome, t0: Date.now(), step:'mob', bi:0, mob:[], trocas:0,
+      cardio:{eq:null, acc:0, run:null},
+      blocos: d.blocos.map(b => ({tipo:b.tipo, nota:b.nota||'', exs: b.exs.map(x => { const id = S.resolve(x.ex); const prev = last[id] || [];
+        return {orig:x.ex, ex:id, auto: id!==x.ex, reps:x.reps, desc:x.desc, obs:x.obs||'', sets: Array.from({length:x.series}, (_,k) => ({kg: prev[k]?.kg ?? prev.at(-1)?.kg ?? '', r: '', ok:false})) }; }) })) };
+    S.save(); S.open();
+  },
+  save(){ DB.ps('sess', S.cur); },
+  day(){ return App.program().dias[S.cur.di]; },
+  open(){ if(!S.cur) return; if(S.cur.mes !== App.prog.mes || !App.program().dias[S.cur.di]){ toast('O programa mudou de mês. Treino anterior encerrado.'); return S.close(); }
+    $('sess').classList.add('open'); $('mini').classList.add('hide'); S.render();
+    clearInterval(S.clockIv); S.clockIv = setInterval(S.clock, 1000); S.clock(); },
+  minimize(){ $('sess').classList.remove('open'); clearInterval(S.imgIv); UI.render(); },
+  clock(){ if(!S.cur) return; const s = (Date.now() - S.cur.t0)/1000; $('s-clock').textContent = mmss(s); $('mini-s').textContent = mmss(s) + ' · toque para voltar';
+    if(S.cur.step === 'car' && S.cur.cardio.run) S.cardioTick(); },
+  askCancel(){ if(confirm('Cancelar este treino? Nada será salvo.')) S.close(); },
+  close(){ S.cur = null; DB.ps('sess', null); R.stop(); clearInterval(S.clockIv); clearInterval(S.imgIv); $('sess').classList.remove('open'); UI.render(); },
+  go(step){ S.cur.step = step; S.save(); S.render(); $('s-body').scrollTop = 0; },
+  render(){
+    const st = S.cur.step; $('s-title').textContent = S.cur.titulo;
+    const order = ['mob','tre','car']; order.forEach((k,i) => { $('st-'+k).className = k===st ? 'on' : (i < order.indexOf(st) ? 'ok' : ''); });
+    clearInterval(S.imgIv);
+    if(st === 'mob') S.renderMob(); else if(st === 'tre') S.renderBlock(); else S.renderCardio();
+  },
+  renderMob(){
+    const items = S.day().mob, eq = App.cat.equipamentos;
+    $('s-body').innerHTML = `<div class="stack"><div><div class="h2">Mobilidade</div><p class="sm mut" style="margin-top:4px">Aqueça as articulações antes de pegar peso. Toque em cada item ao terminar.</p></div>
+      ${items.map((m,i) => `<button class="mob-item ${S.cur.mob.includes(i)?'on':''}" onclick="S.toggleMob(${i})"><span class="chk"><svg class="i"><use href="#i-check"/></svg></span>
+      <div><b class="sm">${esc(m[0])}</b><div class="xs mut">${esc(m[2])}${eq[m[1]]?' · '+esc(eq[m[1]]):''}</div></div></button>`).join('')}</div>`;
+    $('s-foot').innerHTML = `<button class="btn btn-gold" onclick="S.go('tre')">${S.cur.mob.length===items.length?'Ir para o treino':'Pular para o treino'} <svg class="i"><use href="#i-right"/></svg></button>`;
+  },
+  toggleMob(i){ const a = S.cur.mob; a.includes(i) ? a.splice(a.indexOf(i),1) : a.push(i); S.save(); S.renderMob(); },
+  blockDone(b){ return b.exs.every(x => x.sets.every(s => s.ok)); },
+  renderBlock(){
+    const c = S.cur, b = c.blocos[c.bi], tag = BLK[b.tipo];
+    const nav = `<div class="blocknav">${c.blocos.map((x,i)=>`<button class="${i===c.bi?'on':''} ${S.blockDone(x)?'ok':''}" onclick="S.toBlock(${i})">${i+1}</button>`).join('')}</div>`;
+    $('s-body').innerHTML = `<div class="stack">${nav}
+      ${tag ? `<div class="card" style="padding:12px;border-color:rgba(212,175,55,.4)"><span class="pill">${tag}</span><p class="xs mut" style="margin-top:6px">${BLKTXT[b.tipo]||''}</p></div>` : ''}
+      ${b.exs.map((x,j) => S.exCard(x, j)).join(`<div class="link">SEM PAUSA</div>`)}</div>`;
+    const last = c.bi === c.blocos.length-1;
+    $('s-foot').innerHTML = `<div class="row"><button class="btn btn-dark" style="width:56px" ${c.bi?'':'disabled'} onclick="S.toBlock(${c.bi-1})"><svg class="i"><use href="#i-left"/></svg></button>
+      <button class="btn btn-gold" onclick="${last ? "S.go('car')" : 'S.toBlock('+(c.bi+1)+')'}">${last ? 'Ir para o cardio' : 'Próximo exercício'} <svg class="i"><use href="#i-right"/></svg></button></div>`;
+    S.animate();
+  },
+  exCard(x, j){
+    const e = App.ex(x.ex), imgs = CFG.IMG(e.img), q = App.mainEquip(e), eqn = App.cat.equipamentos;
+    return `<div class="card stack" style="padding:14px">
+      <div class="media" data-imgs='${JSON.stringify(imgs)}'><img src="${imgs[0]}" alt="${esc(e.nome)}" onerror="S.imgFail(this,'${esc(e.musc)}')"><span class="tag">▶ Execução</span></div>
+      <div class="row between" style="align-items:flex-start"><div><div class="h3">${esc(e.nome)}</div><div class="xs gold" style="margin-top:2px">${esc(e.musc)} · ${x.sets.length} × ${esc(x.reps)} · ${x.desc ? 'descanso '+x.desc+'s' : 'sem pausa'}</div></div>
+        ${e.alt ? `<button class="btn btn-dark btn-sm" onclick="S.swap(${j})"><svg class="i"><use href="#i-swap"/></svg>Trocar</button>`:''}</div>
+      ${q ? `<div class="here"><img src="${CFG.FOTO(App.grupo,q)}" onerror="this.parentElement.remove()"><div><div class="xs gold" style="font-weight:800;letter-spacing:.5px;text-transform:uppercase">Na sua academia</div><div class="sm"><b>${esc(eqn[q])}</b></div>${App.cat.detalhes?.[q]?`<div class="xs mut">${esc(App.cat.detalhes[q])}</div>`:''}</div></div>` : ''}
+      ${x.auto ? `<span class="pill red">Substituído: aparelho em manutenção</span>` : ''}${x.orig!==x.ex && !x.auto ? `<span class="pill">Alternativo escolhido</span>`:''}
+      <ul class="xs mut" style="padding-left:16px;line-height:1.6">${e.dicas.map(t=>`<li>${esc(t)}</li>`).join('')}${x.obs?`<li class="gold">${esc(x.obs)}</li>`:''}</ul>
+      <table class="sets"><tr><th>#</th><th>${e.tipo==='tempo'?'Tempo':'Carga (kg)'}</th><th>Reps</th><th></th></tr>
+      ${x.sets.map((s,k) => `<tr class="${s.ok?'done':''}"><td class="n">${k+1}</td>
+        <td><input inputmode="decimal" value="${esc(s.kg)}" placeholder="${e.tipo==='tempo'?'—':'kg'}" ${e.tipo==='tempo'?'disabled':''} onchange="S.setVal(${j},${k},'kg',this.value)"></td>
+        <td><input inputmode="numeric" value="${esc(s.r)}" placeholder="${esc(repT(x.reps,k))}" onchange="S.setVal(${j},${k},'r',this.value)"></td>
+        <td><button class="chk ${s.ok?'on':''}" onclick="S.done(${j},${k})"><svg class="i"><use href="#i-check"/></svg></button></td></tr>`).join('')}</table>
+    </div>`;
+  },
+  animate(){ let f = 0; S.imgIv = setInterval(() => { f = 1-f; document.querySelectorAll('#s-body .media[data-imgs] img').forEach(img => {
+    if(!img.dataset.fail) img.src = JSON.parse(img.parentElement.dataset.imgs)[f]; }); }, 900); },
+  imgFail(img, musc){ img.dataset.fail = 1; const m = img.parentElement; m.classList.add('fb'); m.removeAttribute('data-imgs');
+    m.innerHTML = `<div style="text-align:center"><svg class="i gold" style="width:44px;height:44px"><use href="#i-dumb"/></svg><div class="xs mut" style="margin-top:6px">${musc}</div></div>`; },
+  toBlock(i){ if(i<0||i>=S.cur.blocos.length) return; S.cur.bi = i; S.save(); S.renderBlock(); $('s-body').scrollTop = 0; },
+  setVal(j,k,f,v){ S.cur.blocos[S.cur.bi].exs[j].sets[k][f] = f==='kg' ? (num(v) ?? '') : (parseInt(v)||''); S.save(); },
+  done(j,k){
+    const bi = S.cur.bi, b = S.cur.blocos[bi], x = b.exs[j], s = x.sets[k]; s.ok = !s.ok;
+    if(s.ok && s.r === ''){ const t = parseInt(repT(x.reps,k)); if(t) s.r = t; }
+    S.save(); S.renderBlock();
+    if(!s.ok) return;
+    if(j < b.exs.length-1){ toast('Sem pausa → ' + App.ex(b.exs[j+1].ex).nome); return; }
+    const nb = S.cur.blocos[bi+1], fim = S.blockDone(b);
+    R.start(x.desc, fim ? (nb ? 'Próximo: ' + App.ex(nb.exs[0].ex).nome : 'Depois: cardio') : 'Série ' + (k+2));
+    if(fim && nb) setTimeout(()=>{ if(S.cur && S.cur.bi===bi) S.toBlock(bi+1); }, 600);
+  },
+  swap(j){
+    const x = S.cur.blocos[S.cur.bi].exs[j], e = App.ex(x.ex);
+    const options = [x.orig, App.ex(x.orig)?.alt, e.alt].filter((v,i,a) => v && App.ex(v) && v !== x.ex && a.indexOf(v)===i);
+    UI.modal(`<div class="stack"><div class="h3">Aparelho ocupado ou com problema?</div><p class="sm mut">Troque por um exercício equivalente desta academia:</p>
+      ${options.map(o => `<button class="prof" onclick="S.doSwap(${j},'${o}')"><div class="ic"><svg class="i"><use href="#i-swap"/></svg></div><div><b class="sm">${esc(App.ex(o).nome)}</b><div class="xs mut">${esc(App.ex(o).equip.map(q=>App.cat.equipamentos[q]).join(' + '))}</div></div></button>`).join('')}
+      <button class="btn btn-dark" onclick="UI.closeModal()">Manter</button></div>`);
+  },
+  doSwap(j,id){ const x = S.cur.blocos[S.cur.bi].exs[j]; x.ex = id; x.auto = false; S.cur.trocas++;
+    const prev = DB.p('cargas', {})[id] || []; x.sets.forEach((s,k) => { if(!s.ok) s.kg = prev[k]?.kg ?? ''; });
+    S.save(); UI.closeModal(); S.renderBlock(); },
+  renderCardio(){
+    const d = S.day(), c = S.cur.cardio, eq = App.cat.equipamentos;
+    const opts = ['esteira','bike','transport','cama_elastica'].filter(q => eq[q]);
+    $('s-body').innerHTML = `<div class="stack"><div><div class="h2">Cardio final</div><p class="sm mut" style="margin-top:4px">${esc(d.cardio.obs)}</p></div>
+      <div class="card stack" style="text-align:center"><span class="pill" style="margin:0 auto">${esc(d.cardio.intens)}</span>
+        <div class="cardio-clock" id="cd-clock">${mmss(d.cardio.min*60)}</div><div class="xs mut">meta: ${d.cardio.min} minutos</div>
+        <div class="chips" style="justify-content:center">${opts.map(q => `<button class="${c.eq===q?'on':''}" onclick="S.cardioEq('${q}')">${esc(eq[q])}</button>`).join('')}</div>
+        <button class="btn ${c.run?'btn-dark':'btn-ghost'}" onclick="S.cardioToggle()">${c.run ? 'Pausar' : (c.acc ? 'Continuar' : 'Iniciar cronômetro')}</button></div></div>`;
+    $('s-foot').innerHTML = `<div class="row"><button class="btn btn-dark" style="width:56px" onclick="S.go('tre')"><svg class="i"><use href="#i-left"/></svg></button><button class="btn btn-gold" onclick="S.finish()"><svg class="i"><use href="#i-check"/></svg>CONCLUIR TREINO</button></div>`;
+    S.cardioTick();
+  },
+  cardioEq(q){ S.cur.cardio.eq = q; S.save(); S.renderCardio(); },
+  cardioElapsed(){ const c = S.cur.cardio; return c.acc + (c.run ? (Date.now() - c.run)/1000 : 0); },
+  cardioToggle(){ const c = S.cur.cardio; if(c.run){ c.acc += (Date.now()-c.run)/1000; c.run = null; } else c.run = Date.now(); S.save(); S.renderCardio(); },
+  cardioTick(){ const el = $('cd-clock'); if(!el) return; const left = S.day().cardio.min*60 - S.cardioElapsed();
+    el.textContent = left > 0 ? mmss(left) : '+' + mmss(-left);
+    if(left <= 0 && !S.cur.cardio.beeped){ S.cur.cardio.beeped = true; S.save(); buzz(); toast('Meta de cardio atingida!'); } },
+  finish(){
+    const c = S.cur; let vol = 0, series = 0; const exs = [], cargas = DB.p('cargas', {});
+    c.blocos.forEach(b => b.exs.forEach(x => { const sets = x.sets.filter(s => s.ok).map(s => ({kg: num(s.kg)||0, r: parseInt(s.r)||0}));
+      if(!sets.length) return; series += sets.length; sets.forEach(s => vol += s.kg*s.r); exs.push({ex:x.ex, sets}); cargas[x.ex] = sets; }));
+    if(!series && !confirm('Nenhuma série foi marcada como feita. Concluir mesmo assim?')) return;
+    const h = DB.p('hist', []); h.push({ id: 's'+Date.now().toString(36), d: new Date().toISOString(), mes: c.mes, dia: S.day().id, nome: c.titulo,
+      obj: App.profile().obj, lvl: App.profile().lvl, dur: Math.round((Date.now()-c.t0)/1000), vol: Math.round(vol), series, exs, cardio: Math.round(S.cardioElapsed()/60), trocas: c.trocas });
+    DB.ps('hist', h); DB.ps('cargas', cargas);
+    const rot = DB.p('rot', {}); rot[c.mes] = c.di + 1; DB.ps('rot', rot);
+    S.close();
+    const nx = App.program().dias[App.nextDayIdx()];
+    UI.modal(`<div class="stack" style="text-align:center"><div class="avatar" style="width:64px;height:64px;margin:0 auto"><svg class="i" style="width:30px;height:30px"><use href="#i-check"/></svg></div><div class="h2">Treino concluído!</div>
+      <div class="grid2"><div class="card stat"><span class="lbl" style="margin:0">Volume</span><b>${fmtKg(vol)}</b></div><div class="card stat"><span class="lbl" style="margin:0">Séries</span><b>${series}</b></div></div>
+      <p class="sm mut">Próximo: Treino ${nx.id} · ${esc(nx.nome)}</p><button class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
+  }
+};
+
+/* ================= INÍCIO ================= */
+async function boot(){
+  const q = new URLSearchParams(location.search).get('grupo'), saved = DB.get('grupo');
+  if(q && CFG.GRUPOS.includes(q) && q !== saved){ if(!saved || confirm(`Mudar seu grupo de ${saved} para ${q}?`)) DB.set('grupo', q); }
+  App.grupo = DB.get('grupo') || '12'; DB.set('grupo', App.grupo);
+  $('lg-grupo').textContent = 'GRUPO ' + App.grupo; $('lg-buylink').href = CFG.CHECKOUT_URL;
+  Data.nowKey(); history.replaceState(null, '', location.pathname);
+  if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  UI.applyCover();
+  const ok = await Data.load();
+  if(!ok){ document.body.innerHTML = '<div class="screen center"><div class="card wrap" style="text-align:center"><div class="h3">Sem conexão</div><p class="sm mut" style="margin-top:8px">Abra o app uma vez com internet para baixar seus treinos.</p><button class="btn btn-gold" style="margin-top:14px" onclick="location.reload()">Tentar de novo</button></div></div>'; return; }
+  $('lg-sub').textContent = `Treinos feitos para os aparelhos da academia do ${App.idx.nome}.`;
+  if(!Auth.valid()) return UI.show('login');
+  const act = DB.get('active'); if(act && DB.get('profiles',[]).some(p => p.id === act)) UI.pick(act); else UI.show('profiles');
+}
+$('lg-go').onclick = async () => {
+  const email = $('lg-email').value.trim().toLowerCase(), err = $('lg-err'); err.classList.add('hide');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent = 'Digite um e-mail válido.'; return err.classList.remove('hide'); }
+  $('lg-go').textContent = 'Verificando...';
+  try{ const r = await Auth.request(email);
+    if(r.dev){ Auth.save(email, App.grupo); toast('Modo teste: acesso liberado'); return boot(); }
+    if(!r.ok){ err.textContent = r.msg || 'Não encontramos uma assinatura ativa para este e-mail.'; err.classList.remove('hide'); return; }
+    $('lg-mailshow').textContent = email; $('lg-step1').classList.add('hide'); $('lg-step2').classList.remove('hide');
+  }catch(e){ err.textContent = 'Sem conexão. Tente novamente.'; err.classList.remove('hide'); }
+  finally{ $('lg-go').textContent = 'ENTRAR'; }
+};
+$('lg-verify').onclick = async () => {
+  const email = $('lg-email').value.trim().toLowerCase(), err = $('lg-err');
+  try{ const r = await Auth.verify(email, $('lg-code').value.trim());
+    if(!r.ok){ err.textContent = 'Código inválido ou expirado.'; return err.classList.remove('hide'); }
+    if(r.grupo) DB.set('grupo', String(r.grupo)); Auth.save(email, r.grupo || App.grupo, r.exp); boot();
+  }catch(e){ err.textContent = 'Sem conexão. Tente novamente.'; err.classList.remove('hide'); }
+};
+$('lg-back').onclick = () => { $('lg-step2').classList.add('hide'); $('lg-step1').classList.remove('hide'); };
+$('ob-save').onclick = UI.saveProfile;
+['ob-obj','ob-lvl'].forEach(id => $(id).addEventListener('click', e => { const b = e.target.closest('.opt'); if(!b) return;
+  $(id).querySelectorAll('.opt').forEach(o => o.classList.toggle('on', o === b)); }));
+document.querySelectorAll('nav.bot button').forEach(b => b.onclick = () => UI.tab(b.dataset.t));
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); window._bip = e; });
+document.addEventListener('visibilitychange', () => { if(!document.hidden && R.end) R.tick(); });
+boot();
+</script>
+</body>
+</html>
