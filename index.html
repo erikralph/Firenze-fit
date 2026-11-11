@@ -53,19 +53,24 @@ nav.bot button{flex:1;display:flex;flex-direction:column;align-items:center;gap:
 nav.bot button.on{color:var(--gold)}
 .tab{display:none}.tab.on{display:block}
 .hero{position:relative;overflow:hidden;border-radius:22px;padding:20px;border:1px solid var(--line);background:radial-gradient(120% 140% at 100% 0%,rgba(212,175,55,.18),transparent 55%),linear-gradient(160deg,#171717,#0c0c0c)}
-.gym{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(212,175,55,.35);min-height:150px;background:linear-gradient(160deg,#1a1a1a,#0c0c0c) center/cover no-repeat;display:flex;align-items:flex-end}
+.gym{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(212,175,55,.35);min-height:150px;background:linear-gradient(160deg,#1a1a1a,#0c0c0c) center/cover no-repeat;display:flex;align-items:flex-end;width:100%;text-align:left}
 .gym .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.05) 20%,rgba(10,10,10,.92))}
 .gym .in{position:relative;padding:16px;width:100%}
-.strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.strip::-webkit-scrollbar{display:none}
-.strip figure{flex-shrink:0;width:112px}.strip img{width:112px;height:84px;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block}
-.strip figcaption{font-size:10px;color:var(--mut);margin-top:4px;line-height:1.25}
 .bar{height:9px;border-radius:9px;background:var(--bg);border:1px solid var(--line);overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:9px;transition:width .5s}
 .stat b{display:block;font-size:20px;font-weight:900;margin-top:4px}
 .list-item{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
 .list-item:first-child{border-top:0}
-.thumb{width:52px;height:52px;border-radius:12px;background:#fff;object-fit:cover;flex-shrink:0}
-.ic{width:52px;height:52px;border-radius:12px;background:rgba(212,175,55,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.chart{width:100%;height:140px}
+.thumb{width:56px;height:42px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--card2)}
+.ic{width:56px;height:42px;border-radius:10px;background:rgba(212,175,55,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chart{width:100%;height:150px}
+/* imagem de execução: 2 fotos com transição suave (sem tranco, sem faixas brancas) */
+.media{position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.media img.b{animation:xfade 5s ease-in-out infinite}
+@keyframes xfade{0%,30%{opacity:0}48%,80%{opacity:1}98%,100%{opacity:0}}
+.media .tag{position:absolute;left:8px;bottom:8px;background:rgba(10,10,10,.8);color:var(--gold);font-size:10px;font-weight:800;padding:4px 8px;border-radius:8px;z-index:2}
+.media.fb{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1a1a1a,#0d0d0d)}
+.media.mini{aspect-ratio:3/2;width:96px;border-radius:12px;flex-shrink:0}
 #sess{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease}
 #sess.open{transform:none}
 .s-head{padding:calc(var(--st) + 10px) 14px 10px;background:var(--card);border-bottom:1px solid var(--line)}
@@ -73,12 +78,9 @@ nav.bot button.on{color:var(--gold)}
 .steps div.on{color:#000;background:var(--gold);border-color:var(--gold)}.steps div.ok{color:var(--gold);border-color:rgba(212,175,55,.4)}
 .s-body{flex:1;overflow-y:auto;padding:14px 14px calc(var(--sb) + 110px)}
 .s-foot{position:absolute;left:0;right:0;bottom:0;padding:12px 14px calc(var(--sb) + 12px);background:linear-gradient(transparent,var(--bg) 30%)}
-.media{position:relative;width:100%;aspect-ratio:4/3;max-height:260px;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line)}
-.media img{width:100%;height:100%;object-fit:contain}
-.media .tag{position:absolute;left:8px;bottom:8px;background:rgba(10,10,10,.8);color:var(--gold);font-size:10px;font-weight:800;padding:4px 8px;border-radius:8px}
-.media.fb{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1a1a1a,#0d0d0d)}
-.here{display:flex;gap:10px;align-items:center;padding:8px;border-radius:14px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.3)}
+.here{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:14px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.3)}
 .here img{width:64px;height:48px;object-fit:cover;border-radius:9px}
+.note{font-size:11px;color:#c9b77a;background:rgba(212,175,55,.06);border-left:3px solid var(--gold);padding:7px 10px;border-radius:6px}
 .sets{width:100%;border-collapse:separate;border-spacing:0 6px}
 .sets th{font-size:9.5px;color:var(--mut);text-transform:uppercase;font-weight:800;letter-spacing:.6px;text-align:center}
 .sets td{text-align:center}.sets td input{padding:9px 4px;text-align:center;border-radius:10px;font-weight:700}
@@ -86,10 +88,18 @@ nav.bot button.on{color:var(--gold)}
 .chk{width:42px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg);display:inline-flex;align-items:center;justify-content:center;color:var(--mut)}
 .chk.on{background:var(--gold);border-color:var(--gold);color:#000}
 tr.done input{border-color:rgba(212,175,55,.35);color:var(--gold)}
+tr.now td.n{color:var(--gold)}tr.now input{border-color:var(--gold)}
+/* bi/tri-set */
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px}
+.flow span{font-size:11px;font-weight:800;padding:5px 9px;border-radius:9px;background:var(--bg);border:1px solid var(--line)}
+.flow span.on{border-color:var(--gold);color:var(--gold)}.flow i{color:var(--mut);font-style:normal;font-size:12px}
+.code{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:24px;padding:0 6px;border-radius:7px;background:var(--gold);color:#000;font-weight:900;font-size:12px;margin-right:6px}
+.excard.dim{opacity:.55}.excard.cur{border-color:rgba(212,175,55,.6)}
 .link{display:flex;align-items:center;gap:8px;justify-content:center;margin:8px 0;font-size:11px;font-weight:900;letter-spacing:1px;color:var(--gold)}
 .link:before,.link:after{content:"";flex:1;height:1px;background:rgba(212,175,55,.35)}
-.mob-item{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:14px;background:var(--card);width:100%;text-align:left}
-.mob-item.on{border-color:rgba(212,175,55,.5)}.mob-item.on .chk{background:var(--gold);color:#000;border-color:var(--gold)}
+.mob-item{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:12px}
+.mob-item.on{border-color:rgba(212,175,55,.55)}
+.mob-item ol{padding-left:18px;margin-top:8px;font-size:11.5px;color:#bdbdbd;line-height:1.55}
 .blocknav{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.blocknav::-webkit-scrollbar{display:none}
 .blocknav button{flex-shrink:0;min-width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-weight:800;font-size:12px;color:var(--mut)}
 .blocknav button.on{border-color:var(--gold);color:var(--gold)}.blocknav button.ok{background:rgba(212,175,55,.15);color:var(--gold)}
@@ -108,10 +118,16 @@ tr.done input{border-color:rgba(212,175,55,.35);color:var(--gold)}
 .logo{width:64px;height:64px;border-radius:18px;margin:0 auto 14px;display:block}
 .prof{display:flex;align-items:center;gap:12px;width:100%;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:left}
 .avatar{width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
+.wrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
+.strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}
+.strip img{height:110px;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--line);flex-shrink:0}
+.eqchips{display:flex;flex-wrap:wrap;gap:6px}.eqchips span{font-size:11px;padding:6px 10px;border-radius:10px;background:var(--card2);border:1px solid var(--line)}
+.eqchips span b{color:var(--gold);font-weight:700}
 details summary{list-style:none;cursor:pointer}details summary::-webkit-details-marker{display:none}
 </style>
 </head>
 <body>
+
 <section id="scr-login" class="screen center login-bg hide">
   <div class="wrap card glass" style="padding:28px 22px;text-align:center">
     <img src="icons/icon-192.png" class="logo" alt="">
@@ -197,7 +213,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
       <div class="bar"><i id="hj-bar" style="width:0"></i></div>
       <div class="row between xs"><b id="hj-feitos">0 treinos</b><span class="mut" id="hj-metatxt">Meta</span></div>
     </div>
-    <button class="gym" id="hj-gym" onclick="UI.showGym()" style="width:100%;text-align:left">
+    <button class="gym" id="hj-gym" onclick="UI.showGym()">
       <div class="ov"></div><div class="in"><span class="pill">Feito sob medida</span>
       <div class="h3" style="margin-top:8px" id="gym-tit">Academia do Grupo 12</div>
       <div class="xs mut" id="gym-sub" style="margin-top:2px"></div></div>
@@ -206,7 +222,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
       <div class="card stat"><span class="lbl" style="margin:0">Treinos</span><b id="st-tr">0</b></div>
       <div class="card stat"><span class="lbl" style="margin:0">Volume total</span><b id="st-vol">0 kg</b></div>
       <div class="card stat"><span class="lbl" style="margin:0">Séries</span><b id="st-se">0</b></div>
-      <div class="card stat"><span class="lbl" style="margin:0">Peso atual</span><b id="st-peso">-- kg</b></div>
+      <button class="card stat" style="text-align:left" onclick="UI.addWeight()"><span class="lbl" style="margin:0">Peso atual</span><b id="st-peso">-- kg</b><span class="xs gold">+ registrar</span></button>
     </div>
   </section>
 
@@ -218,8 +234,9 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
   <section class="tab stack" id="t-evo">
     <div class="h2">Evolução</div>
     <div class="card stack">
-      <div class="row between"><span class="lbl" style="margin:0">Peso corporal</span><button class="btn btn-ghost btn-sm" onclick="UI.addWeight()">+ Registrar</button></div>
+      <div class="row between"><span class="lbl" style="margin:0">Peso corporal</span><button class="btn btn-gold btn-sm" onclick="UI.addWeight()">+ Registrar peso</button></div>
       <div id="ch-peso"></div>
+      <div id="w-list"></div>
     </div>
     <div class="card stack">
       <span class="lbl" style="margin:0">Carga por exercício</span>
@@ -311,55 +328,66 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
  <symbol id="i-dumb" viewBox="0 0 24 24"><path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/></symbol>
  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
- <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+ <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+ <symbol id="i-yoga" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v6M6 10l6 3 6-3M8 21l4-8 4 8"/></symbol>
 </svg>
+
 <script>
 /* ================= CONFIGURAÇÃO ================= */
 const CFG = {
-  VERSAO: '2.1.0',
+  VERSAO: '2.2.0',
   GRUPOS: ['12','13','14','15','16','17','18'],
-  AUTH_URL: null,              // null = modo teste (aceita qualquer e-mail). Depois: URL do serviço de acesso
+  AUTH_URL: null,          // null = modo teste (aceita qualquer e-mail)
   CHECKOUT_URL: '#',
   IMG: id => [0,1].map(n => `https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${id}/${n}.jpg`),
-  FOTO: (g, nome) => `data/g${g}/fotos/${nome}.jpg`,   // fotos reais da academia de cada grupo
+  FOTO: (g, nome) => `data/g${g}/fotos/${nome}.jpg`,
   ACESSO_DIAS: 30
 };
-const NAO_FOTO = ['anilhas','banco','colchonete','grama'];   // não vale mostrar como "aparelho da sua academia"
+const NAO_FOTO = ['anilhas','banco','colchonete','grama','halter_leve','halter'];
 
 /* ================= UTIL ================= */
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num = v => { const n = parseFloat(String(v).replace(',', '.')); return isFinite(n) ? n : null; };
 const fmtKg = n => n >= 1000 ? (n/1000).toFixed(1).replace('.', ',') + ' t' : Math.round(n) + ' kg';
+const fmtW = n => String(Math.round(n*10)/10).replace('.', ',');
 const mmss = s => { s = Math.max(0, Math.round(s)); const m = Math.floor(s/60); return String(m).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); };
 const today = () => { const d = new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+const ddmm = d => d.slice(8,10)+'/'+d.slice(5,7);
 const repT = (reps,k) => { const p = String(reps).split('/').map(t=>t.trim()); return p.length>1 ? (p[k]||p.at(-1)) : String(reps).split(' ')[0]; };
 const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const OBJ = {hipertrofia:'Hipertrofia', emagrecimento:'Emagrecimento'};
 const LVL = {iniciante:'Iniciante', intermediario:'Intermediário', avancado:'Avançado'};
 const BLK = {normal:null, piramide:'Pirâmide', biset:'Bi-set', triset:'Tri-set', drop:'Drop-set', restpause:'Rest-pause'};
-const BLKTXT = {piramide:'Ajuste a carga a cada série conforme as repetições indicadas.', biset:'Faça uma série de cada exercício em sequência, <b class="gold">sem pausa</b>. Descanse só no fim da volta.',
-  triset:'Três exercícios em sequência, <b class="gold">sem pausa</b>. Descanse só no fim da volta.', drop:'Na última série, ao chegar na falha, reduza a carga em ~30% e continue até a falha de novo.',
+const BLKTXT = {piramide:'Ajuste a carga a cada série conforme as repetições indicadas.',
+  drop:'Na última série, ao chegar na falha, reduza a carga em ~30% e continue até a falha de novo.',
   restpause:'Faça as repetições, pause 15 segundos e continue. Repita a pausa mais uma vez.'};
 function toast(msg, ms=2200){ const t=$('toast'); t.textContent=msg; t.classList.remove('hide'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.add('hide'), ms); }
 function buzz(){ try{ navigator.vibrate && navigator.vibrate([300,120,300]); }catch(e){}
   try{ const a=new (window.AudioContext||window.webkitAudioContext)(); [0,.25,.5].forEach(t=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.25,a.currentTime+t);o.start(a.currentTime+t);o.stop(a.currentTime+t+.15);}); }catch(e){} }
+/* imagem de execução com transição suave (CSS) */
+function media(img, label, cls=''){
+  const [a,b] = CFG.IMG(img);
+  return `<div class="media ${cls}"><img src="${a}" alt="" onerror="mediaFail(this)"><img class="b" src="${b}" alt="" onerror="this.remove()">${label?`<span class="tag">${label}</span>`:''}</div>`;
+}
+function mediaFail(img){ const m = img.parentElement; if(!m) return; m.classList.add('fb');
+  m.innerHTML = `<svg class="i gold" style="width:36px;height:36px"><use href="#i-dumb"/></svg>`; }
 
 /* ================= ARMAZENAMENTO POR PESSOA ================= */
 const DB = {
   get(k, d=null){ try{ const v = localStorage.getItem('ff2:'+k); return v===null ? d : JSON.parse(v); }catch(e){ return d; } },
-  set(k, v){ try{ localStorage.setItem('ff2:'+k, JSON.stringify(v)); }catch(e){ toast('Memória do aparelho cheia. Faça um backup.'); } },
+  set(k, v){ try{ localStorage.setItem('ff2:'+k, JSON.stringify(v)); return true; }catch(e){ toast('Memória do aparelho cheia. Faça um backup.'); return false; } },
   del(k){ localStorage.removeItem('ff2:'+k); },
   p(k, d=null){ return DB.get('p:'+App.pid+':'+k, d); },
-  ps(k, v){ DB.set('p:'+App.pid+':'+k, v); }
+  ps(k, v){ return DB.set('p:'+App.pid+':'+k, v); }
 };
 
-/* ================= DADOS (JSON estático por grupo) ================= */
+/* ================= DADOS ================= */
 const Data = {
   async json(url){ const r = await fetch(url, {cache:'no-cache'}); if(!r.ok) throw new Error(r.status); return r.json(); },
   nowKey(){ const q = new URLSearchParams(location.search).get('mes') || sessionStorage.getItem('ff-mes'); if(q && /^\d{4}-\d{2}$/.test(q)){ sessionStorage.setItem('ff-mes', q); return q; }
     const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'); },
-  pick(meses, now){ const ok = meses.filter(m => m <= now); return ok.length ? ok.at(-1) : meses[0]; },  // mês atual; se faltar, o último publicado
+  pick(meses, now){ const ok = meses.filter(m => m <= now); return ok.length ? ok.at(-1) : meses[0]; },
   async load(){
     const g = App.grupo, base = `data/g${g}/`;
     const idx = await Data.json(base+'index.json').then(v => (DB.set('cache:idx:'+g, v), v)).catch(() => DB.get('cache:idx:'+g));
@@ -393,9 +421,11 @@ const App = { pid:null, grupo:'12', idx:null, cat:null, prog:null, status:null,
   profile(){ return (DB.get('profiles', [])).find(p => p.id === App.pid); },
   program(){ const p = App.profile(); return App.prog?.programas?.[p.obj]?.[p.lvl]; },
   ex(id){ return App.cat?.exercicios?.[id]; },
+  mob(id){ return App.cat?.mobilidade?.[id]; },
   monthHist(){ const mk = App.prog?.mes; return DB.p('hist', []).filter(h => h.mes === mk); },
   nextDayIdx(){ const prog = App.program(); if(!prog) return 0; const r = DB.p('rot', {}); return (r[App.prog.mes] || 0) % prog.dias.length; },
-  mainEquip(e){ return e.equip.find(q => !NAO_FOTO.includes(q)); }
+  mainEquip(e){ return e.equip.find(q => !NAO_FOTO.includes(q)) || e.equip[0]; },
+  pesos(){ return DB.p('pesos', []).filter(p => p && p.d && num(p.kg)).sort((a,b) => (a.d+(a.t||'')).localeCompare(b.d+(b.t||''))); }
 };
 
 /* ================= UI ================= */
@@ -411,7 +441,6 @@ const UI = {
     document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 't-'+t)); $('app').scrollTop = 0;
     if(t==='evo') UI.renderEvo(); if(t==='hist') UI.renderHist(); if(t==='treinos') UI.renderTreinos(); },
 
-  /* fotos da academia: aplica a capa onde existir */
   applyCover(){
     const url = CFG.FOTO(App.grupo, 'capa'), img = new Image();
     img.onload = () => { $('hj-gym').style.backgroundImage = `url(${url})`;
@@ -420,11 +449,11 @@ const UI = {
   },
   showGym(){
     const g = App.grupo, eq = App.cat.equipamentos, det = App.cat.detalhes || {};
-    const ids = Object.keys(eq).filter(q => !['grama'].includes(q));
+    const fotos = (App.idx.fotos || ['capa']).map(f => `<img src="${CFG.FOTO(g,f)}" onerror="this.remove()">`).join('');
     UI.modal(`<div class="stack"><div><span class="pill">Feito sob medida</span><div class="h2" style="margin-top:8px">Academia do ${esc(App.idx.nome)}</div>
-      <p class="sm mut" style="margin-top:4px">Todo treino deste app usa somente os aparelhos abaixo. Nada de adaptação.</p>${App.idx.obs?`<p class="xs gold" style="margin-top:6px">${esc(App.idx.obs)}</p>`:''}</div>
-      <div class="grid2" id="gym-grid">${ids.map(q => `<figure data-q="${q}" style="margin:0"><img src="${CFG.FOTO(g,q)}" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:var(--card2)" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ic',style:'width:100%;height:auto;aspect-ratio:4/3',innerHTML:'<svg class=\\'i\\' style=\\'width:28px;height:28px\\'><use href=\\'#i-dumb\\'/></svg>'}))">
-        <figcaption class="xs" style="margin-top:4px"><b>${esc(eq[q])}</b>${det[q]?`<br><span class="mut">${esc(det[q])}</span>`:''}</figcaption></figure>`).join('')}</div>
+      <p class="sm mut" style="margin-top:4px">Todo treino deste app usa somente estes aparelhos. Nada de adaptação.</p>${App.idx.obs?`<p class="xs gold" style="margin-top:6px">${esc(App.idx.obs)}</p>`:''}</div>
+      <div class="strip">${fotos}</div>
+      <div class="eqchips">${Object.keys(eq).map(q => `<span>${esc(eq[q])}${det[q]?` · <b>${esc(det[q])}</b>`:''}</span>`).join('')}</div>
       <button class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
   },
 
@@ -445,7 +474,7 @@ const UI = {
     const p = { id: 'p' + Date.now().toString(36), nome, obj: $('ob-obj').querySelector('.on').dataset.v, lvl: $('ob-lvl').querySelector('.on').dataset.v,
       criado: new Date().toISOString(), consent: {parq:true, lgpd:true, em:new Date().toISOString()} };
     const list = DB.get('profiles', []); list.push(p); DB.set('profiles', list);
-    App.pid = p.id; DB.ps('pesos', [{d: today(), kg: peso}]); UI.pick(p.id);
+    App.pid = p.id; DB.ps('pesos', [{d: today(), t: new Date().toTimeString().slice(0,5), kg: peso}]); UI.pick(p.id);
   },
   pick(id){ App.pid = id; DB.set('active', id); S.cur = DB.p('sess'); UI.show('app'); UI.tab('hoje'); UI.render(); },
   deleteProfile(){ const p = App.profile(); if(!confirm(`Excluir o perfil de ${p.nome} e todo o histórico dele? Os outros perfis não são afetados.`)) return;
@@ -463,7 +492,7 @@ const UI = {
     $('h-obj').textContent = OBJ[p.obj]; $('h-lvl').textContent = LVL[p.lvl];
     $('pf-obj').value = p.obj; $('pf-lvl').value = p.lvl; $('pf-ver').textContent = 'Firenze Fit v' + CFG.VERSAO + ' · programa ' + mk;
     $('hj-mes').textContent = 'Programa de ' + MESES[m-1];
-    $('hj-din').textContent = prog.dinamica.split(' – ')[0].split(' + ')[0];
+    $('hj-din').textContent = prog.dinamica.split(' + ')[0];
     const man = (App.status.manutencao||[]).map(id => App.cat.equipamentos[id]).filter(Boolean);
     $('hj-aviso').classList.toggle('hide', !man.length && !App.status.aviso);
     $('hj-aviso').innerHTML = `<b class="sm" style="color:var(--red)">Aviso da academia</b><p class="xs mut" style="margin-top:4px">${man.length ? 'Em manutenção: ' + esc(man.join(', ')) + '. O app já trocou os exercícios afetados.' : ''} ${esc(App.status.aviso||'')}</p>`;
@@ -476,11 +505,11 @@ const UI = {
     $('hj-pct').textContent = pct + '%'; $('hj-bar').style.width = pct + '%';
     $('hj-feitos').textContent = feitos + (feitos===1?' treino':' treinos'); $('hj-metatxt').textContent = 'Meta: ' + meta + ' (' + prog.freq + 'x/semana)';
     $('gym-tit').textContent = 'Academia do ' + App.idx.nome;
-    $('gym-sub').textContent = `Programa montado com os ${Object.keys(App.cat.equipamentos).length} itens da sua academia · ver aparelhos`;
+    $('gym-sub').textContent = `Programa montado só com os aparelhos da sua academia · ver lista`;
     const hist = DB.p('hist', []);
     $('st-tr').textContent = hist.length; $('st-vol').textContent = fmtKg(hist.reduce((a,h)=>a+h.vol,0));
     $('st-se').textContent = hist.reduce((a,h)=>a+h.series,0);
-    const pesos = DB.p('pesos', []); $('st-peso').textContent = pesos.length ? String(pesos.at(-1).kg).replace('.',',') + ' kg' : '-- kg';
+    const pesos = App.pesos(); $('st-peso').textContent = pesos.length ? fmtW(pesos.at(-1).kg) + ' kg' : '-- kg';
     $('mini').classList.toggle('hide', !(S.cur && !$('sess').classList.contains('open')));
     if(S.cur) $('mini-t').textContent = S.cur.titulo;
     UI.banner();
@@ -494,46 +523,65 @@ const UI = {
       <details class="card" ${i===next?'open':''}><summary class="row between"><div><span class="pill ${i===next?'':'grn'}">${i===next?'Próximo':'Treino '+d.id}</span>
       <div class="h3" style="margin-top:6px">${esc(d.id+' · '+d.nome)}</div><div class="xs mut">${esc(d.foco)} · ~${UI.estimate(d)} min</div></div><svg class="i mut"><use href="#i-down2"/></svg></summary>
       <div style="margin-top:12px">
-        <div class="list-item"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><div><b class="sm">1 · Mobilidade</b><div class="xs mut">${d.mob.length} movimentos · ~6 min</div></div></div>
-        ${d.blocos.map(b => b.exs.map((x,j) => { const e = App.ex(S.resolve(x.ex)); return `
+        <div class="list-item"><div class="ic"><svg class="i"><use href="#i-yoga"/></svg></div><div><b class="sm">1 · Mobilidade</b><div class="xs mut">${d.mob.map(id => esc(App.mob(id)?.nome||'')).join(' · ')}</div></div></div>
+        ${d.blocos.map((b,bi) => b.exs.map((x,j) => { const e = App.ex(S.resolve(x.ex)); if(!e) return ''; const code = b.exs.length>1 ? S.code(bi,j) : ''; return `
           <div class="list-item"><img class="thumb" loading="lazy" src="${CFG.IMG(e.img)[0]}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ic',innerHTML:'<svg class=\\'i\\'><use href=\\'#i-dumb\\'/></svg>'}))">
-          <div style="flex:1"><b class="sm">${esc(e.nome)}</b><div class="xs mut">${x.series} × ${esc(x.reps)} · ${x.desc?'descanso '+x.desc+'s':'sem pausa'}</div>
+          <div style="flex:1"><b class="sm">${code?`<span class="code">${code}</span>`:''}${esc(e.nome)}</b><div class="xs mut">${x.series} × ${esc(x.reps)} · ${x.desc?'descanso '+x.desc+'s':'sem pausa → próximo'}</div>
           ${BLK[b.tipo] && j===0 ? `<span class="pill" style="margin-top:4px">${BLK[b.tipo]}</span>`:''}</div></div>`; }).join('')).join('')}
         <div class="list-item"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><div><b class="sm">3 · Cardio no final · ${d.cardio.min} min</b><div class="xs mut">${esc(d.cardio.intens)}</div></div></div>
         <button class="btn btn-gold" style="margin-top:10px" onclick="S.start(${i})"><svg class="i"><use href="#i-play"/></svg>Fazer este treino</button>
       </div></details>`).join('');
   },
 
+  /* gráfico em SVG (funciona com 1 ou mais pontos) */
   chart(el, pts, unit){
-    if(pts.length < 2){ el.innerHTML = `<p class="xs mut" style="padding:24px 0;text-align:center">${pts.length? 'Registre mais uma vez para ver a curva.' : 'Sem registros ainda.'}</p>`; return; }
-    const W=320,H=140,P=24, ys=pts.map(p=>p.y), mn=Math.min(...ys), mx=Math.max(...ys), rg=(mx-mn)||1;
-    const X=i=>P+i*(W-2*P)/(pts.length-1), Y=v=>H-P-(v-mn)/rg*(H-2*P);
-    const path=pts.map((p,i)=>(i?'L':'M')+X(i).toFixed(1)+' '+Y(p.y).toFixed(1)).join(' ');
-    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="chart"><defs><linearGradient id="g${el.id}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#D4AF37" stop-opacity=".35"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></linearGradient></defs>
-      <path d="${path} L${X(pts.length-1)} ${H-P} L${P} ${H-P}Z" fill="url(#g${el.id})"/><path d="${path}" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
-      ${pts.map((p,i)=>`<circle cx="${X(i)}" cy="${Y(p.y)}" r="3.5" fill="#0a0a0a" stroke="#D4AF37" stroke-width="2"/>`).join('')}
-      <text x="${P}" y="14" fill="#8a8a8a" font-size="10">${String(mx).replace('.',',')} ${unit}</text><text x="${P}" y="${H-6}" fill="#8a8a8a" font-size="10">${pts[0].l}</text>
-      <text x="${W-P}" y="${H-6}" fill="#8a8a8a" font-size="10" text-anchor="end">${pts.at(-1).l}</text></svg>`;
+    if(!pts.length){ el.innerHTML = `<p class="xs mut" style="padding:24px 0;text-align:center">Sem registros ainda.</p>`; return; }
+    const W=320,H=150,PL=30,PR=14,PT=18,PB=24, ys=pts.map(p=>p.y);
+    let mn=Math.min(...ys), mx=Math.max(...ys); if(mx-mn < 2){ mn -= 1; mx += 1; }
+    const n = pts.length, X = i => n===1 ? W/2 : PL+i*(W-PL-PR)/(n-1), Y = v => H-PB-(v-mn)/(mx-mn)*(H-PT-PB);
+    const path = pts.map((p,i)=>(i?'L':'M')+X(i).toFixed(1)+' '+Y(p.y).toFixed(1)).join(' ');
+    const gid = 'g'+el.id.replace(/\W/g,'');
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="chart"><defs><linearGradient id="${gid}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#D4AF37" stop-opacity=".35"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></linearGradient></defs>
+      ${[mx,(mx+mn)/2,mn].map(v=>`<line x1="${PL}" x2="${W-PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="#2a2a2a" stroke-dasharray="3 4"/><text x="${PL-4}" y="${Y(v)+3}" fill="#8a8a8a" font-size="9" text-anchor="end">${fmtW(v)}</text>`).join('')}
+      ${n>1?`<path d="${path} L${X(n-1)} ${H-PB} L${X(0)} ${H-PB}Z" fill="url(#${gid})"/><path d="${path}" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linejoin="round"/>`:''}
+      ${pts.map((p,i)=>`<circle cx="${X(i)}" cy="${Y(p.y)}" r="4" fill="#0a0a0a" stroke="#D4AF37" stroke-width="2"/>`).join('')}
+      <text x="${X(n-1)}" y="${Y(pts.at(-1).y)-9}" fill="#D4AF37" font-size="11" font-weight="800" text-anchor="${n===1?'middle':'end'}">${fmtW(pts.at(-1).y)} ${unit}</text>
+      <text x="${X(0)}" y="${H-6}" fill="#8a8a8a" font-size="10" text-anchor="${n===1?'middle':'start'}">${pts[0].l}</text>
+      ${n>1?`<text x="${X(n-1)}" y="${H-6}" fill="#8a8a8a" font-size="10" text-anchor="end">${pts.at(-1).l}</text>`:''}</svg>
+      ${n===1?'<p class="xs mut" style="text-align:center">Registre de novo nos próximos dias para ver a curva.</p>':''}`;
   },
   renderEvo(){
-    UI.chart($('ch-peso'), DB.p('pesos', []).map(p => ({y:p.kg, l:p.d.slice(8,10)+'/'+p.d.slice(5,7)})), 'kg');
+    const ps = App.pesos();
+    UI.chart($('ch-peso'), ps.map(p => ({y:num(p.kg), l:ddmm(p.d)})), 'kg');
+    const diff = ps.length > 1 ? num(ps.at(-1).kg) - num(ps[0].kg) : null;
+    $('w-list').innerHTML = (diff!==null ? `<p class="sm" style="margin-bottom:6px">Desde o início: <b class="gold">${diff>0?'+':''}${fmtW(diff)} kg</b></p>` : '') +
+      ps.slice().reverse().slice(0,8).map(p => `<div class="wrow"><span>${new Date(p.d+'T12:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'})}${p.t?` <span class="mut xs">${p.t}</span>`:''}</span>
+        <span class="row" style="gap:6px"><b>${fmtW(num(p.kg))} kg</b><button class="mut" style="padding:4px" onclick="UI.delWeight('${p.d}','${p.t||''}')" aria-label="Apagar"><svg class="i" style="width:15px"><use href="#i-trash"/></svg></button></span></div>`).join('');
     const ids = Object.keys(DB.p('cargas', {})).filter(id => App.ex(id));
     const sel = $('ev-ex'), keep = sel.value;
-    sel.innerHTML = ids.length ? ids.map(id => `<option value="${id}">${esc(App.ex(id).nome)}</option>`).join('') : '<option>Faça um treino para ver suas cargas</option>';
+    sel.innerHTML = ids.length ? ids.map(id => `<option value="${id}">${esc(App.ex(id).nome)}</option>`).join('') : '<option value="">Faça um treino para ver suas cargas</option>';
     if(ids.includes(keep)) sel.value = keep; UI.renderLoadChart();
   },
   renderLoadChart(){
     const id = $('ev-ex').value, pts = [];
-    DB.p('hist', []).forEach(h => { const e = h.exs.find(x => x.ex === id); if(e){ const mx = Math.max(...e.sets.map(s=>s.kg||0)); if(mx) pts.push({y:mx, l:h.d.slice(8,10)+'/'+h.d.slice(5,7)}); } });
+    if(id) DB.p('hist', []).forEach(h => { const e = h.exs.find(x => x.ex === id); if(e){ const mx = Math.max(...e.sets.map(s=>s.kg||0)); if(mx) pts.push({y:mx, l:ddmm(h.d.slice(0,10))}); } });
     UI.chart($('ch-carga'), pts, 'kg');
   },
   addWeight(){
-    UI.modal(`<div class="stack"><div class="h3">Registrar peso</div><input id="w-in" inputmode="decimal" placeholder="Ex.: 81,7">
-      <button class="btn btn-gold" onclick="UI.saveWeight()">Salvar</button></div>`); setTimeout(()=>$('w-in').focus(),100);
+    UI.modal(`<div class="stack"><div class="h3">Registrar peso de hoje</div><input id="w-in" type="text" inputmode="decimal" placeholder="Ex.: 81,7" autocomplete="off">
+      <button class="btn btn-gold" id="w-save">Salvar</button><button class="btn btn-dark" onclick="UI.closeModal()">Cancelar</button></div>`);
+    $('w-save').onclick = UI.saveWeight;
+    $('w-in').onkeydown = e => { if(e.key === 'Enter') UI.saveWeight(); };
+    setTimeout(()=>$('w-in')?.focus(), 150);
   },
-  saveWeight(){ const kg = num($('w-in').value); if(!kg || kg<30 || kg>250) return toast('Peso inválido');
-    const arr = DB.p('pesos', []).filter(p => p.d !== today()); arr.push({d: today(), kg}); arr.sort((a,b)=>a.d.localeCompare(b.d));
-    DB.ps('pesos', arr); UI.closeModal(); UI.render(); UI.renderEvo(); toast('Peso registrado'); },
+  saveWeight(){
+    const kg = num($('w-in').value); if(!kg || kg<30 || kg>250) return toast('Digite um peso válido, ex.: 81,7');
+    const arr = App.pesos(); arr.push({d: today(), t: new Date().toTimeString().slice(0,5), kg});
+    if(!DB.ps('pesos', arr)) return;
+    UI.closeModal(); UI.render(); UI.renderEvo(); toast('Peso registrado: ' + fmtW(kg) + ' kg');
+  },
+  delWeight(d,t){ if(!confirm('Apagar este registro de peso?')) return;
+    DB.ps('pesos', App.pesos().filter(p => !(p.d===d && (p.t||'')===t))); UI.render(); UI.renderEvo(); },
   renderHist(){
     const h = DB.p('hist', []).slice().reverse();
     $('hi-list').innerHTML = h.length ? h.map(s => { const d = new Date(s.d); return `
@@ -571,19 +619,20 @@ const UI = {
   closeModal(){ $('modal').classList.add('hide'); }
 };
 
-/* ================= DESCANSO (por horário: resiste ao bloqueio de tela) ================= */
+/* ================= DESCANSO ================= */
 const R = {
   end:0, iv:null,
   start(sec, next){ if(!sec) return; R.end = Date.now() + sec*1000; $('rest-next').textContent = next || 'Próxima série'; $('rest').classList.remove('hide','end'); clearInterval(R.iv); R.iv = setInterval(R.tick, 250); R.tick(); },
   tick(){ const left = (R.end - Date.now())/1000; $('rest-t').textContent = mmss(left);
     if(left <= 0 && !$('rest').classList.contains('end')){ $('rest').classList.add('end'); buzz(); setTimeout(R.stop, 4000); } },
   add(s){ R.end += s*1000; $('rest').classList.remove('end'); },
-  stop(){ clearInterval(R.iv); $('rest').classList.add('hide'); $('rest').classList.remove('end'); }
+  stop(){ clearInterval(R.iv); R.end = 0; $('rest').classList.add('hide'); $('rest').classList.remove('end'); }
 };
 
 /* ================= SESSÃO ================= */
 const S = {
-  cur:null, clockIv:null, imgIv:null,
+  cur:null, clockIv:null,
+  code(bi,j){ return String.fromCharCode(65 + (bi % 26)) + (j+1); },   // A1, A2...
   resolve(id){ const e = App.ex(id); if(!e) return id; const man = App.status?.manutencao || [];
     if(e.equip.some(q => man.includes(q)) && e.alt && App.ex(e.alt)) return e.alt; return id; },
   start(idx){
@@ -592,67 +641,87 @@ const S = {
     const last = DB.p('cargas', {});
     S.cur = { di, mes: App.prog.mes, titulo: 'Treino ' + d.id + ' · ' + d.nome, t0: Date.now(), step:'mob', bi:0, mob:[], trocas:0,
       cardio:{eq:null, acc:0, run:null},
-      blocos: d.blocos.map(b => ({tipo:b.tipo, nota:b.nota||'', exs: b.exs.map(x => { const id = S.resolve(x.ex); const prev = last[id] || [];
+      blocos: d.blocos.map(b => ({tipo:b.tipo, exs: b.exs.map(x => { const id = S.resolve(x.ex); const prev = last[id] || [];
         return {orig:x.ex, ex:id, auto: id!==x.ex, reps:x.reps, desc:x.desc, obs:x.obs||'', sets: Array.from({length:x.series}, (_,k) => ({kg: prev[k]?.kg ?? prev.at(-1)?.kg ?? '', r: '', ok:false})) }; }) })) };
     S.save(); S.open();
   },
   save(){ DB.ps('sess', S.cur); },
   day(){ return App.program().dias[S.cur.di]; },
-  open(){ if(!S.cur) return; if(S.cur.mes !== App.prog.mes || !App.program().dias[S.cur.di]){ toast('O programa mudou de mês. Treino anterior encerrado.'); return S.close(); }
+  valid(){ const c = S.cur; if(!c || c.mes !== App.prog.mes || !App.program()?.dias[c.di]) return false;
+    return c.blocos.every(b => b.exs.every(x => App.ex(x.ex))); },
+  open(){ if(!S.cur) return; if(!S.valid()){ toast('O programa foi atualizado. Comece o treino de novo.'); return S.close(); }
     $('sess').classList.add('open'); $('mini').classList.add('hide'); S.render();
     clearInterval(S.clockIv); S.clockIv = setInterval(S.clock, 1000); S.clock(); },
-  minimize(){ $('sess').classList.remove('open'); clearInterval(S.imgIv); UI.render(); },
+  minimize(){ $('sess').classList.remove('open'); UI.render(); },
   clock(){ if(!S.cur) return; const s = (Date.now() - S.cur.t0)/1000; $('s-clock').textContent = mmss(s); $('mini-s').textContent = mmss(s) + ' · toque para voltar';
     if(S.cur.step === 'car' && S.cur.cardio.run) S.cardioTick(); },
   askCancel(){ if(confirm('Cancelar este treino? Nada será salvo.')) S.close(); },
-  close(){ S.cur = null; DB.ps('sess', null); R.stop(); clearInterval(S.clockIv); clearInterval(S.imgIv); $('sess').classList.remove('open'); UI.render(); },
+  close(){ S.cur = null; DB.ps('sess', null); R.stop(); clearInterval(S.clockIv); $('sess').classList.remove('open'); UI.render(); },
   go(step){ S.cur.step = step; S.save(); S.render(); $('s-body').scrollTop = 0; },
   render(){
     const st = S.cur.step; $('s-title').textContent = S.cur.titulo;
     const order = ['mob','tre','car']; order.forEach((k,i) => { $('st-'+k).className = k===st ? 'on' : (i < order.indexOf(st) ? 'ok' : ''); });
-    clearInterval(S.imgIv);
     if(st === 'mob') S.renderMob(); else if(st === 'tre') S.renderBlock(); else S.renderCardio();
   },
+
+  /* 1. MOBILIDADE com imagem e passo a passo */
   renderMob(){
-    const items = S.day().mob, eq = App.cat.equipamentos;
-    $('s-body').innerHTML = `<div class="stack"><div><div class="h2">Mobilidade</div><p class="sm mut" style="margin-top:4px">Aqueça as articulações antes de pegar peso. Toque em cada item ao terminar.</p></div>
-      ${items.map((m,i) => `<button class="mob-item ${S.cur.mob.includes(i)?'on':''}" onclick="S.toggleMob(${i})"><span class="chk"><svg class="i"><use href="#i-check"/></svg></span>
-      <div><b class="sm">${esc(m[0])}</b><div class="xs mut">${esc(m[2])}${eq[m[1]]?' · '+esc(eq[m[1]]):''}</div></div></button>`).join('')}</div>`;
-    $('s-foot').innerHTML = `<button class="btn btn-gold" onclick="S.go('tre')">${S.cur.mob.length===items.length?'Ir para o treino':'Pular para o treino'} <svg class="i"><use href="#i-right"/></svg></button>`;
+    const ids = S.day().mob, eq = App.cat.equipamentos;
+    $('s-body').innerHTML = `<div class="stack"><div><div class="h2">Mobilidade</div><p class="sm mut" style="margin-top:4px">5 a 6 minutos para soltar as articulações antes de pegar peso. Movimentos lentos, sem dor. Marque cada um ao terminar.</p></div>
+      ${ids.map((id,i) => { const m = App.mob(id); if(!m) return ''; const on = S.cur.mob.includes(i); return `
+      <div class="mob-item ${on?'on':''}"><div class="row" style="align-items:flex-start;gap:12px">
+        ${media(m.img,'','mini')}
+        <div style="flex:1"><b class="sm">${i+1}. ${esc(m.nome)}</b><div class="xs gold" style="margin-top:2px">${esc(m.dose)}</div><div class="xs mut">${esc(eq[m.equip]||'')}</div></div>
+        <button class="chk ${on?'on':''}" onclick="S.toggleMob(${i})" aria-label="Feito"><svg class="i"><use href="#i-check"/></svg></button></div>
+        <ol>${m.passos.map(p=>`<li>${esc(p)}</li>`).join('')}</ol></div>`; }).join('')}</div>`;
+    $('s-foot').innerHTML = `<button class="btn btn-gold" onclick="S.go('tre')">${S.cur.mob.length>=ids.length?'Ir para o treino':'Pular para o treino'} <svg class="i"><use href="#i-right"/></svg></button>`;
   },
   toggleMob(i){ const a = S.cur.mob; a.includes(i) ? a.splice(a.indexOf(i),1) : a.push(i); S.save(); S.renderMob(); },
+
+  /* 2. TREINO */
   blockDone(b){ return b.exs.every(x => x.sets.every(s => s.ok)); },
+  pointer(b){ // próxima série a fazer, na ordem das voltas: A1 s1, A2 s1, A1 s2, A2 s2...
+    const n = Math.max(...b.exs.map(x => x.sets.length));
+    for(let k=0;k<n;k++) for(let j=0;j<b.exs.length;j++){ const s = b.exs[j].sets[k]; if(s && !s.ok) return {j,k}; }
+    return null;
+  },
   renderBlock(){
-    const c = S.cur, b = c.blocos[c.bi], tag = BLK[b.tipo];
+    const c = S.cur, b = c.blocos[c.bi], multi = b.exs.length > 1, ptr = S.pointer(b);
     const nav = `<div class="blocknav">${c.blocos.map((x,i)=>`<button class="${i===c.bi?'on':''} ${S.blockDone(x)?'ok':''}" onclick="S.toBlock(${i})">${i+1}</button>`).join('')}</div>`;
-    $('s-body').innerHTML = `<div class="stack">${nav}
-      ${tag ? `<div class="card" style="padding:12px;border-color:rgba(212,175,55,.4)"><span class="pill">${tag}</span><p class="xs mut" style="margin-top:6px">${BLKTXT[b.tipo]||''}</p></div>` : ''}
-      ${b.exs.map((x,j) => S.exCard(x, j)).join(`<div class="link">SEM PAUSA</div>`)}</div>`;
+    let head = '';
+    if(multi){
+      const voltas = Math.max(...b.exs.map(x => x.sets.length)), volta = ptr ? ptr.k+1 : voltas, rest = b.exs.at(-1).desc;
+      head = `<div class="card" style="padding:12px;border-color:rgba(212,175,55,.45)">
+        <div class="row between"><span class="pill">${BLK[b.tipo]}</span><b class="gold sm">Volta ${volta} de ${voltas}</b></div>
+        <p class="xs mut" style="margin-top:8px">Faça <b class="gold">1 série de cada</b>, em sequência e <b class="gold">sem descanso</b> entre eles. Descanse só no fim da volta e repita.</p>
+        <div class="flow">${b.exs.map((x,j)=>`<span class="${ptr&&ptr.j===j?'on':''}">${S.code(c.bi,j)}</span><i>→</i>`).join('')}<span>descanso ${rest}s</span><i>↺</i></div></div>`;
+    } else if(BLK[b.tipo]) head = `<div class="card" style="padding:12px;border-color:rgba(212,175,55,.4)"><span class="pill">${BLK[b.tipo]}</span><p class="xs mut" style="margin-top:6px">${BLKTXT[b.tipo]||''}</p></div>`;
+    $('s-body').innerHTML = `<div class="stack">${nav}${head}
+      ${b.exs.map((x,j) => S.exCard(x, j, multi, ptr)).join(multi ? `<div class="link">SEM PAUSA</div>` : '')}</div>`;
     const last = c.bi === c.blocos.length-1;
     $('s-foot').innerHTML = `<div class="row"><button class="btn btn-dark" style="width:56px" ${c.bi?'':'disabled'} onclick="S.toBlock(${c.bi-1})"><svg class="i"><use href="#i-left"/></svg></button>
       <button class="btn btn-gold" onclick="${last ? "S.go('car')" : 'S.toBlock('+(c.bi+1)+')'}">${last ? 'Ir para o cardio' : 'Próximo exercício'} <svg class="i"><use href="#i-right"/></svg></button></div>`;
-    S.animate();
   },
-  exCard(x, j){
-    const e = App.ex(x.ex), imgs = CFG.IMG(e.img), q = App.mainEquip(e), eqn = App.cat.equipamentos;
-    return `<div class="card stack" style="padding:14px">
-      <div class="media" data-imgs='${JSON.stringify(imgs)}'><img src="${imgs[0]}" alt="${esc(e.nome)}" onerror="S.imgFail(this,'${esc(e.musc)}')"><span class="tag">▶ Execução</span></div>
-      <div class="row between" style="align-items:flex-start"><div><div class="h3">${esc(e.nome)}</div><div class="xs gold" style="margin-top:2px">${esc(e.musc)} · ${x.sets.length} × ${esc(x.reps)} · ${x.desc ? 'descanso '+x.desc+'s' : 'sem pausa'}</div></div>
+  exCard(x, j, multi, ptr){
+    const e = App.ex(x.ex), q = App.mainEquip(e), eqn = App.cat.equipamentos, det = App.cat.detalhes || {};
+    const cls = multi && ptr ? (ptr.j === j ? 'cur' : 'dim') : '';
+    return `<div class="card stack excard ${cls}" id="ex-${j}" style="padding:14px">
+      ${media(e.img,'▶ Execução')}
+      <div class="row between" style="align-items:flex-start"><div><div class="h3">${multi?`<span class="code">${S.code(S.cur.bi,j)}</span>`:''}${esc(e.nome)}</div>
+        <div class="xs gold" style="margin-top:4px">${esc(e.musc)} · ${x.sets.length} × ${esc(x.reps)} · ${x.desc ? 'descanso '+x.desc+'s' : 'sem pausa → próximo'}</div></div>
         ${e.alt ? `<button class="btn btn-dark btn-sm" onclick="S.swap(${j})"><svg class="i"><use href="#i-swap"/></svg>Trocar</button>`:''}</div>
-      ${q ? `<div class="here"><img src="${CFG.FOTO(App.grupo,q)}" onerror="this.parentElement.remove()"><div><div class="xs gold" style="font-weight:800;letter-spacing:.5px;text-transform:uppercase">Na sua academia</div><div class="sm"><b>${esc(eqn[q])}</b></div>${App.cat.detalhes?.[q]?`<div class="xs mut">${esc(App.cat.detalhes[q])}</div>`:''}</div></div>` : ''}
+      <div class="here"><img src="${CFG.FOTO(App.grupo,q)}" onerror="this.remove()"><div><div class="xs gold" style="font-weight:800;letter-spacing:.5px;text-transform:uppercase">Na sua academia</div>
+        <div class="sm"><b>${esc(e.equip.filter(k=>k!=='anilhas').map(k=>eqn[k]).join(' + '))}</b></div>${det[q]?`<div class="xs mut">${esc(det[q])}</div>`:''}</div></div>
+      ${e.nota ? `<div class="note">${esc(e.nota)}</div>` : ''}
       ${x.auto ? `<span class="pill red">Substituído: aparelho em manutenção</span>` : ''}${x.orig!==x.ex && !x.auto ? `<span class="pill">Alternativo escolhido</span>`:''}
       <ul class="xs mut" style="padding-left:16px;line-height:1.6">${e.dicas.map(t=>`<li>${esc(t)}</li>`).join('')}${x.obs?`<li class="gold">${esc(x.obs)}</li>`:''}</ul>
       <table class="sets"><tr><th>#</th><th>${e.tipo==='tempo'?'Tempo':'Carga (kg)'}</th><th>Reps</th><th></th></tr>
-      ${x.sets.map((s,k) => `<tr class="${s.ok?'done':''}"><td class="n">${k+1}</td>
+      ${x.sets.map((s,k) => `<tr class="${s.ok?'done':''} ${ptr&&ptr.j===j&&ptr.k===k?'now':''}"><td class="n">${k+1}</td>
         <td><input inputmode="decimal" value="${esc(s.kg)}" placeholder="${e.tipo==='tempo'?'—':'kg'}" ${e.tipo==='tempo'?'disabled':''} onchange="S.setVal(${j},${k},'kg',this.value)"></td>
         <td><input inputmode="numeric" value="${esc(s.r)}" placeholder="${esc(repT(x.reps,k))}" onchange="S.setVal(${j},${k},'r',this.value)"></td>
         <td><button class="chk ${s.ok?'on':''}" onclick="S.done(${j},${k})"><svg class="i"><use href="#i-check"/></svg></button></td></tr>`).join('')}</table>
     </div>`;
   },
-  animate(){ let f = 0; S.imgIv = setInterval(() => { f = 1-f; document.querySelectorAll('#s-body .media[data-imgs] img').forEach(img => {
-    if(!img.dataset.fail) img.src = JSON.parse(img.parentElement.dataset.imgs)[f]; }); }, 900); },
-  imgFail(img, musc){ img.dataset.fail = 1; const m = img.parentElement; m.classList.add('fb'); m.removeAttribute('data-imgs');
-    m.innerHTML = `<div style="text-align:center"><svg class="i gold" style="width:44px;height:44px"><use href="#i-dumb"/></svg><div class="xs mut" style="margin-top:6px">${musc}</div></div>`; },
   toBlock(i){ if(i<0||i>=S.cur.blocos.length) return; S.cur.bi = i; S.save(); S.renderBlock(); $('s-body').scrollTop = 0; },
   setVal(j,k,f,v){ S.cur.blocos[S.cur.bi].exs[j].sets[k][f] = f==='kg' ? (num(v) ?? '') : (parseInt(v)||''); S.save(); },
   done(j,k){
@@ -660,25 +729,32 @@ const S = {
     if(s.ok && s.r === ''){ const t = parseInt(repT(x.reps,k)); if(t) s.r = t; }
     S.save(); S.renderBlock();
     if(!s.ok) return;
-    if(j < b.exs.length-1){ toast('Sem pausa → ' + App.ex(b.exs[j+1].ex).nome); return; }
-    const nb = S.cur.blocos[bi+1], fim = S.blockDone(b);
-    R.start(x.desc, fim ? (nb ? 'Próximo: ' + App.ex(nb.exs[0].ex).nome : 'Depois: cardio') : 'Série ' + (k+2));
+    const multi = b.exs.length > 1, ptr = S.pointer(b);
+    if(multi && ptr && ptr.k === k && ptr.j > j){   // ainda na mesma volta: vai para o próximo sem descanso
+      toast('Sem pausa → ' + S.code(bi, ptr.j) + ' ' + App.ex(b.exs[ptr.j].ex).nome);
+      $('ex-'+ptr.j)?.scrollIntoView({behavior:'smooth', block:'start'}); return;
+    }
+    const fim = S.blockDone(b), nb = S.cur.blocos[bi+1], restS = multi ? b.exs.at(-1).desc : x.desc;
+    R.start(restS, fim ? (nb ? 'Próximo: ' + App.ex(nb.exs[0].ex).nome : 'Depois: cardio') : (multi ? 'Volta ' + (ptr.k+1) + ': comece pelo ' + S.code(bi,0) : 'Série ' + (k+2)));
+    if(multi && !fim) $('ex-0')?.scrollIntoView({behavior:'smooth', block:'start'});
     if(fim && nb) setTimeout(()=>{ if(S.cur && S.cur.bi===bi) S.toBlock(bi+1); }, 600);
   },
   swap(j){
     const x = S.cur.blocos[S.cur.bi].exs[j], e = App.ex(x.ex);
     const options = [x.orig, App.ex(x.orig)?.alt, e.alt].filter((v,i,a) => v && App.ex(v) && v !== x.ex && a.indexOf(v)===i);
     UI.modal(`<div class="stack"><div class="h3">Aparelho ocupado ou com problema?</div><p class="sm mut">Troque por um exercício equivalente desta academia:</p>
-      ${options.map(o => `<button class="prof" onclick="S.doSwap(${j},'${o}')"><div class="ic"><svg class="i"><use href="#i-swap"/></svg></div><div><b class="sm">${esc(App.ex(o).nome)}</b><div class="xs mut">${esc(App.ex(o).equip.map(q=>App.cat.equipamentos[q]).join(' + '))}</div></div></button>`).join('')}
+      ${options.map(o => `<button class="prof" onclick="S.doSwap(${j},'${o}')"><img class="thumb" src="${CFG.IMG(App.ex(o).img)[0]}" onerror="this.style.visibility='hidden'"><div><b class="sm">${esc(App.ex(o).nome)}</b><div class="xs mut">${esc(App.ex(o).equip.map(q=>App.cat.equipamentos[q]).join(' + '))}</div></div></button>`).join('')}
       <button class="btn btn-dark" onclick="UI.closeModal()">Manter</button></div>`);
   },
   doSwap(j,id){ const x = S.cur.blocos[S.cur.bi].exs[j]; x.ex = id; x.auto = false; S.cur.trocas++;
     const prev = DB.p('cargas', {})[id] || []; x.sets.forEach((s,k) => { if(!s.ok) s.kg = prev[k]?.kg ?? ''; });
     S.save(); UI.closeModal(); S.renderBlock(); },
+
+  /* 3. CARDIO */
   renderCardio(){
     const d = S.day(), c = S.cur.cardio, eq = App.cat.equipamentos;
     const opts = ['esteira','bike','transport','cama_elastica'].filter(q => eq[q]);
-    $('s-body').innerHTML = `<div class="stack"><div><div class="h2">Cardio final</div><p class="sm mut" style="margin-top:4px">${esc(d.cardio.obs)}</p></div>
+    $('s-body').innerHTML = `<div class="stack"><div><div class="h2">Cardio final</div><p class="sm mut" style="margin-top:4px">Por último, para não roubar energia do treino de força. ${esc(d.cardio.obs)}.</p></div>
       <div class="card stack" style="text-align:center"><span class="pill" style="margin:0 auto">${esc(d.cardio.intens)}</span>
         <div class="cardio-clock" id="cd-clock">${mmss(d.cardio.min*60)}</div><div class="xs mut">meta: ${d.cardio.min} minutos</div>
         <div class="chips" style="justify-content:center">${opts.map(q => `<button class="${c.eq===q?'on':''}" onclick="S.cardioEq('${q}')">${esc(eq[q])}</button>`).join('')}</div>
@@ -709,18 +785,33 @@ const S = {
   }
 };
 
+/* ================= REVISÃO DE IMAGENS (abra o app com ?revisar=1) ================= */
+function revisar(){
+  const ex = Object.values(App.cat.exercicios), mob = Object.values(App.cat.mobilidade||{});
+  document.body.innerHTML = `<div class="screen"><div class="wrap stack"><div class="h2">Revisão de imagens · ${esc(App.idx.nome)}</div>
+    <p class="sm mut">Confira se cada imagem mostra o exercício certo. Tire print das erradas e mande para ajuste.</p>
+    ${[...mob.map(m=>({nome:'Mobilidade · '+m.nome,img:m.img,info:m.dose})), ...ex.map(e=>({nome:e.nome,img:e.img,info:e.equip.map(q=>App.cat.equipamentos[q]).join(' + ')}))]
+      .map((e,i)=>`<div class="card stack"><b class="sm">${i+1}. ${esc(e.nome)}</b><div class="xs mut">${esc(e.info)}</div><div class="grid2">${CFG.IMG(e.img).map(u=>`<img src="${u}" style="width:100%;border-radius:10px;background:#fff" onerror="this.outerHTML='<div class=\\'pill red\\'>Sem imagem</div>'">`).join('')}</div></div>`).join('')}
+  </div></div>`;
+}
+
 /* ================= INÍCIO ================= */
 async function boot(){
-  const q = new URLSearchParams(location.search).get('grupo'), saved = DB.get('grupo');
+  const qs = new URLSearchParams(location.search), q = qs.get('grupo'), saved = DB.get('grupo'), rev = qs.get('revisar');
   if(q && CFG.GRUPOS.includes(q) && q !== saved){ if(!saved || confirm(`Mudar seu grupo de ${saved} para ${q}?`)) DB.set('grupo', q); }
   App.grupo = DB.get('grupo') || '12'; DB.set('grupo', App.grupo);
   $('lg-grupo').textContent = 'GRUPO ' + App.grupo; $('lg-buylink').href = CFG.CHECKOUT_URL;
-  Data.nowKey(); history.replaceState(null, '', location.pathname);
+  Data.nowKey(); if(!rev) history.replaceState(null, '', location.pathname);
   if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
-  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  if('serviceWorker' in navigator){
+    const hadCtrl = !!navigator.serviceWorker.controller; let reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => { if(hadCtrl && !reloaded && !S.cur){ reloaded = true; location.reload(); } });
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  }
   UI.applyCover();
   const ok = await Data.load();
   if(!ok){ document.body.innerHTML = '<div class="screen center"><div class="card wrap" style="text-align:center"><div class="h3">Sem conexão</div><p class="sm mut" style="margin-top:8px">Abra o app uma vez com internet para baixar seus treinos.</p><button class="btn btn-gold" style="margin-top:14px" onclick="location.reload()">Tentar de novo</button></div></div>'; return; }
+  if(rev) return revisar();
   $('lg-sub').textContent = `Treinos feitos para os aparelhos da academia do ${App.idx.nome}.`;
   if(!Auth.valid()) return UI.show('login');
   const act = DB.get('active'); if(act && DB.get('profiles',[]).some(p => p.id === act)) UI.pick(act); else UI.show('profiles');
