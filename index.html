@@ -16,9 +16,9 @@
 :root{--bg:#0a0a0a;--card:#141414;--card2:#1b1b1b;--line:#2a2a2a;--gold:#D4AF37;--gold2:#aa8c2c;--mut:#8a8a8a;--txt:#f4f4f4;--red:#f87171;--grn:#4ade80;--st:env(safe-area-inset-top);--sb:env(safe-area-inset-bottom)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-/* corpo travado na tela: impede o iPhone de "deslocar" a página depois do teclado */
 body{position:fixed;inset:0;width:100%;overscroll-behavior:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:disabled{cursor:default}
 input,select{font:inherit;font-size:16px;color:var(--txt);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;outline:none}
 input:focus,select:focus{border-color:var(--gold)}
 .hide{display:none!important}
@@ -42,6 +42,7 @@ input:focus,select:focus{border-color:var(--gold)}
 .pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;background:rgba(212,175,55,.1);color:var(--gold);border:1px solid rgba(212,175,55,.25)}
 .pill.red{background:rgba(248,113,113,.1);color:var(--red);border-color:rgba(248,113,113,.3)}
 .pill.grn{background:rgba(74,222,128,.08);color:var(--grn);border-color:rgba(74,222,128,.25)}
+.pill.off{background:var(--card2);color:var(--mut);border-color:var(--line)}
 .lbl{font-size:10.5px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:block}
 .opt{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:12px;text-align:left;width:100%}
 .opt.on{border-color:var(--gold);background:rgba(212,175,55,.08)}
@@ -126,6 +127,7 @@ tr.now td.n{color:var(--gold)}tr.now input{border-color:var(--gold)}
 .login-bg{background:radial-gradient(90% 60% at 50% 0%,rgba(212,175,55,.22),transparent 60%),var(--bg) center/cover no-repeat}
 .logo{width:64px;height:64px;border-radius:18px;margin:0 auto 14px;display:block}
 .prof{display:flex;align-items:center;gap:12px;width:100%;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:left}
+.prof.off{opacity:.5}
 .avatar{width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
 .wrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
 .ok-box{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:#bdf5cf;border-radius:12px;padding:10px 12px;font-size:12px;margin-bottom:14px}
@@ -137,9 +139,9 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
 <section id="scr-login" class="screen center login-bg hide">
   <div class="wrap card glass" style="padding:28px 22px;text-align:center">
     <img src="icons/icon-192.png" class="logo" alt="">
-    <div class="eyebrow">MovaCondo</div>
-    <div class="h1" id="lg-grupo" style="margin-top:4px">GRUPO 12</div>
-    <p class="sm mut" style="margin:8px 0 20px" id="lg-sub">Treinos feitos para os aparelhos da sua academia.</p>
+    <div class="eyebrow">Feito sob medida</div>
+    <div class="h1" style="margin-top:4px">MovaCondo</div>
+    <p class="sm mut" style="margin:8px 0 20px">Treinos montados com os aparelhos da academia do seu condomínio.</p>
     <div id="lg-ok" class="ok-box hide"><b>Assinatura recebida!</b> Digite abaixo o mesmo e-mail que você usou no Mercado Pago.</div>
     <div class="stack">
       <input type="email" id="lg-email" placeholder="E-mail usado na assinatura" autocomplete="email" inputmode="email" enterkeyhint="go" style="text-align:center">
@@ -150,9 +152,18 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
   </div>
 </section>
 
+<section id="scr-grupo" class="screen hide">
+  <div class="wrap stack">
+    <div style="padding-top:20px"><div class="eyebrow">MovaCondo</div><div class="h2" style="margin-top:4px">Qual é a sua academia?</div>
+    <p class="sm mut" style="margin-top:4px">Seu treino será montado só com os aparelhos dela. Dá para trocar depois no Perfil.</p></div>
+    <div id="gr-list" class="stack"></div>
+    <button type="button" class="btn btn-sm mut hide" id="gr-back" style="margin:0 auto" onclick="enterApp()">Voltar</button>
+  </div>
+</section>
+
 <section id="scr-profiles" class="screen hide">
   <div class="wrap stack">
-    <div style="padding-top:20px"><div class="eyebrow">MovaCondo</div><div class="h2" style="margin-top:4px">Quem vai treinar?</div>
+    <div style="padding-top:20px"><div class="eyebrow" id="pf-gtag">MovaCondo</div><div class="h2" style="margin-top:4px">Quem vai treinar?</div>
     <p class="sm mut" style="margin-top:4px">Cada pessoa tem seu próprio histórico, cargas e evolução.</p></div>
     <div id="pf-list" class="stack"></div>
     <button type="button" class="btn btn-ghost" onclick="UI.newProfile()"><svg class="i"><use href="#i-plus"/></svg>Adicionar pessoa</button>
@@ -187,7 +198,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
   <div class="row between">
     <button type="button" class="row" onclick="UI.show('profiles')" style="gap:10px;text-align:left">
       <div class="avatar" id="h-av" style="width:38px;height:38px;font-size:15px">E</div>
-      <div><div class="eyebrow" id="h-grupo" style="font-size:10px">Grupo 12</div><div class="h3" id="h-nome">Erik</div></div>
+      <div><div class="eyebrow" id="h-grupo" style="font-size:10px">Grupo</div><div class="h3" id="h-nome">Erik</div></div>
     </button>
     <div style="text-align:right"><div class="pill" id="h-obj">Hipertrofia</div><div class="xs mut" id="h-lvl" style="margin-top:4px">Intermediário</div></div>
   </div>
@@ -216,7 +227,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
     </div>
     <button type="button" class="gym" id="hj-gym" onclick="UI.showGym()">
       <div class="ov"></div><div class="in"><span class="pill">Feito sob medida</span>
-      <div class="h3" style="margin-top:8px" id="gym-tit">Academia do Grupo 12</div>
+      <div class="h3" style="margin-top:8px" id="gym-tit">Sua academia</div>
       <div class="xs mut" id="gym-sub" style="margin-top:2px"></div></div>
     </button>
     <div class="grid2">
@@ -254,15 +265,19 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
   <section class="tab stack" id="t-perfil">
     <div class="h2">Perfil</div>
     <div class="card stack">
-      <div class="row"><div class="avatar" id="pf-av">E</div><div><b id="pf-nome">Erik</b><div class="xs gold" id="pf-sub">Grupo 12</div></div></div>
+      <div class="row"><div class="avatar" id="pf-av">E</div><div><b id="pf-nome">Erik</b><div class="xs gold" id="pf-sub">Grupo</div></div></div>
       <div><label class="lbl" for="pf-obj">Objetivo</label><select id="pf-obj" onchange="UI.changeGoal()"><option value="hipertrofia">Hipertrofia</option><option value="emagrecimento">Emagrecimento</option></select></div>
       <div><label class="lbl" for="pf-lvl">Nível</label><select id="pf-lvl" onchange="UI.changeGoal()"><option value="iniciante">Iniciante (3x/sem)</option><option value="intermediario">Intermediário (4x/sem)</option><option value="avancado">Avançado (5x/sem)</option></select></div>
       <p class="xs mut">O histórico é mantido quando você troca de objetivo ou nível.</p>
     </div>
-    <button type="button" class="btn btn-ghost" onclick="UI.showGym()"><svg class="i"><use href="#i-dumb"/></svg>Sua academia</button>
+    <div class="card stack">
+      <span class="lbl" style="margin:0">Sua academia</span>
+      <div class="row between"><b class="sm" id="pf-grupo">Grupo</b><button type="button" class="btn btn-dark btn-sm" onclick="UI.trocarGrupo()">Trocar</button></div>
+      <button type="button" class="btn btn-ghost" onclick="UI.showGym()"><svg class="i"><use href="#i-dumb"/></svg>Ver aparelhos</button>
+    </div>
     <div class="card stack">
       <span class="lbl" style="margin:0">Assinatura</span>
-      <div class="row between"><div><b class="sm" id="pf-plano">Plano</b><div class="xs mut" id="pf-email"></div></div></div>
+      <div><b class="sm" id="pf-plano">Plano</b><div class="xs mut" id="pf-email"></div></div>
       <p class="xs mut">Para cancelar ou trocar de plano, acesse Assinaturas no app do Mercado Pago.</p>
     </div>
     <div class="card stack">
@@ -342,13 +357,13 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
  <symbol id="i-yoga" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v6M6 10l6 3 6-3M8 21l4-8 4 8"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
 </svg>
 <script>
 /* ================= CONFIGURAÇÃO ================= */
 const CFG = {
-  VERSAO: '3.1.0',
+  VERSAO: '3.2.0',
   MARCA: 'MovaCondo',
-  GRUPOS: ['12','13','14','15','16','17','18'],
   AUTH_URL: '/api/acesso',
   IMG: id => [0,1].map(n => `https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${id}/${n}.jpg`),
   FOTO: (g, nome) => `data/g${g}/fotos/${nome}.jpg`,
@@ -394,7 +409,6 @@ function media(img, label, cls=''){
 function mediaFail(img){ const m = img.parentElement; if(!m) return; m.classList.add('fb');
   m.innerHTML = `<svg class="i gold" style="width:36px;height:36px"><use href="#i-dumb"/></svg>`; }
 function galFail(img){ img.outerHTML = `<svg class="i"><use href="#${img.dataset.ic}"/></svg>`; }
-/* iPhone: depois que o teclado fecha, devolve a tela para a posição certa */
 function fixViewport(){ setTimeout(() => { const a = document.activeElement; if(a && /INPUT|SELECT|TEXTAREA/.test(a.tagName)) return;
   window.scrollTo(0,0); document.documentElement.scrollTop = 0; document.body.scrollTop = 0; }, 80); }
 
@@ -413,6 +427,11 @@ const Data = {
   nowKey(){ const q = new URLSearchParams(location.search).get('mes') || sessionStorage.getItem('ff-mes'); if(q && /^\d{4}-\d{2}$/.test(q)){ sessionStorage.setItem('ff-mes', q); return q; }
     const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'); },
   pick(meses, now){ const ok = meses.filter(m => m <= now); return ok.length ? ok.at(-1) : meses[0]; },
+  /* lista de academias atendidas (data/grupos.json) */
+  async grupos(){
+    const g = await Data.json('data/grupos.json').then(v => (DB.set('cache:grupos', v), v)).catch(() => DB.get('cache:grupos'));
+    App.grupos = (g && g.grupos) || [{id:'12', nome:'Grupo 12', ativo:true}];
+  },
   async load(){
     const g = App.grupo, base = `data/g${g}/`;
     const idx = await Data.json(base+'index.json').then(v => (DB.set('cache:idx:'+g, v), v)).catch(() => DB.get('cache:idx:'+g));
@@ -434,7 +453,7 @@ const Auth = {
     if(Date.now() - (a.conf||0) < CFG.RECHECAR_DIAS*864e5) return 'ok';
     return 'check'; },
   async check(email){
-    const r = await fetch(CFG.AUTH_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, device: Auth.device(), grupo: App.grupo})});
+    const r = await fetch(CFG.AUTH_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, device: Auth.device(), grupo: DB.get('grupo') || ''})});
     const j = await r.json().catch(() => ({}));
     if(r.status === 502 || (r.status >= 500 && !j.msg)) throw new Error('rede');
     return j;
@@ -450,7 +469,8 @@ const Auth = {
 };
 
 /* ================= APP ================= */
-const App = { pid:null, grupo:'12', idx:null, cat:null, prog:null, status:null,
+const App = { pid:null, grupo:null, grupos:[], idx:null, cat:null, prog:null, status:null,
+  grupoOk(id){ return App.grupos.some(g => g.id === String(id) && g.ativo); },
   profile(){ return (DB.get('profiles', [])).find(p => p.id === App.pid); },
   program(){ const p = App.profile(); return App.prog?.programas?.[p.obj]?.[p.lvl]; },
   ex(id){ return App.cat?.exercicios?.[id]; },
@@ -470,7 +490,7 @@ const App = { pid:null, grupo:'12', idx:null, cat:null, prog:null, status:null,
 /* ================= UI ================= */
 const UI = {
   show(name){
-    ['login','profiles','onb'].forEach(s => $('scr-'+s).classList.toggle('hide', s !== name));
+    ['login','grupo','profiles','onb'].forEach(s => $('scr-'+s).classList.toggle('hide', s !== name));
     const inApp = name === 'app';
     ['hdr','app','nav'].forEach(id => $(id).classList.toggle('hide', !inApp));
     $('mini').classList.toggle('hide', !(inApp && S.cur && !$('sess').classList.contains('open')));
@@ -483,7 +503,30 @@ const UI = {
   loginMsg(msg){ const e = $('lg-err'); if(msg){ e.textContent = msg; e.classList.remove('hide'); } else e.classList.add('hide'); },
   logout(){ if(!confirm('Sair da assinatura neste celular? Seus perfis e treinos continuam salvos.')) return; DB.del('auth'); UI.show('login'); },
 
+  /* ----- escolha da academia ----- */
+  showGrupos(podeVoltar){
+    const atual = DB.get('grupo');
+    $('gr-list').innerHTML = App.grupos.map(g => `
+      <button type="button" class="prof ${g.ativo?'':'off'}" ${g.ativo?`onclick="UI.pickGrupo('${esc(g.id)}')"`:'disabled'}>
+        <div class="avatar"><svg class="i"><use href="#i-pin"/></svg></div>
+        <div style="flex:1"><b>${esc(g.nome)}</b><div class="xs mut">${esc(g.desc||'')}</div></div>
+        ${g.ativo ? (g.id===atual ? '<span class="pill">Atual</span>' : '<svg class="i gold"><use href="#i-right"/></svg>') : '<span class="pill off">Em breve</span>'}
+      </button>`).join('');
+    $('gr-back').classList.toggle('hide', !podeVoltar);
+    UI.show('grupo');
+  },
+  trocarGrupo(){
+    if(S.cur && !confirm('Há um treino em andamento. Trocar de academia vai encerrá-lo. Continuar?')) return;
+    UI.showGrupos(true);
+  },
+  async pickGrupo(id){
+    if(!App.grupoOk(id)) return;
+    if(id !== DB.get('grupo') && S.cur) S.close();
+    DB.set('grupo', id); await afterAuth();
+  },
+
   applyCover(){
+    $('hj-gym').style.backgroundImage = '';
     const url = CFG.FOTO(App.grupo, 'capa'), img = new Image();
     img.onload = () => { $('hj-gym').style.backgroundImage = `url(${url})`;
       $('scr-login').style.backgroundImage = `linear-gradient(rgba(10,10,10,.72),rgba(10,10,10,.96)),url(${url})`; };
@@ -496,7 +539,9 @@ const UI = {
     const fig = (q, ic) => { const key = fotos[q] || q; if(vistos.has(key)) return ''; vistos.add(key);
       return `<figure><div class="ph">${fotos[q] ? `<img src="${CFG.FOTO(g, fotos[q])}" alt="" data-ic="${ic}" onerror="galFail(this)">` : `<svg class="i"><use href="#${ic}"/></svg>`}</div>
         <figcaption>${esc(GAL_NOME[q] || eq[q])}${det[q]?`<span>${esc(det[q])}</span>`:''}</figcaption></figure>`; };
-    const secs = GAL.map(([titulo, ids, ic]) => { const h = ids.filter(q => eq[q]).map(q => fig(q, ic)).join(''); return h ? `<div class="gal-sec">${titulo}</div><div class="gal">${h}</div>` : ''; }).join('');
+    const conhecidos = new Set(GAL.flatMap(s => s[1]));
+    const extra = Object.keys(eq).filter(q => !conhecidos.has(q) && !['anilhas','barra_w','barra_h','barra_reta','banco','polia_baixa','flexora','abdutora','polia_triceps','barra_fixa','mesa_flexora'].includes(q));
+    const secs = [...GAL, ['Outros', extra, 'i-dumb']].map(([titulo, ids, ic]) => { const h = ids.filter(q => eq[q]).map(q => fig(q, ic)).join(''); return h ? `<div class="gal-sec">${titulo}</div><div class="gal">${h}</div>` : ''; }).join('');
     UI.modal(`<div class="stack"><div><span class="pill">Feito sob medida</span><div class="h2" style="margin-top:8px">Academia do ${esc(App.idx.nome)}</div>
       <p class="sm mut" style="margin-top:4px">Todo treino deste app usa somente estes aparelhos. Nada de adaptação.</p>${App.idx.obs?`<p class="xs gold" style="margin-top:6px">${esc(App.idx.obs)}</p>`:''}</div>
       <div class="strip">${amb}</div>${secs}
@@ -505,6 +550,7 @@ const UI = {
 
   renderProfiles(){
     const list = DB.get('profiles', []);
+    $('pf-gtag').textContent = App.idx ? 'MovaCondo · ' + App.idx.nome : 'MovaCondo';
     $('pf-list').innerHTML = list.length ? list.map(p => `
       <button type="button" class="prof" onclick="UI.pick('${p.id}')"><div class="avatar">${esc(p.nome[0]||'?').toUpperCase()}</div>
       <div style="flex:1"><b>${esc(p.nome)}</b><div class="xs mut">${OBJ[p.obj]} · ${LVL[p.lvl]}</div></div><svg class="i gold"><use href="#i-right"/></svg></button>`).join('')
@@ -537,6 +583,7 @@ const UI = {
     $('h-av').textContent = $('pf-av').textContent = p.nome[0].toUpperCase();
     $('h-nome').textContent = $('pf-nome').textContent = p.nome;
     $('h-grupo').textContent = App.idx.nome; $('pf-sub').textContent = App.idx.nome + ' · ' + OBJ[p.obj];
+    $('pf-grupo').textContent = App.idx.nome;
     $('h-obj').textContent = OBJ[p.obj]; $('h-lvl').textContent = LVL[p.lvl];
     $('pf-obj').value = p.obj; $('pf-lvl').value = p.lvl; $('pf-ver').textContent = CFG.MARCA + ' v' + CFG.VERSAO + ' · programa ' + mk;
     $('pf-plano').textContent = a.teste ? 'Modo teste' : (PLANO_TXT[a.plano] || PLANO_TXT.solo);
@@ -694,7 +741,7 @@ const S = {
     if(S.cur && !confirm('Já existe um treino em andamento. Descartar e começar outro?')) return S.open();
     const prog = App.program(); const di = idx ?? App.nextDayIdx(); const d = prog.dias[di];
     const last = DB.p('cargas', {});
-    S.cur = { di, mes: App.prog.mes, titulo: 'Treino ' + d.id + ' · ' + d.nome, t0: Date.now(), step:'mob', bi:0, mob:[], trocas:0,
+    S.cur = { di, mes: App.prog.mes, grupo: App.grupo, titulo: 'Treino ' + d.id + ' · ' + d.nome, t0: Date.now(), step:'mob', bi:0, mob:[], trocas:0,
       cardio:{eq:null, acc:0, run:null},
       blocos: d.blocos.map(b => ({tipo:b.tipo, exs: b.exs.map(x => { const id = S.resolve(x.ex); const prev = last[id] || [];
         return {orig:x.ex, ex:id, auto: id!==x.ex, reps:x.reps, desc:x.desc, obs:x.obs||'', sets: Array.from({length:x.series}, (_,k) => ({kg: prev[k]?.kg ?? prev.at(-1)?.kg ?? '', r: '', ok:false})) }; }) })) };
@@ -702,7 +749,7 @@ const S = {
   },
   save(){ DB.ps('sess', S.cur); },
   day(){ return App.program().dias[S.cur.di]; },
-  valid(){ const c = S.cur; if(!c || c.mes !== App.prog.mes || !App.program()?.dias[c.di]) return false;
+  valid(){ const c = S.cur; if(!c || c.mes !== App.prog.mes || (c.grupo && c.grupo !== App.grupo) || !App.program()?.dias[c.di]) return false;
     return c.blocos.every(b => b.exs.every(x => App.ex(x.ex))); },
   open(){ if(!S.cur) return; if(!S.valid()){ toast('O programa foi atualizado. Comece o treino de novo.'); return S.close(); }
     $('sess').classList.add('open'); $('mini').classList.add('hide'); S.render();
@@ -711,7 +758,7 @@ const S = {
   clock(){ if(!S.cur) return; const s = (Date.now() - S.cur.t0)/1000; $('s-clock').textContent = mmss(s); $('mini-s').textContent = mmss(s) + ' · toque para voltar';
     if(S.cur.step === 'car' && S.cur.cardio.run) S.cardioTick(); },
   askCancel(){ if(confirm('Cancelar este treino? Nada será salvo.')) S.close(); },
-  close(){ S.cur = null; DB.ps('sess', null); R.stop(); clearInterval(S.clockIv); $('sess').classList.remove('open'); UI.render(); fixViewport(); },
+  close(){ S.cur = null; if(App.pid) DB.ps('sess', null); R.stop(); clearInterval(S.clockIv); $('sess').classList.remove('open'); if(App.prog && App.profile()) UI.render(); fixViewport(); },
   go(step){ S.cur.step = step; S.save(); S.render(); $('s-body').scrollTop = 0; },
   render(){
     const st = S.cur.step; $('s-title').textContent = S.cur.titulo;
@@ -822,7 +869,7 @@ const S = {
     c.blocos.forEach(b => b.exs.forEach(x => { const sets = x.sets.filter(s => s.ok).map(s => ({kg: num(s.kg)||0, r: parseInt(s.r)||0}));
       if(!sets.length) return; series += sets.length; sets.forEach(s => vol += s.kg*s.r); exs.push({ex:x.ex, sets}); cargas[x.ex] = sets; }));
     if(!series && !confirm('Nenhuma série foi marcada como feita. Concluir mesmo assim?')) return;
-    const h = DB.p('hist', []); h.push({ id: uid('s'), d: new Date().toISOString(), mes: c.mes, dia: S.day().id, nome: c.titulo,
+    const h = DB.p('hist', []); h.push({ id: uid('s'), d: new Date().toISOString(), mes: c.mes, grupo: App.grupo, dia: S.day().id, nome: c.titulo,
       obj: App.profile().obj, lvl: App.profile().lvl, dur: Math.round((Date.now()-c.t0)/1000), vol: Math.round(vol), series, exs, cardio: Math.round(S.cardioElapsed()/60), trocas: c.trocas });
     DB.ps('hist', h); DB.ps('cargas', cargas);
     const rot = DB.p('rot', {}); rot[c.mes] = c.di + 1; DB.ps('rot', rot);
@@ -846,29 +893,29 @@ function revisar(){
 }
 
 /* ================= INÍCIO ================= */
-let booted = false;
 function enterApp(){ const act = DB.get('active'); if(act && DB.get('profiles',[]).some(p => p.id === act)) UI.pick(act); else UI.show('profiles'); }
+function offline(){ document.body.innerHTML = '<div class="screen center"><div class="card wrap" style="text-align:center"><div class="h3">Sem conexão</div><p class="sm mut" style="margin-top:8px">Abra o app uma vez com internet para baixar seus treinos.</p><button type="button" class="btn btn-gold" style="margin-top:14px" onclick="location.reload()">Tentar de novo</button></div></div>'; }
+/* depois do acesso liberado: escolhe a academia (se ainda não escolheu) e carrega os treinos dela */
+async function afterAuth(){
+  const g = DB.get('grupo');
+  if(!g || !App.grupoOk(g)) return UI.showGrupos(false);
+  App.grupo = g; UI.applyCover();
+  if(!await Data.load()) return offline();
+  enterApp();
+}
 async function boot(){
-  const qs = new URLSearchParams(location.search), q = qs.get('grupo'), saved = DB.get('grupo'), rev = qs.get('revisar');
-  if(q && CFG.GRUPOS.includes(q) && q !== saved){ if(!saved || confirm(`Mudar seu grupo de ${saved} para ${q}?`)) DB.set('grupo', q); }
-  App.grupo = DB.get('grupo') || '12'; DB.set('grupo', App.grupo);
-  $('lg-grupo').textContent = 'GRUPO ' + App.grupo;
+  const qs = new URLSearchParams(location.search), q = qs.get('grupo'), rev = qs.get('revisar');
   if(qs.get('assinou')) $('lg-ok').classList.remove('hide');
   Data.nowKey();
-  if(!booted){
-    booted = true;
-    if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
-    if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
-  }
-  UI.applyCover();
-  const ok = await Data.load();
-  if(!ok){ document.body.innerHTML = '<div class="screen center"><div class="card wrap" style="text-align:center"><div class="h3">Sem conexão</div><p class="sm mut" style="margin-top:8px">Abra o app uma vez com internet para baixar seus treinos.</p><button type="button" class="btn btn-gold" style="margin-top:14px" onclick="location.reload()">Tentar de novo</button></div></div>'; return; }
-  if(rev) return revisar();
-  $('lg-sub').textContent = `Treinos feitos para os aparelhos da academia do ${App.idx.nome}.`;
+  if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+  await Data.grupos();
+  if(q && App.grupoOk(q)){ const saved = DB.get('grupo'); if(!saved || saved === q || confirm(`Mudar sua academia para ${App.grupos.find(g=>g.id===q).nome}?`)) DB.set('grupo', q); }
+  if(rev){ App.grupo = (App.grupoOk(q) && q) || DB.get('grupo') || App.grupos.find(g=>g.ativo)?.id; if(!await Data.load()) return offline(); return revisar(); }
   const st = Auth.state();
-  if(st === 'out' || qs.get('assinou')){ UI.show('login'); return; }
+  if(st === 'out' || qs.get('assinou')) return UI.show('login');
   if(st === 'check'){ const r = await Auth.revalidate(); if(r !== 'ok'){ UI.show('login'); UI.loginMsg(r.out); return; } }
-  enterApp();
+  afterAuth();
 }
 async function doLogin(){
   const email = $('lg-email').value.trim().toLowerCase(); UI.loginMsg('');
@@ -878,7 +925,7 @@ async function doLogin(){
     if(!j.ok) return UI.loginMsg(j.msg || 'Não encontramos assinatura ativa para este e-mail.');
     Auth.save(email, j); $('lg-ok').classList.add('hide');
     toast(j.teste ? 'Modo teste: acesso liberado' : (j.plano === 'cortesia' ? 'Acesso cortesia liberado. Bom treino!' : 'Assinatura confirmada. Bom treino!'));
-    enterApp();
+    await afterAuth();
   }catch(e){ UI.loginMsg('Sem conexão. Tente novamente.'); }
   finally{ $('lg-go').textContent = 'ENTRAR'; $('lg-go').disabled = false; fixViewport(); }
 }

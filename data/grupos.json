@@ -1,0 +1,11 @@
+{
+ "grupos": [
+  {"id": "12", "nome": "Grupo 12", "desc": "4 torres · academia completa", "ativo": true},
+  {"id": "13", "nome": "Grupo 13", "desc": "", "ativo": false},
+  {"id": "14", "nome": "Grupo 14", "desc": "", "ativo": false},
+  {"id": "15", "nome": "Grupo 15", "desc": "", "ativo": false},
+  {"id": "16", "nome": "Grupo 16", "desc": "", "ativo": false},
+  {"id": "17", "nome": "Grupo 17", "desc": "", "ativo": false},
+  {"id": "18", "nome": "Grupo 18", "desc": "", "ativo": false}
+ ]
+}
