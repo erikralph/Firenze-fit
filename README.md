@@ -1,12 +1,9 @@
-# Firenze Fit v2.4.0
+# MovaCondo v3.0.0
+App:        index.html, planos.html, termos.html, sw.js, manifest.webmanifest, icons/
+Servidor:   worker.js + wrangler.jsonc (confere a assinatura no Mercado Pago)
+Treinos:    data/g12/ (index.json, catalogo.json, AAAA-MM.json, status.json, fotos/)
+Motor:      tools/ (não vai para o site)  ->  python tools/motor.py 12 2026-11 2027-12
 
-## Estrutura
-index.html, sw.js, manifest.webmanifest, icons/, wrangler.jsonc  -> o app
-data/g12/  -> treinos do Grupo 12 (index.json, catalogo.json, AAAA-MM.json, status.json, fotos/)
-tools/     -> motor que gera os treinos (não vai para o site)
-
-## Rotina
-- Atualizar o app: subir só os arquivos alterados (mesmo nome = substitui).
-- Aparelho quebrado: editar data/g12/status.json -> "manutencao": ["leg_press_h"]
-- Revisar imagens: abrir o app com /?revisar=1
-- Fotos da academia: data/g12/fotos/ (capa.jpg, leg_press_h.jpg, peck_deck.jpg...)
+Aparelho quebrado: data/g12/status.json -> "manutencao": ["leg_press_h"]
+Revisar imagens:   /?revisar=1
+Liberar celular de um assinante: Cloudflare > KV > ACESSOS > apagar a chave e:email

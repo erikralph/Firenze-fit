@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Firenze Fit</title>
+<title>MovaCondo</title>
 <meta name="theme-color" content="#0a0a0a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Firenze Fit">
+<meta name="apple-mobile-web-app-title" content="MovaCondo">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -26,7 +26,7 @@ input:focus,select:focus{border-color:var(--gold)}
 .wrap{width:100%;max-width:440px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
 .glass{background:rgba(20,20,20,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(212,175,55,.3)}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:14px;font-weight:800;letter-spacing:.3px;transition:transform .1s}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:14px;font-weight:800;letter-spacing:.3px;transition:transform .1s;text-decoration:none}
 .btn:active{transform:scale(.97)}
 .btn-gold{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;box-shadow:0 8px 24px rgba(212,175,55,.18)}
 .btn-ghost{background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.3);color:var(--gold)}
@@ -53,7 +53,7 @@ nav.bot button{flex:1;display:flex;flex-direction:column;align-items:center;gap:
 nav.bot button.on{color:var(--gold)}
 .tab{display:none}.tab.on{display:block}
 .hero{position:relative;overflow:hidden;border-radius:22px;padding:20px;border:1px solid var(--line);background:radial-gradient(120% 140% at 100% 0%,rgba(212,175,55,.18),transparent 55%),linear-gradient(160deg,#171717,#0c0c0c)}
-.gym{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(212,175,55,.35);min-height:150px;background:linear-gradient(160deg,#1a1a1a,#0c0c0c) center/cover no-repeat;display:flex;align-items:flex-end;width:100%;text-align:left}
+.gym{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(212,175,55,.35);min-height:170px;background:linear-gradient(160deg,#1a1a1a,#0c0c0c) center/cover no-repeat;display:flex;align-items:flex-end;width:100%;text-align:left}
 .gym .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.05) 20%,rgba(10,10,10,.92))}
 .gym .in{position:relative;padding:16px;width:100%}
 .bar{height:9px;border-radius:9px;background:var(--bg);border:1px solid var(--line);overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:9px;transition:width .5s}
@@ -70,17 +70,16 @@ nav.bot button.on{color:var(--gold)}
 .media .tag{position:absolute;left:8px;bottom:8px;background:rgba(10,10,10,.8);color:var(--gold);font-size:10px;font-weight:800;padding:4px 8px;border-radius:8px;z-index:2}
 .media.fb{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1a1a1a,#0d0d0d)}
 .media.mini{aspect-ratio:3/2;width:96px;border-radius:12px;flex-shrink:0}
-/* galeria da academia */
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .gal figure{margin:0;background:var(--card2);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.gal .ph{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:radial-gradient(80% 80% at 50% 40%,rgba(212,175,55,.10),transparent 70%),#111;color:var(--gold)}
+.gal .ph{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;background:radial-gradient(80% 80% at 50% 40%,rgba(212,175,55,.10),transparent 70%),#111;color:var(--gold)}
 .gal .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .gal .ph svg.i{width:30px;height:30px;stroke-width:1.6}
 .gal figcaption{padding:8px 10px 10px;font-size:12px;font-weight:700;line-height:1.3}
 .gal figcaption span{display:block;font-size:10.5px;color:var(--mut);font-weight:500;margin-top:2px}
 .gal-sec{font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin:6px 0 -2px}
 .strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}.strip:empty{display:none}
-.strip img{height:120px;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--line);flex-shrink:0}
+.strip img{height:150px;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid var(--line);flex-shrink:0}
 #sess{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease}
 #sess.open{transform:none}
 .s-head{padding:calc(var(--st) + 10px) 14px 10px;background:var(--card);border-bottom:1px solid var(--line)}
@@ -89,7 +88,7 @@ nav.bot button.on{color:var(--gold)}
 .s-body{flex:1;overflow-y:auto;padding:14px 14px calc(var(--sb) + 110px)}
 .s-foot{position:absolute;left:0;right:0;bottom:0;padding:12px 14px calc(var(--sb) + 12px);background:linear-gradient(transparent,var(--bg) 30%)}
 .here{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:14px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.3)}
-.here img{width:64px;height:48px;object-fit:cover;border-radius:9px}
+.here img{width:54px;height:72px;object-fit:cover;border-radius:9px}
 .note{font-size:11px;color:#c9b77a;background:rgba(212,175,55,.06);border-left:3px solid var(--gold);padding:7px 10px;border-radius:6px}
 .sets{width:100%;border-collapse:separate;border-spacing:0 6px}
 .sets th{font-size:9.5px;color:var(--mut);text-transform:uppercase;font-weight:800;letter-spacing:.6px;text-align:center}
@@ -128,6 +127,7 @@ tr.now td.n{color:var(--gold)}tr.now input{border-color:var(--gold)}
 .prof{display:flex;align-items:center;gap:12px;width:100%;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:left}
 .avatar{width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
 .wrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
+.ok-box{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:#bdf5cf;border-radius:12px;padding:10px 12px;font-size:12px;margin-bottom:14px}
 details summary{list-style:none;cursor:pointer}details summary::-webkit-details-marker{display:none}
 </style>
 </head>
@@ -136,27 +136,22 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
 <section id="scr-login" class="screen center login-bg hide">
   <div class="wrap card glass" style="padding:28px 22px;text-align:center">
     <img src="icons/icon-192.png" class="logo" alt="">
-    <div class="eyebrow">Firenze Fit</div>
+    <div class="eyebrow">MovaCondo</div>
     <div class="h1" id="lg-grupo" style="margin-top:4px">GRUPO 12</div>
-    <p class="sm mut" style="margin:8px 0 24px" id="lg-sub">Treinos feitos para os aparelhos da sua academia.</p>
-    <div id="lg-step1" class="stack">
-      <input type="email" id="lg-email" placeholder="E-mail usado na assinatura" autocomplete="email" inputmode="email" style="text-align:center">
+    <p class="sm mut" style="margin:8px 0 20px" id="lg-sub">Treinos feitos para os aparelhos da sua academia.</p>
+    <div id="lg-ok" class="ok-box hide"><b>Assinatura recebida!</b> Digite abaixo o mesmo e-mail que você usou no Mercado Pago.</div>
+    <div class="stack">
+      <input type="email" id="lg-email" placeholder="E-mail usado na assinatura" autocomplete="email" inputmode="email" enterkeyhint="go" style="text-align:center">
       <button type="button" class="btn btn-gold" id="lg-go">ENTRAR</button>
     </div>
-    <div id="lg-step2" class="stack hide">
-      <p class="sm mut">Enviamos um código de 6 dígitos para <b id="lg-mailshow" class="gold"></b></p>
-      <input id="lg-code" inputmode="numeric" maxlength="6" placeholder="000000" style="text-align:center;font-size:24px;letter-spacing:8px;font-weight:900">
-      <button type="button" class="btn btn-gold" id="lg-verify">CONFIRMAR</button>
-      <button type="button" class="btn btn-sm" style="margin:0 auto" id="lg-back"><span class="mut">Usar outro e-mail</span></button>
-    </div>
     <p id="lg-err" class="sm hide" style="color:var(--red);margin-top:12px"></p>
-    <p class="xs mut" style="margin-top:18px">Ainda não assina? <button type="button" class="gold xs" style="text-decoration:underline" onclick="UI.buy()">Conheça os planos</button></p>
+    <p class="xs mut" style="margin-top:18px">Ainda não assina? <a class="gold" href="planos.html" style="font-weight:700">Conheça os planos</a></p>
   </div>
 </section>
 
 <section id="scr-profiles" class="screen hide">
   <div class="wrap stack">
-    <div style="padding-top:20px"><div class="eyebrow">Firenze Fit</div><div class="h2" style="margin-top:4px">Quem vai treinar?</div>
+    <div style="padding-top:20px"><div class="eyebrow">MovaCondo</div><div class="h2" style="margin-top:4px">Quem vai treinar?</div>
     <p class="sm mut" style="margin-top:4px">Cada pessoa tem seu próprio histórico, cargas e evolução.</p></div>
     <div id="pf-list" class="stack"></div>
     <button type="button" class="btn btn-ghost" onclick="UI.newProfile()"><svg class="i"><use href="#i-plus"/></svg>Adicionar pessoa</button>
@@ -179,7 +174,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
       <div class="row" style="align-items:flex-start;gap:10px"><input type="checkbox" id="ob-parq" style="width:20px;height:20px;margin-top:2px;flex-shrink:0">
       <span class="sm mut" onclick="$('ob-parq').click()">Declaro que não tenho restrição médica para atividade física ou que fui liberado(a) por um médico. Se sentir dor, tontura ou falta de ar, paro o treino.</span></div>
       <div class="row" style="align-items:flex-start;gap:10px;margin-top:12px"><input type="checkbox" id="ob-lgpd" style="width:20px;height:20px;margin-top:2px;flex-shrink:0">
-      <span class="sm mut" onclick="$('ob-lgpd').click()">Concordo que meu peso e meus treinos fiquem salvos neste aparelho para acompanhar minha evolução.</span></div>
+      <span class="sm mut" onclick="$('ob-lgpd').click()">Li e concordo com os <a href="termos.html" class="gold">termos e a política de privacidade</a>. Meu peso e meus treinos ficam salvos neste aparelho.</span></div>
     </div>
     <p id="ob-err" class="sm hide" style="color:var(--red)"></p>
     <button type="button" class="btn btn-gold" id="ob-save">CRIAR PERFIL</button>
@@ -265,6 +260,10 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
     </div>
     <button type="button" class="btn btn-ghost" onclick="UI.showGym()"><svg class="i"><use href="#i-dumb"/></svg>Sua academia</button>
     <div class="card stack">
+      <span class="lbl" style="margin:0">Assinatura</span>
+      <div class="row between"><div><b class="sm" id="pf-plano">Plano</b><div class="xs mut" id="pf-email"></div></div><a class="btn btn-dark btn-sm" href="planos.html">Planos</a></div>
+    </div>
+    <div class="card stack">
       <span class="lbl" style="margin:0">Seus dados</span>
       <p class="xs mut">Os treinos ficam salvos neste celular. Faça um backup antes de trocar de aparelho.</p>
       <div class="grid2"><button type="button" class="btn btn-dark btn-sm" style="width:100%" onclick="UI.exportData()"><svg class="i"><use href="#i-down"/></svg>Backup</button>
@@ -273,8 +272,11 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
     </div>
     <button type="button" class="btn btn-ghost" onclick="UI.showInstall()"><svg class="i"><use href="#i-phone"/></svg>Como instalar no celular</button>
     <button type="button" class="btn btn-dark" onclick="UI.show('profiles')"><svg class="i"><use href="#i-users"/></svg>Trocar de pessoa</button>
-    <button type="button" class="btn btn-sm" style="margin:6px auto 0;color:var(--red)" onclick="UI.deleteProfile()">Excluir este perfil</button>
-    <p class="xs mut" style="text-align:center" id="pf-ver"></p>
+    <div class="row" style="justify-content:center;gap:18px;margin-top:6px">
+      <button type="button" class="btn btn-sm mut" onclick="UI.logout()">Sair da assinatura</button>
+      <button type="button" class="btn btn-sm" style="color:var(--red)" onclick="UI.deleteProfile()">Excluir este perfil</button>
+    </div>
+    <p class="xs mut" style="text-align:center"><a href="termos.html" class="mut">Termos e privacidade</a> · <span id="pf-ver"></span></p>
   </section>
 </main>
 
@@ -339,26 +341,27 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
  <symbol id="i-yoga" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v6M6 10l6 3 6-3M8 21l4-8 4 8"/></symbol>
 </svg>
-
 <script>
 /* ================= CONFIGURAÇÃO ================= */
 const CFG = {
-  VERSAO: '2.4.0',
+  VERSAO: '3.0.0',
+  MARCA: 'MovaCondo',
   GRUPOS: ['12','13','14','15','16','17','18'],
-  AUTH_URL: null,          // null = modo teste (aceita qualquer e-mail)
-  CHECKOUT_URL: '',        // link da página de vendas (abre fora do app)
+  AUTH_URL: '/api/acesso',
   IMG: id => [0,1].map(n => `https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${id}/${n}.jpg`),
   FOTO: (g, nome) => `data/g${g}/fotos/${nome}.jpg`,
-  ACESSO_DIAS: 30
+  RECHECAR_DIAS: 7,       // confere a assinatura a cada 7 dias
+  OFFLINE_DIAS: 30        // sem internet, continua liberado até 30 dias após a última conferência
 };
-const NAO_FOTO = ['anilhas','banco','colchonete','grama','halter_leve','halter'];
-/* seções da galeria da academia */
+const NAO_FOTO = ['anilhas'];
 const GAL = [
-  ['Máquinas', ['leg_press_h','maq_supino','peck_deck','extensora','flexora','mesa_flexora','adutora','abdutora','smith','panturrilha_sent','banco_scott','polia_alta','polia_baixa','polia_triceps'], 'i-dumb'],
-  ['Pesos livres e bancos', ['halter_leve','halter','mesa_supino','barra_supino','barra_w','barra_h','barra_reta','anilhas','barra_fixa','banco','banco_reg'], 'i-dumb'],
+  ['Máquinas', ['leg_press_h','extensora','adutora','peck_deck','polia_alta','panturrilha_sent','banco_scott','mesa_supino','maq_supino'], 'i-dumb'],
+  ['Estação funcional', ['smith'], 'i-dumb'],
+  ['Pesos livres e bancos', ['halter','halter_leve','barra_supino','banco_reg','banco'], 'i-dumb'],
   ['Cardio', ['esteira','bike','transport','cama_elastica'], 'i-heart'],
-  ['Área livre', ['colchonete','bola_suica','caixote','grama'], 'i-mat']
+  ['Área livre', ['grama','cadeira_romana','espaldar','colchonete','bola_suica','caixote'], 'i-mat']
 ];
+const GAL_NOME = {barra_supino:'Barras (retas, W e H)'};
 
 /* ================= UTIL ================= */
 const $ = id => document.getElementById(id);
@@ -417,19 +420,30 @@ const Data = {
   }
 };
 
-/* ================= ACESSO ================= */
+/* ================= ACESSO (Mercado Pago via /api/acesso) ================= */
 const Auth = {
-  valid(){ const a = DB.get('auth'); return a && a.exp > Date.now(); },
-  async request(email){
-    if(!CFG.AUTH_URL) return {ok:true, dev:true};
-    const r = await fetch(CFG.AUTH_URL + '/code', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email, grupo:App.grupo})});
-    return r.json();
+  device(){ let d = DB.get('device'); if(!d){ d = uid('d'); DB.set('device', d); } return d; },
+  get(){ return DB.get('auth'); },
+  /* 'ok' liberado, 'check' precisa conferir, 'out' sem acesso */
+  state(){ const a = Auth.get(); if(!a || !a.email) return 'out';
+    if(Date.now() - (a.conf||0) < CFG.RECHECAR_DIAS*864e5) return 'ok';
+    return 'check'; },
+  async check(email){
+    const r = await fetch(CFG.AUTH_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, device: Auth.device(), grupo: App.grupo})});
+    const j = await r.json().catch(() => ({}));
+    if(r.status >= 500 && !j.msg) throw new Error('rede');
+    if(r.status === 502) throw new Error('rede');
+    return j;
   },
-  async verify(email, code){
-    const r = await fetch(CFG.AUTH_URL + '/verify', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email, code})});
-    return r.json();
-  },
-  save(email, grupo, exp){ DB.set('auth', {email, grupo, exp: exp || Date.now() + CFG.ACESSO_DIAS*864e5}); }
+  save(email, j){ DB.set('auth', {email, plano: j.plano || 'solo', teste: !!j.teste, conf: Date.now()}); },
+  /* reconfere em segundo plano; só bloqueia se o Mercado Pago disser que não está ativa */
+  async revalidate(){
+    const a = Auth.get(); if(!a) return 'out';
+    try{ const j = await Auth.check(a.email);
+      if(j.ok){ Auth.save(a.email, j); return 'ok'; }
+      DB.del('auth'); return {out: j.msg};
+    }catch(e){ return (Date.now() - (a.conf||0) < CFG.OFFLINE_DIAS*864e5) ? 'ok' : {out:'Conecte-se à internet para confirmar sua assinatura.'}; }
+  }
 };
 
 /* ================= APP ================= */
@@ -438,10 +452,10 @@ const App = { pid:null, grupo:'12', idx:null, cat:null, prog:null, status:null,
   program(){ const p = App.profile(); return App.prog?.programas?.[p.obj]?.[p.lvl]; },
   ex(id){ return App.cat?.exercicios?.[id]; },
   mob(id){ return App.cat?.mobilidade?.[id]; },
+  foto(q){ const f = App.cat?.fotos?.[q]; return f ? CFG.FOTO(App.grupo, f) : null; },
   monthHist(){ const mk = App.prog?.mes; return DB.p('hist', []).filter(h => h.mes === mk); },
   nextDayIdx(){ const prog = App.program(); if(!prog) return 0; const r = DB.p('rot', {}); return (r[App.prog.mes] || 0) % prog.dias.length; },
-  mainEquip(e){ return e.equip.find(q => !NAO_FOTO.includes(q)) || e.equip[0]; },
-  /* cada registro de peso tem um id único: apagar um nunca apaga outro */
+  mainEquip(e){ return e.equip.find(q => !NAO_FOTO.includes(q) && App.cat.fotos?.[q]) || e.equip.find(q => !NAO_FOTO.includes(q)) || e.equip[0]; },
   pesos(){
     const raw = DB.p('pesos', []); let fixed = false;
     const list = raw.filter(p => p && p.d && num(p.kg)).map(p => { if(!p.id){ fixed = true; return {...p, id: uid('w')}; } return p; });
@@ -463,33 +477,26 @@ const UI = {
   tab(t){ document.querySelectorAll('nav.bot button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
     document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 't-'+t)); $('app').scrollTop = 0;
     if(t==='evo') UI.renderEvo(); if(t==='hist') UI.renderHist(); if(t==='treinos') UI.renderTreinos(); },
-  buy(){ if(CFG.CHECKOUT_URL) window.open(CFG.CHECKOUT_URL, '_blank', 'noopener'); else toast('Planos em breve'); },
+  loginMsg(msg){ const e = $('lg-err'); if(msg){ e.textContent = msg; e.classList.remove('hide'); } else e.classList.add('hide'); },
+  logout(){ if(!confirm('Sair da assinatura neste celular? Seus perfis e treinos continuam salvos.')) return; DB.del('auth'); UI.show('login'); },
 
   applyCover(){
     const url = CFG.FOTO(App.grupo, 'capa'), img = new Image();
     img.onload = () => { $('hj-gym').style.backgroundImage = `url(${url})`;
-      $('scr-login').style.backgroundImage = `linear-gradient(rgba(10,10,10,.75),rgba(10,10,10,.97)),url(${url})`; };
+      $('scr-login').style.backgroundImage = `linear-gradient(rgba(10,10,10,.72),rgba(10,10,10,.96)),url(${url})`; };
     img.src = url;
   },
-  /* galeria: grade com foto (ou ícone) + nome + detalhe, separada por seção */
   showGym(){
-    const g = App.grupo, eq = App.cat.equipamentos, det = App.cat.detalhes || {};
-    const fotos = (App.idx.fotos || ['capa']).map(f => `<img src="${CFG.FOTO(g,f)}" alt="" onerror="this.remove()">`).join('');
-    const usados = new Set();
-    const secs = GAL.map(([titulo, ids, ic]) => {
-      const lista = ids.filter(q => eq[q] && !usados.has(q)); lista.forEach(q => usados.add(q));
-      if(!lista.length) return '';
-      return `<div class="gal-sec">${titulo}</div><div class="gal">${lista.map(q => `
-        <figure><div class="ph"><img src="${CFG.FOTO(g,q)}" alt="" data-ic="${ic}" onerror="galFail(this)"></div>
-        <figcaption>${esc(eq[q])}${det[q]?`<span>${esc(det[q])}</span>`:''}</figcaption></figure>`).join('')}</div>`;
-    }).join('');
-    const resto = Object.keys(eq).filter(q => !usados.has(q));
-    const extra = resto.length ? `<div class="gal-sec">Outros</div><div class="gal">${resto.map(q => `
-        <figure><div class="ph"><img src="${CFG.FOTO(g,q)}" alt="" data-ic="i-dumb" onerror="galFail(this)"></div>
-        <figcaption>${esc(eq[q])}${det[q]?`<span>${esc(det[q])}</span>`:''}</figcaption></figure>`).join('')}</div>` : '';
+    const g = App.grupo, eq = App.cat.equipamentos, det = App.cat.detalhes || {}, fotos = App.cat.fotos || {};
+    const amb = (App.idx.ambiente || []).filter(f => f !== 'grama').map(f => `<img src="${CFG.FOTO(g,f)}" alt="" onerror="this.remove()">`).join('');
+    const vistos = new Set(), usados = new Set();
+    const fig = (q, ic) => { const key = fotos[q] || q; if(vistos.has(key)) return ''; vistos.add(key); usados.add(q);
+      return `<figure><div class="ph">${fotos[q] ? `<img src="${CFG.FOTO(g, fotos[q])}" alt="" loading="lazy" data-ic="${ic}" onerror="galFail(this)">` : `<svg class="i"><use href="#${ic}"/></svg>`}</div>
+        <figcaption>${esc(GAL_NOME[q] || eq[q])}${det[q]?`<span>${esc(det[q])}</span>`:''}</figcaption></figure>`; };
+    const secs = GAL.map(([titulo, ids, ic]) => { const h = ids.filter(q => eq[q]).map(q => fig(q, ic)).join(''); return h ? `<div class="gal-sec">${titulo}</div><div class="gal">${h}</div>` : ''; }).join('');
     UI.modal(`<div class="stack"><div><span class="pill">Feito sob medida</span><div class="h2" style="margin-top:8px">Academia do ${esc(App.idx.nome)}</div>
       <p class="sm mut" style="margin-top:4px">Todo treino deste app usa somente estes aparelhos. Nada de adaptação.</p>${App.idx.obs?`<p class="xs gold" style="margin-top:6px">${esc(App.idx.obs)}</p>`:''}</div>
-      <div class="strip">${fotos}</div>${secs}${extra}
+      <div class="strip">${amb}</div>${secs}
       <button type="button" class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
   },
 
@@ -523,12 +530,14 @@ const UI = {
 
   render(){
     const p = App.profile(); if(!p) return UI.show('profiles');
-    const prog = App.program(), mk = App.prog.mes, m = +mk.split('-')[1];
+    const prog = App.program(), mk = App.prog.mes, m = +mk.split('-')[1], a = Auth.get() || {};
     $('h-av').textContent = $('pf-av').textContent = p.nome[0].toUpperCase();
     $('h-nome').textContent = $('pf-nome').textContent = p.nome;
     $('h-grupo').textContent = App.idx.nome; $('pf-sub').textContent = App.idx.nome + ' · ' + OBJ[p.obj];
     $('h-obj').textContent = OBJ[p.obj]; $('h-lvl').textContent = LVL[p.lvl];
-    $('pf-obj').value = p.obj; $('pf-lvl').value = p.lvl; $('pf-ver').textContent = 'Firenze Fit v' + CFG.VERSAO + ' · programa ' + mk;
+    $('pf-obj').value = p.obj; $('pf-lvl').value = p.lvl; $('pf-ver').textContent = CFG.MARCA + ' v' + CFG.VERSAO + ' · programa ' + mk;
+    $('pf-plano').textContent = a.teste ? 'Modo teste' : (a.plano === 'duo' ? 'Plano Duo · 2 celulares' : 'Plano Solo · 1 celular');
+    $('pf-email').textContent = a.email || '';
     $('hj-mes').textContent = 'Programa de ' + MESES[m-1];
     $('hj-din').textContent = prog.dinamica.split(' + ')[0];
     const man = (App.status.manutencao||[]).map(id => App.cat.equipamentos[id]).filter(Boolean);
@@ -538,12 +547,12 @@ const UI = {
     $('hj-nome').textContent = 'Treino ' + d.id + ' · ' + d.nome; $('hj-foco').textContent = d.foco;
     const nEx = d.blocos.reduce((a,b)=>a+b.exs.length,0);
     const ic = (i,t) => `<span class="row" style="gap:4px"><svg class="i gold" style="width:14px"><use href="#${i}"/></svg>${t}</span>`;
-    $('hj-meta').innerHTML = ic('i-clock','~'+UI.estimate(d)+' min') + ic('i-dumb', nEx+' exercícios') + ic('i-chart', 'cardio '+d.cardio.min+' min');
+    $('hj-meta').innerHTML = ic('i-clock','~'+UI.estimate(d)+' min') + ic('i-dumb', nEx+' exercícios') + ic('i-heart', 'cardio '+d.cardio.min+' min');
     const feitos = App.monthHist().length, meta = prog.freq * 4, pct = Math.min(100, Math.round(feitos/meta*100));
     $('hj-pct').textContent = pct + '%'; $('hj-bar').style.width = pct + '%';
     $('hj-feitos').textContent = feitos + (feitos===1?' treino':' treinos'); $('hj-metatxt').textContent = 'Meta: ' + meta + ' (' + prog.freq + 'x/semana)';
     $('gym-tit').textContent = 'Academia do ' + App.idx.nome;
-    $('gym-sub').textContent = `Programa montado só com os aparelhos da sua academia · ver aparelhos`;
+    $('gym-sub').textContent = 'Programa montado só com os aparelhos da sua academia · ver aparelhos';
     const hist = DB.p('hist', []);
     $('st-tr').textContent = hist.length; $('st-vol').textContent = fmtKg(hist.reduce((a,h)=>a+h.vol,0));
     $('st-se').textContent = hist.reduce((a,h)=>a+h.series,0);
@@ -632,16 +641,16 @@ const UI = {
       : `<div class="card sm mut" style="text-align:center">Seus treinos concluídos aparecem aqui.</div>`;
   },
   exportData(){
-    const p = App.profile(), out = {app:'firenzefit', v:2, perfil:p, dados:{}};
+    const p = App.profile(), out = {app:'movacondo', v:3, perfil:p, dados:{}};
     Object.keys(localStorage).filter(k => k.startsWith('ff2:p:'+p.id+':')).forEach(k => out.dados[k.split(':').pop()] = JSON.parse(localStorage.getItem(k)));
-    const blob = new Blob([JSON.stringify(out)], {type:'application/json'}), name = `firenzefit-${p.nome.toLowerCase()}-${today()}.json`;
+    const blob = new Blob([JSON.stringify(out)], {type:'application/json'}), name = `movacondo-${p.nome.toLowerCase()}-${today()}.json`;
     const file = typeof File === 'function' ? new File([blob], name, {type:'application/json'}) : null;
-    if(file && navigator.canShare?.({files:[file]})){ navigator.share({files:[file], title:'Backup Firenze Fit'}).catch(()=>{}); return; }
+    if(file && navigator.canShare?.({files:[file]})){ navigator.share({files:[file], title:'Backup MovaCondo'}).catch(()=>{}); return; }
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); toast('Backup salvo nos seus arquivos');
   },
   importData(inp){
     const f = inp.files[0]; if(!f) return; const rd = new FileReader();
-    rd.onload = () => { try{ const o = JSON.parse(rd.result); if(o.app !== 'firenzefit') throw 0;
+    rd.onload = () => { try{ const o = JSON.parse(rd.result); if(!['movacondo','firenzefit'].includes(o.app)) throw 0;
       const list = DB.get('profiles', []).filter(x => x.id !== o.perfil.id); list.push(o.perfil); DB.set('profiles', list);
       Object.entries(o.dados).forEach(([k,v]) => DB.set('p:'+o.perfil.id+':'+k, v)); UI.pick(o.perfil.id); toast('Backup restaurado: ' + o.perfil.nome);
     }catch(e){ toast('Arquivo de backup inválido'); } }; rd.readAsText(f); inp.value='';
@@ -652,7 +661,7 @@ const UI = {
   install(){ if(window._bip){ window._bip.prompt(); window._bip = null; } else UI.showInstall(); },
   showInstall(){
     const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    UI.modal(`<div class="stack"><div class="h3">Instalar o Firenze Fit</div>
+    UI.modal(`<div class="stack"><div class="h3">Instalar o ${CFG.MARCA}</div>
       ${ios ? `<p class="sm mut">1. Abra este link no <b class="gold">Safari</b><br>2. Toque em <b class="gold">Compartilhar</b> (quadrado com seta)<br>3. Escolha <b class="gold">Adicionar à Tela de Início</b></p>
       <p class="xs" style="color:var(--red)">No iPhone, depois de instalar use sempre pelo ícone: o Safari e o app guardam dados separados.</p>`
       : `<p class="sm mut">1. No <b class="gold">Chrome</b>, toque nos três pontinhos<br>2. Escolha <b class="gold">Instalar aplicativo</b></p>`}
@@ -742,14 +751,14 @@ const S = {
       <button type="button" class="btn btn-gold" onclick="${last ? "S.go('car')" : 'S.toBlock('+(c.bi+1)+')'}">${last ? 'Ir para o cardio' : 'Próximo exercício'} <svg class="i"><use href="#i-right"/></svg></button></div>`;
   },
   exCard(x, j, multi, ptr){
-    const e = App.ex(x.ex), q = App.mainEquip(e), eqn = App.cat.equipamentos, det = App.cat.detalhes || {};
+    const e = App.ex(x.ex), q = App.mainEquip(e), eqn = App.cat.equipamentos, det = App.cat.detalhes || {}, foto = App.foto(q);
     const cls = multi && ptr ? (ptr.j === j ? 'cur' : 'dim') : '';
     return `<div class="card stack excard ${cls}" id="ex-${j}" style="padding:14px">
       ${media(e.img,'▶ Execução')}
       <div class="row between" style="align-items:flex-start"><div><div class="h3">${multi?`<span class="code">${S.code(S.cur.bi,j)}</span>`:''}${esc(e.nome)}</div>
         <div class="xs gold" style="margin-top:4px">${esc(e.musc)} · ${x.sets.length} × ${esc(x.reps)} · ${x.desc ? 'descanso '+x.desc+'s' : 'sem pausa → próximo'}</div></div>
         ${e.alt ? `<button type="button" class="btn btn-dark btn-sm" onclick="S.swap(${j})"><svg class="i"><use href="#i-swap"/></svg>Trocar</button>`:''}</div>
-      <div class="here"><img src="${CFG.FOTO(App.grupo,q)}" onerror="this.remove()"><div><div class="xs gold" style="font-weight:800;letter-spacing:.5px;text-transform:uppercase">Na sua academia</div>
+      <div class="here">${foto?`<img src="${foto}" alt="" onerror="this.remove()">`:''}<div><div class="xs gold" style="font-weight:800;letter-spacing:.5px;text-transform:uppercase">Na sua academia</div>
         <div class="sm"><b>${esc(e.equip.filter(k=>k!=='anilhas').map(k=>eqn[k]).join(' + '))}</b></div>${det[q]?`<div class="xs mut">${esc(det[q])}</div>`:''}</div></div>
       ${e.nota ? `<div class="note">${esc(e.nota)}</div>` : ''}
       ${x.auto ? `<span class="pill red">Substituído: aparelho em manutenção</span>` : ''}${x.orig!==x.ex && !x.auto ? `<span class="pill">Alternativo escolhido</span>`:''}
@@ -782,7 +791,7 @@ const S = {
     const x = S.cur.blocos[S.cur.bi].exs[j], e = App.ex(x.ex);
     const options = [x.orig, App.ex(x.orig)?.alt, e.alt].filter((v,i,a) => v && App.ex(v) && v !== x.ex && a.indexOf(v)===i);
     UI.modal(`<div class="stack"><div class="h3">Aparelho ocupado ou com problema?</div><p class="sm mut">Troque por um exercício equivalente desta academia:</p>
-      ${options.map(o => `<button type="button" class="prof" onclick="S.doSwap(${j},'${o}')"><img class="thumb" src="${CFG.IMG(App.ex(o).img)[0]}" onerror="this.style.visibility='hidden'"><div><b class="sm">${esc(App.ex(o).nome)}</b><div class="xs mut">${esc(App.ex(o).equip.map(q=>App.cat.equipamentos[q]).join(' + '))}</div></div></button>`).join('')}
+      ${options.map(o => `<button type="button" class="prof" onclick="S.doSwap(${j},'${o}')"><img class="thumb" src="${CFG.IMG(App.ex(o).img)[0]}" onerror="this.style.visibility='hidden'"><div><b class="sm">${esc(App.ex(o).nome)}</b><div class="xs mut">${esc(App.ex(o).equip.filter(q=>q!=='anilhas').map(q=>App.cat.equipamentos[q]).join(' + '))}</div></div></button>`).join('')}
       <button type="button" class="btn btn-dark" onclick="UI.closeModal()">Manter</button></div>`);
   },
   doSwap(j,id){ const x = S.cur.blocos[S.cur.bi].exs[j]; x.ex = id; x.auto = false; S.cur.trocas++;
@@ -827,23 +836,24 @@ function revisar(){
   const ex = Object.values(App.cat.exercicios), mob = Object.values(App.cat.mobilidade||{});
   document.body.innerHTML = `<div class="screen"><div class="wrap stack"><div class="h2">Revisão de imagens · ${esc(App.idx.nome)}</div>
     <p class="sm mut">Confira se cada imagem mostra o exercício certo. Tire print das erradas e mande para ajuste.</p>
-    ${[...mob.map(m=>({nome:'Mobilidade · '+m.nome,img:m.img,info:m.dose})), ...ex.map(e=>({nome:e.nome,img:e.img,info:e.equip.map(q=>App.cat.equipamentos[q]).join(' + ')}))]
+    ${[...mob.map(m=>({nome:'Mobilidade · '+m.nome,img:m.img,info:m.dose})), ...ex.map(e=>({nome:e.nome,img:e.img,info:e.equip.filter(q=>q!=='anilhas').map(q=>App.cat.equipamentos[q]).join(' + ')}))]
       .map((e,i)=>`<div class="card stack"><b class="sm">${i+1}. ${esc(e.nome)}</b><div class="xs mut">${esc(e.info)}</div><div class="grid2">${CFG.IMG(e.img).map(u=>`<img src="${u}" style="width:100%;border-radius:10px;background:#fff" onerror="this.outerHTML='<div class=\\'pill red\\'>Sem imagem</div>'">`).join('')}</div></div>`).join('')}
   </div></div>`;
 }
 
 /* ================= INÍCIO ================= */
 let booted = false;
+function enterApp(){ const act = DB.get('active'); if(act && DB.get('profiles',[]).some(p => p.id === act)) UI.pick(act); else UI.show('profiles'); }
 async function boot(){
   const qs = new URLSearchParams(location.search), q = qs.get('grupo'), saved = DB.get('grupo'), rev = qs.get('revisar');
   if(q && CFG.GRUPOS.includes(q) && q !== saved){ if(!saved || confirm(`Mudar seu grupo de ${saved} para ${q}?`)) DB.set('grupo', q); }
   App.grupo = DB.get('grupo') || '12'; DB.set('grupo', App.grupo);
   $('lg-grupo').textContent = 'GRUPO ' + App.grupo;
+  if(qs.get('assinou')) $('lg-ok').classList.remove('hide');
   Data.nowKey();
   if(!booted){
     booted = true;
     if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
-    // service worker só registra; NUNCA recarrega a página sozinho (isso tirava o iPhone da tela cheia)
     if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
   }
   UI.applyCover();
@@ -851,30 +861,25 @@ async function boot(){
   if(!ok){ document.body.innerHTML = '<div class="screen center"><div class="card wrap" style="text-align:center"><div class="h3">Sem conexão</div><p class="sm mut" style="margin-top:8px">Abra o app uma vez com internet para baixar seus treinos.</p><button type="button" class="btn btn-gold" style="margin-top:14px" onclick="location.reload()">Tentar de novo</button></div></div>'; return; }
   if(rev) return revisar();
   $('lg-sub').textContent = `Treinos feitos para os aparelhos da academia do ${App.idx.nome}.`;
-  if(!Auth.valid()) return UI.show('login');
-  const act = DB.get('active'); if(act && DB.get('profiles',[]).some(p => p.id === act)) UI.pick(act); else UI.show('profiles');
+  const st = Auth.state();
+  if(st === 'out' || qs.get('assinou')){ UI.show('login'); return; }
+  if(st === 'check'){ const r = await Auth.revalidate(); if(r !== 'ok'){ UI.show('login'); UI.loginMsg(r.out); return; } }
+  enterApp();
 }
 async function doLogin(){
-  const email = $('lg-email').value.trim().toLowerCase(), err = $('lg-err'); err.classList.add('hide');
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent = 'Digite um e-mail válido.'; return err.classList.remove('hide'); }
-  $('lg-go').textContent = 'Verificando...';
-  try{ const r = await Auth.request(email);
-    if(r.dev){ Auth.save(email, App.grupo); toast('Modo teste: acesso liberado'); UI.show('profiles'); return; }
-    if(!r.ok){ err.textContent = r.msg || 'Não encontramos uma assinatura ativa para este e-mail.'; err.classList.remove('hide'); return; }
-    $('lg-mailshow').textContent = email; $('lg-step1').classList.add('hide'); $('lg-step2').classList.remove('hide');
-  }catch(e){ err.textContent = 'Sem conexão. Tente novamente.'; err.classList.remove('hide'); }
-  finally{ $('lg-go').textContent = 'ENTRAR'; }
+  const email = $('lg-email').value.trim().toLowerCase(); UI.loginMsg('');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return UI.loginMsg('Digite um e-mail válido.');
+  $('lg-go').textContent = 'Verificando...'; $('lg-go').disabled = true;
+  try{ const j = await Auth.check(email);
+    if(!j.ok) return UI.loginMsg(j.msg || 'Não encontramos assinatura ativa para este e-mail.');
+    Auth.save(email, j); $('lg-ok').classList.add('hide');
+    toast(j.teste ? 'Modo teste: acesso liberado' : 'Assinatura confirmada. Bom treino!');
+    enterApp();
+  }catch(e){ UI.loginMsg('Sem conexão. Tente novamente.'); }
+  finally{ $('lg-go').textContent = 'ENTRAR'; $('lg-go').disabled = false; }
 }
 $('lg-go').onclick = doLogin;
 $('lg-email').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); doLogin(); } };
-$('lg-verify').onclick = async () => {
-  const email = $('lg-email').value.trim().toLowerCase(), err = $('lg-err');
-  try{ const r = await Auth.verify(email, $('lg-code').value.trim());
-    if(!r.ok){ err.textContent = 'Código inválido ou expirado.'; return err.classList.remove('hide'); }
-    if(r.grupo) DB.set('grupo', String(r.grupo)); Auth.save(email, r.grupo || App.grupo, r.exp); boot();
-  }catch(e){ err.textContent = 'Sem conexão. Tente novamente.'; err.classList.remove('hide'); }
-};
-$('lg-back').onclick = () => { $('lg-step2').classList.add('hide'); $('lg-step1').classList.remove('hide'); };
 $('ob-save').onclick = UI.saveProfile;
 $('ob-nome').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); $('ob-peso').focus(); } };
 $('ob-peso').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); e.target.blur(); } };
@@ -883,8 +888,6 @@ $('ob-peso').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); e.tar
 document.querySelectorAll('nav.bot button').forEach(b => b.onclick = () => UI.tab(b.dataset.t));
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); window._bip = e; });
 document.addEventListener('visibilitychange', () => { if(!document.hidden && R.end) R.tick(); });
-/* bloqueia qualquer link que tentaria sair do app */
-document.addEventListener('click', e => { const a = e.target.closest('a[href]'); if(a && !a.target){ e.preventDefault(); } }, true);
 boot();
 </script>
 </body>

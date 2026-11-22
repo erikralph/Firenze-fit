@@ -1,11 +1,11 @@
 """
-Motor de programas Firenze Fit
+Motor de programas MovaCondo
 Uso: python tools/motor.py 12 2026-11 2027-12
 Gera data/gXX/{catalogo.json, index.json, AAAA-MM.json, status.json} usando SÓ os aparelhos do grupo.
 """
 import json, os, sys
 sys.path.insert(0, os.path.dirname(__file__))
-from catalogo import X, EQUIP, GRUPOS, POOLS, SO_INT, MOB, MOBX
+from catalogo import X, EQUIP, GRUPOS, POOLS, SO_INT, MOB, MOBX, ESTACAO, FOTO_DE
 
 MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
 PORTATIL = {"halter_leve","halter","colchonete","bola_suica","caixote","banco"}
@@ -88,8 +88,13 @@ BASE = {
 }
 CARDIO = {"hipertrofia":{"iniciante":10,"intermediario":12,"avancado":10},"emagrecimento":{"iniciante":20,"intermediario":22,"avancado":25}}
 
+def estacoes(e): return {ESTACAO[q] for q in X[e]["equip"] if q in ESTACAO}
 def compat(a, b):
     ea, eb = set(X[a]["equip"]), set(X[b]["equip"])
+    # funções diferentes do mesmo aparelho físico: não dá para trocar sem pausa
+    for s in estacoes(a) & estacoes(b):
+        qa = {q for q in ea if ESTACAO.get(q) == s}; qb = {q for q in eb if ESTACAO.get(q) == s}
+        if qa != qb: return False
     return bool((ea & eb) - {"anilhas"}) or ea <= PORTATIL or eb <= PORTATIL
 
 def mlist(ini, fim):
@@ -184,6 +189,11 @@ def run(g, ini, fim):
                     ids = [x["ex"] for b in d["blocos"] for x in b["exs"]]
                     if len(ids) != len(set(ids)): erros.append(f"{mk} {obj}/{lvl}/{d['id']}: repetido")
                     if len(ids) < 4: erros.append(f"{mk} {obj}/{lvl}/{d['id']}: poucos exercícios")
+                    for b in d["blocos"]:
+                        e = [x["ex"] for x in b["exs"]]
+                        for a in range(len(e)):
+                            for c in range(a+1, len(e)):
+                                if not compat(e[a], e[c]): erros.append(f"{mk}: bi-set inviável {e[a]}+{e[c]}")
                     for x in ids:
                         if x not in cat: erros.append(f"{mk}: {x} não existe no grupo")
                     for m in d["mob"]:
@@ -194,15 +204,17 @@ def run(g, ini, fim):
         if not e["alt"]: avisos.append(f"sem alternativo: {e['id']}")
     G = GRUPOS[g]
     existentes = sorted(f[:-5] for f in os.listdir(out) if len(f) == 12 and f[4] == '-' and f.endswith('.json'))
-    json.dump(dict(versao=2, exercicios=cat, mobilidade=mob, equipamentos={k: EQUIP[k] for k in G["equip"]}, detalhes=G.get("detalhes",{})),
+    fotos_ok = {f[:-4] for f in os.listdir(out + "/fotos") if f.endswith('.jpg')}
+    fotos = {q: (FOTO_DE.get(q, q)) for q in G["equip"] if FOTO_DE.get(q, q) in fotos_ok}
+    json.dump(dict(versao=3, exercicios=cat, mobilidade=mob, equipamentos={k: EQUIP[k] for k in G["equip"]}, detalhes=G.get("detalhes",{}), fotos=fotos),
               open(f"{out}/catalogo.json","w",encoding="utf-8"), ensure_ascii=False, separators=(",",":"))
     json.dump(dict(grupo=g, nome=G["nome"], torres=G["torres"], obs=G.get("obs",""), meses=existentes,
-                   fotos=["capa","ambiente2","ambiente_cardio","grama","halter"]),
+                   ambiente=[f for f in ["capa","grama","ambiente2","ambiente_cardio"] if f in fotos_ok]),
               open(f"{out}/index.json","w",encoding="utf-8"), ensure_ascii=False, indent=1)
     if not os.path.exists(f"{out}/status.json"):
         json.dump(dict(manutencao=[], aviso=""), open(f"{out}/status.json","w",encoding="utf-8"), ensure_ascii=False, indent=1)
-    if erros: print("ERROS:\n" + "\n".join(erros)); sys.exit(1)
-    print(f"Grupo {g}: {len(meses)} meses ({meses[0]} a {meses[-1]}), {len(cat)} exercícios, {len(mob)} de mobilidade. OK")
+    if erros: print("ERROS:\n" + "\n".join(sorted(set(erros))[:30])); sys.exit(1)
+    print(f"Grupo {g}: {len(meses)} meses ({meses[0]} a {meses[-1]}), {len(cat)} exercícios, {len(mob)} mobilidade, {len(fotos)} aparelhos com foto. OK")
     if avisos: print("Avisos:\n" + "\n".join(sorted(set(avisos))))
 
 if __name__ == "__main__":

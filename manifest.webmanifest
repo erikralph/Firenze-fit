@@ -1,7 +1,7 @@
 {
-  "name": "Firenze Fit",
-  "short_name": "Firenze Fit",
-  "description": "Treinos feitos para os aparelhos da academia do seu grupo.",
+  "name": "MovaCondo",
+  "short_name": "MovaCondo",
+  "description": "Treinos feitos para os aparelhos da academia do seu condomínio.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
