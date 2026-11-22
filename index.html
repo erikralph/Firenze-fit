@@ -15,13 +15,14 @@
 <style>
 :root{--bg:#0a0a0a;--card:#141414;--card2:#1b1b1b;--line:#2a2a2a;--gold:#D4AF37;--gold2:#aa8c2c;--mut:#8a8a8a;--txt:#f4f4f4;--red:#f87171;--grn:#4ade80;--st:env(safe-area-inset-top);--sb:env(safe-area-inset-bottom)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-body{overscroll-behavior:none}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+/* corpo travado na tela: impede o iPhone de "deslocar" a página depois do teclado */
+body{position:fixed;inset:0;width:100%;overscroll-behavior:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,select{font:inherit;font-size:16px;color:var(--txt);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;outline:none}
 input:focus,select:focus{border-color:var(--gold)}
 .hide{display:none!important}
-.screen{position:fixed;inset:0;overflow-y:auto;padding:calc(var(--st) + 20px) 18px calc(var(--sb) + 24px)}
+.screen{position:fixed;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:calc(var(--st) + 20px) 18px calc(var(--sb) + 24px)}
 .center{display:flex;flex-direction:column;justify-content:center;align-items:center}
 .wrap{width:100%;max-width:440px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
@@ -47,7 +48,7 @@ input:focus,select:focus{border-color:var(--gold)}
 .opt b{display:block;font-size:14px}.opt span{font-size:11px;color:var(--mut)}
 svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 header.top{position:fixed;top:0;left:0;right:0;z-index:30;padding:calc(var(--st) + 12px) 18px 12px;background:rgba(10,10,10,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-main#app{position:fixed;inset:0;overflow-y:auto;padding:calc(var(--st) + 78px) 16px calc(var(--sb) + 150px)}
+main#app{position:fixed;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:calc(var(--st) + 78px) 16px calc(var(--sb) + 150px)}
 nav.bot{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;background:rgba(10,10,10,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:var(--sb)}
 nav.bot button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 9px;font-size:10px;font-weight:700;color:var(--mut)}
 nav.bot button.on{color:var(--gold)}
@@ -85,7 +86,7 @@ nav.bot button.on{color:var(--gold)}
 .s-head{padding:calc(var(--st) + 10px) 14px 10px;background:var(--card);border-bottom:1px solid var(--line)}
 .steps{display:flex;gap:6px;margin-top:10px}.steps div{flex:1;text-align:center;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:7px 0;border-radius:9px;background:var(--bg);color:var(--mut);border:1px solid var(--line)}
 .steps div.on{color:#000;background:var(--gold);border-color:var(--gold)}.steps div.ok{color:var(--gold);border-color:rgba(212,175,55,.4)}
-.s-body{flex:1;overflow-y:auto;padding:14px 14px calc(var(--sb) + 110px)}
+.s-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(var(--sb) + 110px)}
 .s-foot{position:absolute;left:0;right:0;bottom:0;padding:12px 14px calc(var(--sb) + 12px);background:linear-gradient(transparent,var(--bg) 30%)}
 .here{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:14px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.3)}
 .here img{width:54px;height:72px;object-fit:cover;border-radius:9px}
@@ -119,8 +120,8 @@ tr.now td.n{color:var(--gold)}tr.now input{border-color:var(--gold)}
 .chips button.on{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,.08)}
 #mini{position:fixed;left:12px;right:12px;bottom:calc(var(--sb) + 70px);z-index:40;border-radius:16px;padding:10px 12px;display:flex;align-items:center;gap:12px}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(212,175,55,.7);animation:pulse 1.6s infinite}@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(212,175,55,0)}}
-.modal{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:12px}
-.modal .card{width:100%;max-width:440px;max-height:88vh;overflow-y:auto;margin-bottom:var(--sb)}
+.modal{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:12px 12px calc(var(--sb) + 12px)}
+.modal .card{width:100%;max-width:440px;max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 #toast{position:fixed;top:calc(var(--st) + 14px);left:50%;transform:translateX(-50%);z-index:99;background:var(--gold);color:#000;font-weight:800;font-size:13px;padding:10px 16px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.5);max-width:90%;text-align:center}
 .login-bg{background:radial-gradient(90% 60% at 50% 0%,rgba(212,175,55,.22),transparent 60%),var(--bg) center/cover no-repeat}
 .logo{width:64px;height:64px;border-radius:18px;margin:0 auto 14px;display:block}
@@ -261,7 +262,8 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
     <button type="button" class="btn btn-ghost" onclick="UI.showGym()"><svg class="i"><use href="#i-dumb"/></svg>Sua academia</button>
     <div class="card stack">
       <span class="lbl" style="margin:0">Assinatura</span>
-      <div class="row between"><div><b class="sm" id="pf-plano">Plano</b><div class="xs mut" id="pf-email"></div></div><a class="btn btn-dark btn-sm" href="planos.html">Planos</a></div>
+      <div class="row between"><div><b class="sm" id="pf-plano">Plano</b><div class="xs mut" id="pf-email"></div></div></div>
+      <p class="xs mut">Para cancelar ou trocar de plano, acesse Assinaturas no app do Mercado Pago.</p>
     </div>
     <div class="card stack">
       <span class="lbl" style="margin:0">Seus dados</span>
@@ -344,14 +346,14 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
 <script>
 /* ================= CONFIGURAÇÃO ================= */
 const CFG = {
-  VERSAO: '3.0.0',
+  VERSAO: '3.1.0',
   MARCA: 'MovaCondo',
   GRUPOS: ['12','13','14','15','16','17','18'],
   AUTH_URL: '/api/acesso',
   IMG: id => [0,1].map(n => `https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${id}/${n}.jpg`),
   FOTO: (g, nome) => `data/g${g}/fotos/${nome}.jpg`,
-  RECHECAR_DIAS: 7,       // confere a assinatura a cada 7 dias
-  OFFLINE_DIAS: 30        // sem internet, continua liberado até 30 dias após a última conferência
+  RECHECAR_DIAS: 7,
+  OFFLINE_DIAS: 30
 };
 const NAO_FOTO = ['anilhas'];
 const GAL = [
@@ -362,6 +364,7 @@ const GAL = [
   ['Área livre', ['grama','cadeira_romana','espaldar','colchonete','bola_suica','caixote'], 'i-mat']
 ];
 const GAL_NOME = {barra_supino:'Barras (retas, W e H)'};
+const PLANO_TXT = {solo:'Plano Solo · 1 celular', duo:'Plano Duo · 2 celulares', cortesia:'Acesso cortesia'};
 
 /* ================= UTIL ================= */
 const $ = id => document.getElementById(id);
@@ -391,6 +394,9 @@ function media(img, label, cls=''){
 function mediaFail(img){ const m = img.parentElement; if(!m) return; m.classList.add('fb');
   m.innerHTML = `<svg class="i gold" style="width:36px;height:36px"><use href="#i-dumb"/></svg>`; }
 function galFail(img){ img.outerHTML = `<svg class="i"><use href="#${img.dataset.ic}"/></svg>`; }
+/* iPhone: depois que o teclado fecha, devolve a tela para a posição certa */
+function fixViewport(){ setTimeout(() => { const a = document.activeElement; if(a && /INPUT|SELECT|TEXTAREA/.test(a.tagName)) return;
+  window.scrollTo(0,0); document.documentElement.scrollTop = 0; document.body.scrollTop = 0; }, 80); }
 
 /* ================= ARMAZENAMENTO POR PESSOA ================= */
 const DB = {
@@ -420,23 +426,20 @@ const Data = {
   }
 };
 
-/* ================= ACESSO (Mercado Pago via /api/acesso) ================= */
+/* ================= ACESSO ================= */
 const Auth = {
   device(){ let d = DB.get('device'); if(!d){ d = uid('d'); DB.set('device', d); } return d; },
   get(){ return DB.get('auth'); },
-  /* 'ok' liberado, 'check' precisa conferir, 'out' sem acesso */
   state(){ const a = Auth.get(); if(!a || !a.email) return 'out';
     if(Date.now() - (a.conf||0) < CFG.RECHECAR_DIAS*864e5) return 'ok';
     return 'check'; },
   async check(email){
     const r = await fetch(CFG.AUTH_URL, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, device: Auth.device(), grupo: App.grupo})});
     const j = await r.json().catch(() => ({}));
-    if(r.status >= 500 && !j.msg) throw new Error('rede');
-    if(r.status === 502) throw new Error('rede');
+    if(r.status === 502 || (r.status >= 500 && !j.msg)) throw new Error('rede');
     return j;
   },
   save(email, j){ DB.set('auth', {email, plano: j.plano || 'solo', teste: !!j.teste, conf: Date.now()}); },
-  /* reconfere em segundo plano; só bloqueia se o Mercado Pago disser que não está ativa */
   async revalidate(){
     const a = Auth.get(); if(!a) return 'out';
     try{ const j = await Auth.check(a.email);
@@ -472,7 +475,7 @@ const UI = {
     ['hdr','app','nav'].forEach(id => $(id).classList.toggle('hide', !inApp));
     $('mini').classList.toggle('hide', !(inApp && S.cur && !$('sess').classList.contains('open')));
     if(name === 'profiles') UI.renderProfiles();
-    document.activeElement?.blur?.();
+    document.activeElement?.blur?.(); fixViewport();
   },
   tab(t){ document.querySelectorAll('nav.bot button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
     document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 't-'+t)); $('app').scrollTop = 0;
@@ -489,9 +492,9 @@ const UI = {
   showGym(){
     const g = App.grupo, eq = App.cat.equipamentos, det = App.cat.detalhes || {}, fotos = App.cat.fotos || {};
     const amb = (App.idx.ambiente || []).filter(f => f !== 'grama').map(f => `<img src="${CFG.FOTO(g,f)}" alt="" onerror="this.remove()">`).join('');
-    const vistos = new Set(), usados = new Set();
-    const fig = (q, ic) => { const key = fotos[q] || q; if(vistos.has(key)) return ''; vistos.add(key); usados.add(q);
-      return `<figure><div class="ph">${fotos[q] ? `<img src="${CFG.FOTO(g, fotos[q])}" alt="" loading="lazy" data-ic="${ic}" onerror="galFail(this)">` : `<svg class="i"><use href="#${ic}"/></svg>`}</div>
+    const vistos = new Set();
+    const fig = (q, ic) => { const key = fotos[q] || q; if(vistos.has(key)) return ''; vistos.add(key);
+      return `<figure><div class="ph">${fotos[q] ? `<img src="${CFG.FOTO(g, fotos[q])}" alt="" data-ic="${ic}" onerror="galFail(this)">` : `<svg class="i"><use href="#${ic}"/></svg>`}</div>
         <figcaption>${esc(GAL_NOME[q] || eq[q])}${det[q]?`<span>${esc(det[q])}</span>`:''}</figcaption></figure>`; };
     const secs = GAL.map(([titulo, ids, ic]) => { const h = ids.filter(q => eq[q]).map(q => fig(q, ic)).join(''); return h ? `<div class="gal-sec">${titulo}</div><div class="gal">${h}</div>` : ''; }).join('');
     UI.modal(`<div class="stack"><div><span class="pill">Feito sob medida</span><div class="h2" style="margin-top:8px">Academia do ${esc(App.idx.nome)}</div>
@@ -536,7 +539,7 @@ const UI = {
     $('h-grupo').textContent = App.idx.nome; $('pf-sub').textContent = App.idx.nome + ' · ' + OBJ[p.obj];
     $('h-obj').textContent = OBJ[p.obj]; $('h-lvl').textContent = LVL[p.lvl];
     $('pf-obj').value = p.obj; $('pf-lvl').value = p.lvl; $('pf-ver').textContent = CFG.MARCA + ' v' + CFG.VERSAO + ' · programa ' + mk;
-    $('pf-plano').textContent = a.teste ? 'Modo teste' : (a.plano === 'duo' ? 'Plano Duo · 2 celulares' : 'Plano Solo · 1 celular');
+    $('pf-plano').textContent = a.teste ? 'Modo teste' : (PLANO_TXT[a.plano] || PLANO_TXT.solo);
     $('pf-email').textContent = a.email || '';
     $('hj-mes').textContent = 'Programa de ' + MESES[m-1];
     $('hj-din').textContent = prog.dinamica.split(' + ')[0];
@@ -668,7 +671,7 @@ const UI = {
       <button type="button" class="btn btn-gold" onclick="UI.closeModal()">Entendi</button></div>`);
   },
   modal(html){ $('modal-c').innerHTML = html; $('modal').classList.remove('hide'); $('modal-c').scrollTop = 0; },
-  closeModal(){ $('modal').classList.add('hide'); document.activeElement?.blur?.(); }
+  closeModal(){ $('modal').classList.add('hide'); document.activeElement?.blur?.(); fixViewport(); }
 };
 
 /* ================= DESCANSO ================= */
@@ -704,11 +707,11 @@ const S = {
   open(){ if(!S.cur) return; if(!S.valid()){ toast('O programa foi atualizado. Comece o treino de novo.'); return S.close(); }
     $('sess').classList.add('open'); $('mini').classList.add('hide'); S.render();
     clearInterval(S.clockIv); S.clockIv = setInterval(S.clock, 1000); S.clock(); },
-  minimize(){ $('sess').classList.remove('open'); UI.render(); },
+  minimize(){ $('sess').classList.remove('open'); UI.render(); fixViewport(); },
   clock(){ if(!S.cur) return; const s = (Date.now() - S.cur.t0)/1000; $('s-clock').textContent = mmss(s); $('mini-s').textContent = mmss(s) + ' · toque para voltar';
     if(S.cur.step === 'car' && S.cur.cardio.run) S.cardioTick(); },
   askCancel(){ if(confirm('Cancelar este treino? Nada será salvo.')) S.close(); },
-  close(){ S.cur = null; DB.ps('sess', null); R.stop(); clearInterval(S.clockIv); $('sess').classList.remove('open'); UI.render(); },
+  close(){ S.cur = null; DB.ps('sess', null); R.stop(); clearInterval(S.clockIv); $('sess').classList.remove('open'); UI.render(); fixViewport(); },
   go(step){ S.cur.step = step; S.save(); S.render(); $('s-body').scrollTop = 0; },
   render(){
     const st = S.cur.step; $('s-title').textContent = S.cur.titulo;
@@ -834,11 +837,12 @@ const S = {
 /* ================= REVISÃO DE IMAGENS (?revisar=1) ================= */
 function revisar(){
   const ex = Object.values(App.cat.exercicios), mob = Object.values(App.cat.mobilidade||{});
-  document.body.innerHTML = `<div class="screen"><div class="wrap stack"><div class="h2">Revisão de imagens · ${esc(App.idx.nome)}</div>
+  document.body.style.position = 'static'; document.documentElement.style.overflow = document.body.style.overflow = 'auto';
+  document.body.innerHTML = `<div class="wrap stack" style="padding:20px 16px"><div class="h2">Revisão de imagens · ${esc(App.idx.nome)}</div>
     <p class="sm mut">Confira se cada imagem mostra o exercício certo. Tire print das erradas e mande para ajuste.</p>
     ${[...mob.map(m=>({nome:'Mobilidade · '+m.nome,img:m.img,info:m.dose})), ...ex.map(e=>({nome:e.nome,img:e.img,info:e.equip.filter(q=>q!=='anilhas').map(q=>App.cat.equipamentos[q]).join(' + ')}))]
       .map((e,i)=>`<div class="card stack"><b class="sm">${i+1}. ${esc(e.nome)}</b><div class="xs mut">${esc(e.info)}</div><div class="grid2">${CFG.IMG(e.img).map(u=>`<img src="${u}" style="width:100%;border-radius:10px;background:#fff" onerror="this.outerHTML='<div class=\\'pill red\\'>Sem imagem</div>'">`).join('')}</div></div>`).join('')}
-  </div></div>`;
+  </div>`;
 }
 
 /* ================= INÍCIO ================= */
@@ -869,14 +873,14 @@ async function boot(){
 async function doLogin(){
   const email = $('lg-email').value.trim().toLowerCase(); UI.loginMsg('');
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return UI.loginMsg('Digite um e-mail válido.');
-  $('lg-go').textContent = 'Verificando...'; $('lg-go').disabled = true;
+  $('lg-go').textContent = 'Verificando...'; $('lg-go').disabled = true; $('lg-email').blur();
   try{ const j = await Auth.check(email);
     if(!j.ok) return UI.loginMsg(j.msg || 'Não encontramos assinatura ativa para este e-mail.');
     Auth.save(email, j); $('lg-ok').classList.add('hide');
-    toast(j.teste ? 'Modo teste: acesso liberado' : 'Assinatura confirmada. Bom treino!');
+    toast(j.teste ? 'Modo teste: acesso liberado' : (j.plano === 'cortesia' ? 'Acesso cortesia liberado. Bom treino!' : 'Assinatura confirmada. Bom treino!'));
     enterApp();
   }catch(e){ UI.loginMsg('Sem conexão. Tente novamente.'); }
-  finally{ $('lg-go').textContent = 'ENTRAR'; $('lg-go').disabled = false; }
+  finally{ $('lg-go').textContent = 'ENTRAR'; $('lg-go').disabled = false; fixViewport(); }
 }
 $('lg-go').onclick = doLogin;
 $('lg-email').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); doLogin(); } };
@@ -887,7 +891,10 @@ $('ob-peso').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); e.tar
   $(id).querySelectorAll('.opt').forEach(o => o.classList.toggle('on', o === b)); }));
 document.querySelectorAll('nav.bot button').forEach(b => b.onclick = () => UI.tab(b.dataset.t));
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); window._bip = e; });
-document.addEventListener('visibilitychange', () => { if(!document.hidden && R.end) R.tick(); });
+document.addEventListener('visibilitychange', () => { if(!document.hidden){ if(R.end) R.tick(); fixViewport(); } });
+document.addEventListener('focusout', fixViewport);
+window.visualViewport?.addEventListener('resize', () => { if(window.visualViewport.height >= window.innerHeight - 1) fixViewport(); });
+window.addEventListener('orientationchange', fixViewport);
 boot();
 </script>
 </body>
