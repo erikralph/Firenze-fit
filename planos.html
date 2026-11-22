@@ -12,13 +12,14 @@
 :root{--bg:#0a0a0a;--card:#141414;--line:#2a2a2a;--gold:#D4AF37;--gold2:#aa8c2c;--mut:#8f8f8f;--txt:#f4f4f4}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
 a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .wrap{max-width:460px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 18px) 18px calc(env(safe-area-inset-bottom) + 30px)}
 .top{display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px}.brand img{width:36px;height:36px;border-radius:10px}
 .back{font-size:13px;color:var(--mut);text-decoration:none}
-.hero{margin-top:18px;border-radius:24px;overflow:hidden;position:relative;min-height:320px;display:flex;align-items:flex-end;border:1px solid rgba(212,175,55,.35);
- background:#111 url('data/g12/fotos/capa.jpg') center/cover}
+.hero{margin-top:18px;border-radius:24px;overflow:hidden;position:relative;min-height:320px;display:flex;align-items:flex-end;border:1px solid rgba(212,175,55,.35);background:#111 center/cover}
 .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.1),rgba(10,10,10,.95) 78%)}
 .hero .in{position:relative;padding:20px}
 .eye{font-size:11px;font-weight:800;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase}
@@ -33,13 +34,19 @@ h1{font-size:30px;line-height:1.08;font-weight:900;letter-spacing:-.5px;margin-t
 .pt{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
 .pt b{display:block;font-size:14px}.pt span{font-size:12px;color:var(--mut)}
 .ic{width:34px;height:34px;border-radius:10px;background:rgba(212,175,55,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:900}
-h2{font-size:22px;font-weight:900;margin:30px 0 4px}
+h2{font-size:22px;font-weight:900;margin:30px 0 4px;display:flex;align-items:center;gap:10px}
+h2 .n{width:28px;height:28px;border-radius:50%;background:var(--gold);color:#000;font-size:14px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
 .sub{color:var(--mut);font-size:13px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.chips span{font-size:12px;font-weight:700;padding:7px 12px;border-radius:999px;border:1px solid var(--gold);color:var(--gold);background:rgba(212,175,55,.08)}
-.chips span.off{border-color:var(--line);color:var(--mut);background:none}
+/* seleção de academia */
+.pick{display:flex;align-items:center;gap:12px;width:100%;margin-top:14px;padding:12px;border-radius:16px;border:1px dashed rgba(212,175,55,.55);background:rgba(212,175,55,.05);text-align:left}
+.pick.ok{border-style:solid;border-color:var(--gold)}
+.pick .cv{width:56px;height:56px;border-radius:12px;flex-shrink:0;background:#111 center/cover;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:22px}
+.pick b{display:block;font-size:15px}.pick span{font-size:12px;color:var(--mut)}
+.pick .go{margin-left:auto;color:var(--gold);font-weight:800;font-size:13px}
+.locked{opacity:.4;pointer-events:none;filter:grayscale(.4)}
+.hint{font-size:12px;color:var(--gold);margin-top:8px}
 .tg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;margin:16px 0 12px}
-.tg button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-weight:800;font-size:13px;padding:10px;border-radius:10px;cursor:pointer}
+.tg button{flex:1;color:var(--mut);font-weight:800;font-size:13px;padding:10px;border-radius:10px}
 .tg button.on{background:var(--gold);color:#000}
 .plan{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:12px;position:relative}
 .plan.best{border-color:var(--gold);box-shadow:0 10px 40px rgba(212,175,55,.12)}
@@ -47,23 +54,37 @@ h2{font-size:22px;font-weight:900;margin:30px 0 4px}
 .pn{font-size:18px;font-weight:900}.pd{font-size:12px;color:var(--mut);margin-top:2px}
 .price{margin-top:12px;font-size:32px;font-weight:900}.price small{font-size:13px;color:var(--mut);font-weight:600}
 .eq{font-size:12px;color:var(--gold);margin-top:2px;min-height:16px}
-.btn{display:block;text-align:center;text-decoration:none;margin-top:14px;padding:14px;border-radius:14px;font-weight:900;letter-spacing:.3px;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000}
+.btn{display:block;text-align:center;text-decoration:none;margin-top:14px;padding:14px;border-radius:14px;font-weight:900;letter-spacing:.3px;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;width:100%}
 .btn.dark{background:#1d1d1d;border:1px solid var(--line);color:var(--txt)}
 details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:8px}
 summary{font-weight:800;font-size:14px;cursor:pointer;list-style:none}summary::-webkit-details-marker{display:none}
 details p{color:#bdbdbd;font-size:13px;line-height:1.5;margin-top:8px}
 .foot{margin-top:26px;text-align:center;font-size:11px;color:var(--mut);line-height:1.6}
+/* janela */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:12px 12px calc(env(safe-area-inset-bottom) + 12px)}
+.modal.hide{display:none}
+.sheet{width:100%;max-width:460px;max-height:85vh;overflow-y:auto;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px}
+.sheet h3{font-size:20px;font-weight:900}
+.search{width:100%;margin-top:12px;font:inherit;font-size:16px;color:var(--txt);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none}
+.search:focus{border-color:var(--gold)}
+.ch{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 6px}
+.ac{display:flex;align-items:center;gap:12px;width:100%;padding:10px;margin-top:8px;border-radius:14px;border:1px solid var(--line);background:#101010;text-align:left}
+.ac.on{border-color:var(--gold)}
+.ac .cv{width:58px;height:58px;border-radius:12px;background:#151515 center/cover;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.ac b{display:block;font-size:14px}.ac span{font-size:12px;color:var(--mut)}
+.none{margin-top:18px;padding:14px;border-radius:14px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.3);font-size:13px;color:#ddd;line-height:1.45}
+.wa{display:block;text-align:center;text-decoration:none;margin-top:10px;padding:12px;border-radius:12px;font-weight:800;background:#1f2b22;border:1px solid #2f6f45;color:#8ef0ae}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top"><div class="brand"><img src="icons/icon-192.png" alt="">MovaCondo</div><a class="back" href="./">Já assino · entrar</a></div>
 
-  <div class="hero"><div class="in">
+  <div class="hero" id="hero"><div class="in">
     <div class="eye">Feito sob medida para o seu condomínio</div>
     <h1>Seu treino, montado com os aparelhos da academia do seu prédio.</h1>
     <p class="lead">Desça, abra o app e treine. Programa novo todo mês, sem adaptar nada.</p>
-    <a class="cta" href="#planos">Ver planos</a>
+    <a class="cta" href="#passo1">Começar</a>
   </div></div>
 
   <div class="vs">
@@ -72,65 +93,122 @@ details p{color:#bdbdbd;font-size:13px;line-height:1.5;margin-top:8px}
   </div>
 
   <div class="pts">
-    <div class="pt"><div class="ic">1</div><div><b>Só o que existe na sua academia</b><span>Treino montado a partir da lista real de aparelhos. Se uma máquina quebrar, o app troca o exercício.</span></div></div>
-    <div class="pt"><div class="ic">2</div><div><b>Programa novo todo dia 1º</b><span>Pirâmide, bi-set, drop-set: a dinâmica muda todo mês para o corpo não estagnar.</span></div></div>
-    <div class="pt"><div class="ic">3</div><div><b>Você treina sozinho, com segurança</b><span>Mobilidade, treino e cardio guiados, com imagem, carga anterior e cronômetro de descanso.</span></div></div>
-    <div class="pt"><div class="ic">4</div><div><b>Para ganhar massa ou emagrecer</b><span>Iniciante, intermediário ou avançado. Cada pessoa da casa com seu próprio perfil.</span></div></div>
+    <div class="pt"><div class="ic">✓</div><div><b>Só o que existe na sua academia</b><span>Treino montado a partir da lista real de aparelhos. Se uma máquina quebrar, o app troca o exercício.</span></div></div>
+    <div class="pt"><div class="ic">✓</div><div><b>Programa novo todo dia 1º</b><span>Pirâmide, bi-set, drop-set: a dinâmica muda todo mês para o corpo não estagnar.</span></div></div>
+    <div class="pt"><div class="ic">✓</div><div><b>Você treina sozinho, com segurança</b><span>Mobilidade, treino e cardio guiados, com imagem, carga anterior e cronômetro de descanso.</span></div></div>
+    <div class="pt"><div class="ic">✓</div><div><b>Para ganhar massa ou emagrecer</b><span>Iniciante, intermediário ou avançado. Cada pessoa da casa com seu próprio perfil.</span></div></div>
   </div>
 
-  <h2>Academias atendidas</h2>
-  <p class="sub">Você escolhe a sua dentro do app, depois de assinar.</p>
-  <div class="chips" id="grupos"><span>Grupo 12</span></div>
+  <h2 id="passo1"><span class="n">1</span>Encontre sua academia</h2>
+  <p class="sub">Confirme que atendemos o seu condomínio antes de assinar.</p>
+  <button type="button" class="pick" id="pick" onclick="abrir()">
+    <div class="cv" id="pick-cv"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+    <div><b id="pick-t">Selecionar academia</b><span id="pick-s">Condomínio e grupo</span></div>
+    <span class="go" id="pick-go">Escolher ›</span>
+  </button>
 
-  <h2 id="planos">Escolha seu plano</h2>
+  <h2 id="passo2"><span class="n">2</span>Escolha seu plano</h2>
   <p class="sub">Cancele quando quiser, direto no Mercado Pago.</p>
-  <div class="tg"><button id="b-m" class="on" onclick="per('m')">Mensal</button><button id="b-a" onclick="per('a')">Anual · economize até 22%</button></div>
-
-  <div class="plan">
-    <div class="pn">Solo</div><div class="pd">1 pessoa · 1 celular</div>
-    <div class="price" id="p-solo"></div><div class="eq" id="e-solo"></div>
-    <a class="btn dark" id="l-solo" target="_blank" rel="noopener">Assinar Solo</a>
-  </div>
-  <div class="plan best"><span class="tag">Para o casal</span>
-    <div class="pn">Duo</div><div class="pd">2 pessoas · 2 celulares · perfis separados</div>
-    <div class="price" id="p-duo"></div><div class="eq" id="e-duo"></div>
-    <a class="btn" id="l-duo" target="_blank" rel="noopener">Assinar Duo</a>
+  <p class="hint" id="hint">Selecione sua academia acima para liberar os planos.</p>
+  <div id="planos" class="locked">
+    <div class="tg"><button id="b-m" class="on" onclick="per('m')">Mensal</button><button id="b-a" onclick="per('a')">Anual · economize até 22%</button></div>
+    <div class="plan">
+      <div class="pn">Solo</div><div class="pd">1 pessoa · 1 celular</div>
+      <div class="price" id="p-solo"></div><div class="eq" id="e-solo"></div>
+      <a class="btn dark" id="l-solo" target="_blank" rel="noopener">Assinar Solo</a>
+    </div>
+    <div class="plan best"><span class="tag">Para o casal</span>
+      <div class="pn">Duo</div><div class="pd">2 pessoas · 2 celulares · perfis separados</div>
+      <div class="price" id="p-duo"></div><div class="eq" id="e-duo"></div>
+      <a class="btn" id="l-duo" target="_blank" rel="noopener">Assinar Duo</a>
+    </div>
   </div>
 
   <h2>Como funciona</h2>
   <div class="pts">
     <div class="pt"><div class="ic">1</div><div><b>Assine pelo Mercado Pago</b><span>Cartão de crédito, cobrança automática.</span></div></div>
     <div class="pt"><div class="ic">2</div><div><b>Entre com o e-mail do pagamento</b><span>Sem senha para decorar. O acesso é liberado na hora.</span></div></div>
-    <div class="pt"><div class="ic">3</div><div><b>Escolha a sua academia</b><span>O treino passa a usar só os aparelhos dela.</span></div></div>
+    <div class="pt"><div class="ic">3</div><div><b>Treine com os aparelhos da sua academia</b><span>Mobilidade, treino e cardio, com imagem de cada exercício.</span></div></div>
     <div class="pt"><div class="ic">4</div><div><b>Instale na tela do celular</b><span>Funciona como aplicativo, em tela cheia, até sem internet na academia.</span></div></div>
   </div>
 
   <h2>Dúvidas</h2>
   <details><summary>Preciso baixar na loja de aplicativos?</summary><p>Não. Você abre o link e adiciona à tela inicial. Fica igual a um aplicativo, com ícone próprio.</p></details>
   <details><summary>Como o casal usa o plano Duo?</summary><p>Os dois entram com o mesmo e-mail da assinatura, cada um no seu celular, e cada um cria o próprio perfil com objetivo, nível e histórico separados.</p></details>
-  <details><summary>Minha academia não aparece na lista.</summary><p>Ainda não atendemos o seu condomínio. Não assine por enquanto: estamos chegando a novas academias.</p></details>
+  <details><summary>Meu condomínio não está na lista.</summary><p>Ainda não chegamos aí. Toque em "Selecionar academia" e depois em "Indique seu condomínio": avisamos você quando estiver disponível.</p></details>
   <details><summary>Como cancelo?</summary><p>No app ou site do Mercado Pago, em Assinaturas. O acesso continua até o fim do período já pago.</p></details>
   <details><summary>Serve para quem nunca treinou?</summary><p>Sim. O nível iniciante começa com máquinas guiadas, técnica e cargas confortáveis. Consulte um médico antes de iniciar atividade física.</p></details>
 
   <div class="foot">MovaCondo é um serviço independente, não oficial dos condomínios atendidos.<br><a href="termos.html">Termos de uso e política de privacidade</a></div>
 </div>
+
+<div class="modal hide" id="modal" onclick="if(event.target===this)fechar()">
+  <div class="sheet">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h3>Encontre sua academia</h3><button onclick="fechar()" style="font-size:22px;color:var(--mut);padding:4px 8px">×</button></div>
+    <input class="search" id="busca" placeholder="Buscar condomínio ou grupo" oninput="lista()" autocomplete="off">
+    <div id="lista"></div>
+    <div class="none"><b>Não encontrou seu condomínio?</b><br>Ainda não chegamos aí. Indique e avisamos quando estiver disponível.
+      <a class="wa" id="wa" target="_blank" rel="noopener">Indique seu condomínio no WhatsApp</a></div>
+  </div>
+</div>
+
 <script>
+/* ===== planos (Mercado Pago) ===== */
 const P = {
   m: { solo:{v:'15,90', l:'https://mpago.la/1Un8MNH', s:'/mês', e:''},
        duo: {v:'24,90', l:'https://mpago.la/2CxnzXx', s:'/mês', e:'R$ 12,45 por pessoa'} },
   a: { solo:{v:'149', l:'https://mpago.la/2dxUnCK', s:'/ano', e:'equivale a R$ 12,42/mês'},
        duo: {v:'229', l:'https://mpago.la/2R12EoG', s:'/ano', e:'equivale a R$ 9,54/mês por pessoa'} }
 };
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm = s => String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const LEGADO = {'12':'firenze-12','13':'firenze-13','14':'firenze-14','15':'firenze-15','16':'firenze-16','17':'firenze-17','18':'firenze-18'};
+let CFG = {}, ACADS = [], CONDOS = [];
 function per(k){
-  document.getElementById('b-m').classList.toggle('on', k==='m'); document.getElementById('b-a').classList.toggle('on', k==='a');
+  $('b-m').classList.toggle('on', k==='m'); $('b-a').classList.toggle('on', k==='a');
   ['solo','duo'].forEach(p => { const x = P[k][p];
-    document.getElementById('p-'+p).innerHTML = 'R$ ' + x.v + ' <small>' + x.s + '</small>';
-    document.getElementById('e-'+p).textContent = x.e; document.getElementById('l-'+p).href = x.l; });
+    $('p-'+p).innerHTML = 'R$ ' + x.v + ' <small>' + x.s + '</small>';
+    $('e-'+p).textContent = x.e; $('l-'+p).href = x.l; });
+}
+const PIN = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>';
+const capa = a => a.capa ? `data/${a.pasta}/fotos/capa.jpg` : '';
+function abrir(){ $('busca').value = ''; lista(); $('modal').classList.remove('hide'); document.body.classList.add('lock'); }
+function fechar(){ $('modal').classList.add('hide'); document.body.classList.remove('lock'); }
+function lista(){
+  const q = norm($('busca').value), sel = localStorage.getItem('ff2:grupo');
+  const atual = sel ? JSON.parse(sel) : null;
+  const item = (a, t, s) => `<button class="ac ${a.id===atual?'on':''}" onclick="escolher('${esc(a.id)}')">
+    <div class="cv" style="${capa(a)?`background-image:url('${capa(a)}')`:''}">${capa(a)?'':PIN}</div>
+    <div><b>${esc(t)}</b><span>${esc(s||'')}</span></div></button>`;
+  const html = CONDOS.map(c => {
+    const acs = c.academias.filter(a => !q || norm(c.nome+' '+a.nome+' '+(a.desc||'')).includes(q));
+    if(!acs.length) return '';
+    const sub = c.academias.length > 1 || c.academias[0].nome !== c.nome;
+    return sub ? `<div class="ch">${esc(c.nome)}</div>` + acs.map(a => item(a, a.nome, a.desc)).join('') : item(acs[0], c.nome, acs[0].desc);
+  }).join('');
+  $('lista').innerHTML = html || '<p class="sub" style="margin-top:14px">Nenhuma academia encontrada.</p>';
+}
+function escolher(id){ localStorage.setItem('ff2:grupo', JSON.stringify(id)); fechar(); mostrar(); $('passo2').scrollIntoView({behavior:'smooth'}); }
+function mostrar(){
+  const raw = localStorage.getItem('ff2:grupo'); let id = raw ? JSON.parse(raw) : null; if(LEGADO[id]) id = LEGADO[id];
+  const a = ACADS.find(x => x.id === id);
+  if(a){
+    $('pick').classList.add('ok'); $('pick-t').textContent = a.label; $('pick-s').textContent = 'Academia atendida ✓'; $('pick-go').textContent = 'Trocar';
+    $('pick-cv').style.backgroundImage = capa(a) ? `url('${capa(a)}')` : ''; $('pick-cv').innerHTML = capa(a) ? '' : PIN;
+    if(capa(a)) $('hero').style.backgroundImage = `url('${capa(a)}')`;
+    $('planos').classList.remove('locked'); $('hint').style.display = 'none';
+  }
 }
 per('m');
 fetch('data/grupos.json', {cache:'no-cache'}).then(r => r.json()).then(d => {
-  const g = d.grupos || [], on = g.filter(x => x.ativo), off = g.filter(x => !x.ativo);
-  document.getElementById('grupos').innerHTML = on.map(x => `<span>${x.nome}</span>`).join('') + off.map(x => `<span class="off">${x.nome} · em breve</span>`).join('');
+  CFG = d;
+  CONDOS = (d.condominios||[]).map(c => ({...c, total:(c.academias||[]).length, academias:(c.academias||[]).filter(a => a.ativo)})).filter(c => c.academias.length);
+  ACADS = CONDOS.flatMap(c => c.academias.map(a => ({...a, label: (c.total > 1 || a.nome !== c.nome) ? `${c.nome} · ${a.nome}` : c.nome})));
+  const first = ACADS.find(a => a.capa); if(first) $('hero').style.backgroundImage = `url('${capa(first)}')`;
+  const n = String(d.whatsapp||'').replace(/\D/g,'');
+  $('wa').href = n ? `https://wa.me/${n}?text=${encodeURIComponent(d.whatsapp_msg || 'Olá! Quero o MovaCondo no meu condomínio:')}` : '#';
+  mostrar();
 }).catch(()=>{});
 </script>
 </body>

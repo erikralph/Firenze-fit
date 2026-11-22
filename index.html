@@ -42,7 +42,6 @@ input:focus,select:focus{border-color:var(--gold)}
 .pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;background:rgba(212,175,55,.1);color:var(--gold);border:1px solid rgba(212,175,55,.25)}
 .pill.red{background:rgba(248,113,113,.1);color:var(--red);border-color:rgba(248,113,113,.3)}
 .pill.grn{background:rgba(74,222,128,.08);color:var(--grn);border-color:rgba(74,222,128,.25)}
-.pill.off{background:var(--card2);color:var(--mut);border-color:var(--line)}
 .lbl{font-size:10.5px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:block}
 .opt{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:12px;text-align:left;width:100%}
 .opt.on{border-color:var(--gold);background:rgba(212,175,55,.08)}
@@ -82,6 +81,11 @@ nav.bot button.on{color:var(--gold)}
 .gal-sec{font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin:6px 0 -2px}
 .strip{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}.strip:empty{display:none}
 .strip img{height:150px;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid var(--line);flex-shrink:0}
+/* seleção de academia */
+.acad{display:flex;align-items:center;gap:12px;width:100%;padding:10px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:left}
+.acad.on{border-color:var(--gold);background:rgba(212,175,55,.06)}
+.acad .cv{width:64px;height:64px;border-radius:12px;object-fit:cover;flex-shrink:0;background:radial-gradient(80% 80% at 50% 40%,rgba(212,175,55,.14),transparent 70%),#111;display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.condo-h{font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 8px}
 #sess{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease}
 #sess.open{transform:none}
 .s-head{padding:calc(var(--st) + 10px) 14px 10px;background:var(--card);border-bottom:1px solid var(--line)}
@@ -127,7 +131,6 @@ tr.now td.n{color:var(--gold)}tr.now input{border-color:var(--gold)}
 .login-bg{background:radial-gradient(90% 60% at 50% 0%,rgba(212,175,55,.22),transparent 60%),var(--bg) center/cover no-repeat}
 .logo{width:64px;height:64px;border-radius:18px;margin:0 auto 14px;display:block}
 .prof{display:flex;align-items:center;gap:12px;width:100%;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:left}
-.prof.off{opacity:.5}
 .avatar{width:44px;height:44px;border-radius:50%;background:rgba(212,175,55,.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
 .wrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
 .ok-box{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:#bdf5cf;border-radius:12px;padding:10px 12px;font-size:12px;margin-bottom:14px}
@@ -156,7 +159,8 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
   <div class="wrap stack">
     <div style="padding-top:20px"><div class="eyebrow">MovaCondo</div><div class="h2" style="margin-top:4px">Qual é a sua academia?</div>
     <p class="sm mut" style="margin-top:4px">Seu treino será montado só com os aparelhos dela. Dá para trocar depois no Perfil.</p></div>
-    <div id="gr-list" class="stack"></div>
+    <div id="gr-list"></div>
+    <p class="xs mut" style="text-align:center">Não encontrou? <a class="gold" id="gr-indique" href="#" target="_blank" rel="noopener" style="font-weight:700">Indique seu condomínio</a></p>
     <button type="button" class="btn btn-sm mut hide" id="gr-back" style="margin:0 auto" onclick="enterApp()">Voltar</button>
   </div>
 </section>
@@ -198,7 +202,7 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
   <div class="row between">
     <button type="button" class="row" onclick="UI.show('profiles')" style="gap:10px;text-align:left">
       <div class="avatar" id="h-av" style="width:38px;height:38px;font-size:15px">E</div>
-      <div><div class="eyebrow" id="h-grupo" style="font-size:10px">Grupo</div><div class="h3" id="h-nome">Erik</div></div>
+      <div><div class="eyebrow" id="h-grupo" style="font-size:10px">Academia</div><div class="h3" id="h-nome">Erik</div></div>
     </button>
     <div style="text-align:right"><div class="pill" id="h-obj">Hipertrofia</div><div class="xs mut" id="h-lvl" style="margin-top:4px">Intermediário</div></div>
   </div>
@@ -265,14 +269,14 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
   <section class="tab stack" id="t-perfil">
     <div class="h2">Perfil</div>
     <div class="card stack">
-      <div class="row"><div class="avatar" id="pf-av">E</div><div><b id="pf-nome">Erik</b><div class="xs gold" id="pf-sub">Grupo</div></div></div>
+      <div class="row"><div class="avatar" id="pf-av">E</div><div><b id="pf-nome">Erik</b><div class="xs gold" id="pf-sub">Academia</div></div></div>
       <div><label class="lbl" for="pf-obj">Objetivo</label><select id="pf-obj" onchange="UI.changeGoal()"><option value="hipertrofia">Hipertrofia</option><option value="emagrecimento">Emagrecimento</option></select></div>
       <div><label class="lbl" for="pf-lvl">Nível</label><select id="pf-lvl" onchange="UI.changeGoal()"><option value="iniciante">Iniciante (3x/sem)</option><option value="intermediario">Intermediário (4x/sem)</option><option value="avancado">Avançado (5x/sem)</option></select></div>
       <p class="xs mut">O histórico é mantido quando você troca de objetivo ou nível.</p>
     </div>
     <div class="card stack">
       <span class="lbl" style="margin:0">Sua academia</span>
-      <div class="row between"><b class="sm" id="pf-grupo">Grupo</b><button type="button" class="btn btn-dark btn-sm" onclick="UI.trocarGrupo()">Trocar</button></div>
+      <div class="row between"><b class="sm" id="pf-grupo">Academia</b><button type="button" class="btn btn-dark btn-sm" onclick="UI.trocarGrupo()">Trocar</button></div>
       <button type="button" class="btn btn-ghost" onclick="UI.showGym()"><svg class="i"><use href="#i-dumb"/></svg>Ver aparelhos</button>
     </div>
     <div class="card stack">
@@ -362,14 +366,15 @@ details summary{list-style:none;cursor:pointer}details summary::-webkit-details-
 <script>
 /* ================= CONFIGURAÇÃO ================= */
 const CFG = {
-  VERSAO: '3.2.0',
+  VERSAO: '3.3.0',
   MARCA: 'MovaCondo',
   AUTH_URL: '/api/acesso',
   IMG: id => [0,1].map(n => `https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/${id}/${n}.jpg`),
-  FOTO: (g, nome) => `data/g${g}/fotos/${nome}.jpg`,
+  FOTO: (pasta, nome) => `data/${pasta}/fotos/${nome}.jpg`,
   RECHECAR_DIAS: 7,
   OFFLINE_DIAS: 30
 };
+const LEGADO = {'12':'firenze-12','13':'firenze-13','14':'firenze-14','15':'firenze-15','16':'firenze-16','17':'firenze-17','18':'firenze-18'};
 const NAO_FOTO = ['anilhas'];
 const GAL = [
   ['Máquinas', ['leg_press_h','extensora','adutora','peck_deck','polia_alta','panturrilha_sent','banco_scott','mesa_supino','maq_supino'], 'i-dumb'],
@@ -427,23 +432,29 @@ const Data = {
   nowKey(){ const q = new URLSearchParams(location.search).get('mes') || sessionStorage.getItem('ff-mes'); if(q && /^\d{4}-\d{2}$/.test(q)){ sessionStorage.setItem('ff-mes', q); return q; }
     const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'); },
   pick(meses, now){ const ok = meses.filter(m => m <= now); return ok.length ? ok.at(-1) : meses[0]; },
-  /* lista de academias atendidas (data/grupos.json) */
+  /* catálogo de condomínios e academias (data/grupos.json) */
   async grupos(){
     const g = await Data.json('data/grupos.json').then(v => (DB.set('cache:grupos', v), v)).catch(() => DB.get('cache:grupos'));
-    App.grupos = (g && g.grupos) || [{id:'12', nome:'Grupo 12', ativo:true}];
+    App.cfg = g || {};
+    const condos = (g && g.condominios) || [{id:'firenze', nome:'Parque Firenze', academias:[{id:'firenze-12', nome:'Grupo 12', pasta:'g12', ativo:true}]}];
+    App.acads = condos.flatMap(c => (c.academias||[]).filter(a => a.ativo).map(a => ({...a, condo:c.nome, condoId:c.id, sub: (c.academias||[]).length > 1 || a.nome !== c.nome,
+      label: (c.academias||[]).length > 1 || a.nome !== c.nome ? `${c.nome} · ${a.nome}` : c.nome })));
+    App.condos = condos.map(c => ({...c, academias:(c.academias||[]).filter(a => a.ativo)})).filter(c => c.academias.length);
   },
   async load(){
-    const g = App.grupo, base = `data/g${g}/`;
-    const idx = await Data.json(base+'index.json').then(v => (DB.set('cache:idx:'+g, v), v)).catch(() => DB.get('cache:idx:'+g));
-    const cat = await Data.json(base+'catalogo.json').then(v => (DB.set('cache:cat:'+g, v), v)).catch(() => DB.get('cache:cat:'+g));
+    const a = App.acad(), base = `data/${a.pasta}/`, k = a.id;
+    const idx = await Data.json(base+'index.json').then(v => (DB.set('cache:idx:'+k, v), v)).catch(() => DB.get('cache:idx:'+k));
+    const cat = await Data.json(base+'catalogo.json').then(v => (DB.set('cache:cat:'+k, v), v)).catch(() => DB.get('cache:cat:'+k));
     if(!idx || !cat) return false;
     const mk = Data.pick(idx.meses, Data.nowKey());
-    const prog = await Data.json(base+mk+'.json').then(v => (DB.set('cache:prog:'+g, v), v)).catch(() => DB.get('cache:prog:'+g));
+    const prog = await Data.json(base+mk+'.json').then(v => (DB.set('cache:prog:'+k, v), v)).catch(() => DB.get('cache:prog:'+k));
     const status = await Data.json(base+'status.json').catch(() => ({manutencao:[]}));
     App.idx = idx; App.cat = cat; App.prog = prog; App.status = status || {manutencao:[]};
     return !!prog;
   }
 };
+function waLink(){ const n = (App.cfg?.whatsapp || '').replace(/\D/g,''); const t = encodeURIComponent(App.cfg?.whatsapp_msg || 'Olá! Quero o MovaCondo no meu condomínio:');
+  return n ? `https://wa.me/${n}?text=${t}` : '#'; }
 
 /* ================= ACESSO ================= */
 const Auth = {
@@ -469,13 +480,16 @@ const Auth = {
 };
 
 /* ================= APP ================= */
-const App = { pid:null, grupo:null, grupos:[], idx:null, cat:null, prog:null, status:null,
-  grupoOk(id){ return App.grupos.some(g => g.id === String(id) && g.ativo); },
+const App = { pid:null, grupo:null, cfg:{}, acads:[], condos:[], idx:null, cat:null, prog:null, status:null,
+  acad(id){ return App.acads.find(a => a.id === (id || App.grupo)); },
+  grupoOk(id){ return !!App.acads.find(a => a.id === id); },
+  nome(){ return App.acad()?.label || ''; },
+  pasta(){ return App.acad()?.pasta; },
   profile(){ return (DB.get('profiles', [])).find(p => p.id === App.pid); },
   program(){ const p = App.profile(); return App.prog?.programas?.[p.obj]?.[p.lvl]; },
   ex(id){ return App.cat?.exercicios?.[id]; },
   mob(id){ return App.cat?.mobilidade?.[id]; },
-  foto(q){ const f = App.cat?.fotos?.[q]; return f ? CFG.FOTO(App.grupo, f) : null; },
+  foto(q){ const f = App.cat?.fotos?.[q]; return f ? CFG.FOTO(App.pasta(), f) : null; },
   monthHist(){ const mk = App.prog?.mes; return DB.p('hist', []).filter(h => h.mes === mk); },
   nextDayIdx(){ const prog = App.program(); if(!prog) return 0; const r = DB.p('rot', {}); return (r[App.prog.mes] || 0) % prog.dias.length; },
   mainEquip(e){ return e.equip.find(q => !NAO_FOTO.includes(q) && App.cat.fotos?.[q]) || e.equip.find(q => !NAO_FOTO.includes(q)) || e.equip[0]; },
@@ -503,15 +517,19 @@ const UI = {
   loginMsg(msg){ const e = $('lg-err'); if(msg){ e.textContent = msg; e.classList.remove('hide'); } else e.classList.add('hide'); },
   logout(){ if(!confirm('Sair da assinatura neste celular? Seus perfis e treinos continuam salvos.')) return; DB.del('auth'); UI.show('login'); },
 
-  /* ----- escolha da academia ----- */
+  /* ----- escolha da academia: Condomínio → (grupos) ----- */
   showGrupos(podeVoltar){
     const atual = DB.get('grupo');
-    $('gr-list').innerHTML = App.grupos.map(g => `
-      <button type="button" class="prof ${g.ativo?'':'off'}" ${g.ativo?`onclick="UI.pickGrupo('${esc(g.id)}')"`:'disabled'}>
-        <div class="avatar"><svg class="i"><use href="#i-pin"/></svg></div>
-        <div style="flex:1"><b>${esc(g.nome)}</b><div class="xs mut">${esc(g.desc||'')}</div></div>
-        ${g.ativo ? (g.id===atual ? '<span class="pill">Atual</span>' : '<svg class="i gold"><use href="#i-right"/></svg>') : '<span class="pill off">Em breve</span>'}
-      </button>`).join('');
+    const item = (a, titulo, sub) => `
+      <button type="button" class="acad ${a.id===atual?'on':''}" onclick="UI.pickGrupo('${esc(a.id)}')" style="margin-top:8px">
+        <div class="cv">${a.capa ? `<img src="${CFG.FOTO(a.pasta,'capa')}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:12px" onerror="this.remove()">` : '<svg class="i"><use href="#i-pin"/></svg>'}</div>
+        <div style="flex:1"><b>${esc(titulo)}</b><div class="xs mut">${esc(sub||'')}</div></div>
+        ${a.id===atual ? '<span class="pill">Atual</span>' : '<svg class="i gold"><use href="#i-right"/></svg>'}
+      </button>`;
+    $('gr-list').innerHTML = App.condos.map(c => c.academias.length > 1 || c.academias[0].nome !== c.nome
+      ? `<div class="condo-h">${esc(c.nome)}</div>` + c.academias.map(a => item(a, a.nome, a.desc)).join('')
+      : item(c.academias[0], c.nome, c.academias[0].desc)).join('');
+    $('gr-indique').href = waLink();
     $('gr-back').classList.toggle('hide', !podeVoltar);
     UI.show('grupo');
   },
@@ -527,22 +545,22 @@ const UI = {
 
   applyCover(){
     $('hj-gym').style.backgroundImage = '';
-    const url = CFG.FOTO(App.grupo, 'capa'), img = new Image();
+    const url = CFG.FOTO(App.pasta(), 'capa'), img = new Image();
     img.onload = () => { $('hj-gym').style.backgroundImage = `url(${url})`;
       $('scr-login').style.backgroundImage = `linear-gradient(rgba(10,10,10,.72),rgba(10,10,10,.96)),url(${url})`; };
     img.src = url;
   },
   showGym(){
-    const g = App.grupo, eq = App.cat.equipamentos, det = App.cat.detalhes || {}, fotos = App.cat.fotos || {};
-    const amb = (App.idx.ambiente || []).filter(f => f !== 'grama').map(f => `<img src="${CFG.FOTO(g,f)}" alt="" onerror="this.remove()">`).join('');
+    const pa = App.pasta(), eq = App.cat.equipamentos, det = App.cat.detalhes || {}, fotos = App.cat.fotos || {};
+    const amb = (App.idx.ambiente || []).filter(f => f !== 'grama').map(f => `<img src="${CFG.FOTO(pa,f)}" alt="" onerror="this.remove()">`).join('');
     const vistos = new Set();
     const fig = (q, ic) => { const key = fotos[q] || q; if(vistos.has(key)) return ''; vistos.add(key);
-      return `<figure><div class="ph">${fotos[q] ? `<img src="${CFG.FOTO(g, fotos[q])}" alt="" data-ic="${ic}" onerror="galFail(this)">` : `<svg class="i"><use href="#${ic}"/></svg>`}</div>
+      return `<figure><div class="ph">${fotos[q] ? `<img src="${CFG.FOTO(pa, fotos[q])}" alt="" data-ic="${ic}" onerror="galFail(this)">` : `<svg class="i"><use href="#${ic}"/></svg>`}</div>
         <figcaption>${esc(GAL_NOME[q] || eq[q])}${det[q]?`<span>${esc(det[q])}</span>`:''}</figcaption></figure>`; };
     const conhecidos = new Set(GAL.flatMap(s => s[1]));
     const extra = Object.keys(eq).filter(q => !conhecidos.has(q) && !['anilhas','barra_w','barra_h','barra_reta','banco','polia_baixa','flexora','abdutora','polia_triceps','barra_fixa','mesa_flexora'].includes(q));
     const secs = [...GAL, ['Outros', extra, 'i-dumb']].map(([titulo, ids, ic]) => { const h = ids.filter(q => eq[q]).map(q => fig(q, ic)).join(''); return h ? `<div class="gal-sec">${titulo}</div><div class="gal">${h}</div>` : ''; }).join('');
-    UI.modal(`<div class="stack"><div><span class="pill">Feito sob medida</span><div class="h2" style="margin-top:8px">Academia do ${esc(App.idx.nome)}</div>
+    UI.modal(`<div class="stack"><div><span class="pill">Feito sob medida</span><div class="h2" style="margin-top:8px">${esc(App.nome())}</div>
       <p class="sm mut" style="margin-top:4px">Todo treino deste app usa somente estes aparelhos. Nada de adaptação.</p>${App.idx.obs?`<p class="xs gold" style="margin-top:6px">${esc(App.idx.obs)}</p>`:''}</div>
       <div class="strip">${amb}</div>${secs}
       <button type="button" class="btn btn-gold" onclick="UI.closeModal()">Fechar</button></div>`);
@@ -550,7 +568,7 @@ const UI = {
 
   renderProfiles(){
     const list = DB.get('profiles', []);
-    $('pf-gtag').textContent = App.idx ? 'MovaCondo · ' + App.idx.nome : 'MovaCondo';
+    $('pf-gtag').textContent = App.acad() ? App.nome() : 'MovaCondo';
     $('pf-list').innerHTML = list.length ? list.map(p => `
       <button type="button" class="prof" onclick="UI.pick('${p.id}')"><div class="avatar">${esc(p.nome[0]||'?').toUpperCase()}</div>
       <div style="flex:1"><b>${esc(p.nome)}</b><div class="xs mut">${OBJ[p.obj]} · ${LVL[p.lvl]}</div></div><svg class="i gold"><use href="#i-right"/></svg></button>`).join('')
@@ -579,11 +597,11 @@ const UI = {
 
   render(){
     const p = App.profile(); if(!p) return UI.show('profiles');
-    const prog = App.program(), mk = App.prog.mes, m = +mk.split('-')[1], a = Auth.get() || {};
+    const prog = App.program(), mk = App.prog.mes, m = +mk.split('-')[1], a = Auth.get() || {}, ac = App.acad();
     $('h-av').textContent = $('pf-av').textContent = p.nome[0].toUpperCase();
     $('h-nome').textContent = $('pf-nome').textContent = p.nome;
-    $('h-grupo').textContent = App.idx.nome; $('pf-sub').textContent = App.idx.nome + ' · ' + OBJ[p.obj];
-    $('pf-grupo').textContent = App.idx.nome;
+    $('h-grupo').textContent = ac.label; $('pf-sub').textContent = ac.label + ' · ' + OBJ[p.obj];
+    $('pf-grupo').textContent = ac.label;
     $('h-obj').textContent = OBJ[p.obj]; $('h-lvl').textContent = LVL[p.lvl];
     $('pf-obj').value = p.obj; $('pf-lvl').value = p.lvl; $('pf-ver').textContent = CFG.MARCA + ' v' + CFG.VERSAO + ' · programa ' + mk;
     $('pf-plano').textContent = a.teste ? 'Modo teste' : (PLANO_TXT[a.plano] || PLANO_TXT.solo);
@@ -601,7 +619,7 @@ const UI = {
     const feitos = App.monthHist().length, meta = prog.freq * 4, pct = Math.min(100, Math.round(feitos/meta*100));
     $('hj-pct').textContent = pct + '%'; $('hj-bar').style.width = pct + '%';
     $('hj-feitos').textContent = feitos + (feitos===1?' treino':' treinos'); $('hj-metatxt').textContent = 'Meta: ' + meta + ' (' + prog.freq + 'x/semana)';
-    $('gym-tit').textContent = 'Academia do ' + App.idx.nome;
+    $('gym-tit').textContent = ac.label;
     $('gym-sub').textContent = 'Programa montado só com os aparelhos da sua academia · ver aparelhos';
     const hist = DB.p('hist', []);
     $('st-tr').textContent = hist.length; $('st-vol').textContent = fmtKg(hist.reduce((a,h)=>a+h.vol,0));
@@ -749,7 +767,7 @@ const S = {
   },
   save(){ DB.ps('sess', S.cur); },
   day(){ return App.program().dias[S.cur.di]; },
-  valid(){ const c = S.cur; if(!c || c.mes !== App.prog.mes || (c.grupo && c.grupo !== App.grupo) || !App.program()?.dias[c.di]) return false;
+  valid(){ const c = S.cur; if(!c || c.mes !== App.prog.mes || (c.grupo && (LEGADO[c.grupo]||c.grupo) !== App.grupo) || !App.program()?.dias[c.di]) return false;
     return c.blocos.every(b => b.exs.every(x => App.ex(x.ex))); },
   open(){ if(!S.cur) return; if(!S.valid()){ toast('O programa foi atualizado. Comece o treino de novo.'); return S.close(); }
     $('sess').classList.add('open'); $('mini').classList.add('hide'); S.render();
@@ -885,7 +903,7 @@ const S = {
 function revisar(){
   const ex = Object.values(App.cat.exercicios), mob = Object.values(App.cat.mobilidade||{});
   document.body.style.position = 'static'; document.documentElement.style.overflow = document.body.style.overflow = 'auto';
-  document.body.innerHTML = `<div class="wrap stack" style="padding:20px 16px"><div class="h2">Revisão de imagens · ${esc(App.idx.nome)}</div>
+  document.body.innerHTML = `<div class="wrap stack" style="padding:20px 16px"><div class="h2">Revisão de imagens · ${esc(App.nome())}</div>
     <p class="sm mut">Confira se cada imagem mostra o exercício certo. Tire print das erradas e mande para ajuste.</p>
     ${[...mob.map(m=>({nome:'Mobilidade · '+m.nome,img:m.img,info:m.dose})), ...ex.map(e=>({nome:e.nome,img:e.img,info:e.equip.filter(q=>q!=='anilhas').map(q=>App.cat.equipamentos[q]).join(' + ')}))]
       .map((e,i)=>`<div class="card stack"><b class="sm">${i+1}. ${esc(e.nome)}</b><div class="xs mut">${esc(e.info)}</div><div class="grid2">${CFG.IMG(e.img).map(u=>`<img src="${u}" style="width:100%;border-radius:10px;background:#fff" onerror="this.outerHTML='<div class=\\'pill red\\'>Sem imagem</div>'">`).join('')}</div></div>`).join('')}
@@ -895,7 +913,6 @@ function revisar(){
 /* ================= INÍCIO ================= */
 function enterApp(){ const act = DB.get('active'); if(act && DB.get('profiles',[]).some(p => p.id === act)) UI.pick(act); else UI.show('profiles'); }
 function offline(){ document.body.innerHTML = '<div class="screen center"><div class="card wrap" style="text-align:center"><div class="h3">Sem conexão</div><p class="sm mut" style="margin-top:8px">Abra o app uma vez com internet para baixar seus treinos.</p><button type="button" class="btn btn-gold" style="margin-top:14px" onclick="location.reload()">Tentar de novo</button></div></div>'; }
-/* depois do acesso liberado: escolhe a academia (se ainda não escolheu) e carrega os treinos dela */
 async function afterAuth(){
   const g = DB.get('grupo');
   if(!g || !App.grupoOk(g)) return UI.showGrupos(false);
@@ -904,14 +921,17 @@ async function afterAuth(){
   enterApp();
 }
 async function boot(){
-  const qs = new URLSearchParams(location.search), q = qs.get('grupo'), rev = qs.get('revisar');
+  const qs = new URLSearchParams(location.search), rev = qs.get('revisar');
+  let q = qs.get('academia') || qs.get('grupo'); if(LEGADO[q]) q = LEGADO[q];
+  /* migração: identificador antigo ("12") → novo ("firenze-12") */
+  const g0 = DB.get('grupo'); if(LEGADO[g0]) DB.set('grupo', LEGADO[g0]);
   if(qs.get('assinou')) $('lg-ok').classList.remove('hide');
   Data.nowKey();
   if(navigator.storage?.persist) navigator.storage.persist().catch(()=>{});
   if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
   await Data.grupos();
-  if(q && App.grupoOk(q)){ const saved = DB.get('grupo'); if(!saved || saved === q || confirm(`Mudar sua academia para ${App.grupos.find(g=>g.id===q).nome}?`)) DB.set('grupo', q); }
-  if(rev){ App.grupo = (App.grupoOk(q) && q) || DB.get('grupo') || App.grupos.find(g=>g.ativo)?.id; if(!await Data.load()) return offline(); return revisar(); }
+  if(q && App.grupoOk(q)){ const saved = DB.get('grupo'); if(!saved || saved === q || confirm(`Mudar sua academia para ${App.acad(q).label}?`)) DB.set('grupo', q); }
+  if(rev){ App.grupo = (App.grupoOk(q) && q) || DB.get('grupo') || App.acads[0]?.id; if(!await Data.load()) return offline(); return revisar(); }
   const st = Auth.state();
   if(st === 'out' || qs.get('assinou')) return UI.show('login');
   if(st === 'check'){ const r = await Auth.revalidate(); if(r !== 'ok'){ UI.show('login'); UI.loginMsg(r.out); return; } }
